@@ -1,0 +1,24 @@
+<h1>Your Info</h1>
+
+<div class="browse-file imgProcess" >
+    <img id =  "userDetailsProfileImg" alt="" ng-src="{{userProfile.basicInfo.imageURL || 'images/placeholder_contact-photo.png'}}">
+    <input class="uploadBtn cursor-pointer" id="inputImage2" type="file" accept="image/*" image="uploadedImage" resize-max-height="200" resize-max-width="200" resize-quality="0.7"/>
+</div>
+
+<form action="" class="detailsForm" ng-submit = "updateBasicDetails(false)">
+    <small class="error" ng-show="!hasName">
+        Required
+    </small>
+	<input type="text" placeholder="Your Name *" ng-model = "userProfile.basicInfo.firstName" ng-blur="updateBasicDetails(false)"/>
+    <small class="error" ng-show="!hasSurname">
+        Required
+    </small>
+	<input type="text" placeholder="Your Surname *"  ng-model = "userProfile.basicInfo.lastName" ng-blur="updateBasicDetails(false)"/>
+	<input type="text" placeholder="Position" ng-model = "userProfile.basicInfo.position" ng-blur="updateBasicDetails(false)"/>
+    <input type="text" placeholder="Country" ng-model = "userProfile.basicInfo.country"
+           typeahead="country for country in countries | filter:$viewValue  | limitTo:10 "
+           typeahead-editable="true" typeahead-on-select="updateBasicDetails(false)">
+
+    <input type="submit" style="visibility: hidden;"/>
+</form>
+	

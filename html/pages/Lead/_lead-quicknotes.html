@@ -1,0 +1,7 @@
+<div class="inner-box onehalf scrollableHidden">
+    <h1>Quick Notes</h1>
+    <p class="edit-text link" ng-repeat="note in notes" style="white-space: pre-line;">
+        <span class="date">{{note.timestamp | date : 'dd-MMM-yyyy'}} - {{note.author}}</span>
+        {{note.text}}
+    </p>
+</div>

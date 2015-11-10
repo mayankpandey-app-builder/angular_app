@@ -1,0 +1,323 @@
+<div class="login-register-scren"> <!-- ng-init= "loadUserData()"-->
+<forgot-password class=""></forgot-password>
+<div class="main-wrapper">
+<div class="container">
+<div class="row">
+    <a class="big-logo" href="/"><img src="images/logo.png" alt="" width="100"/></a>
+
+    <div class="login-register" ng-show="showOrganizations">
+        <div class="organisation-tab">
+                <h1>Choose organisation</h1>
+                <form name="loginForm" ng-submit="login(loginData,loginForm)" method="post" action="" class="clearfix"
+                      novalidate>
+                    <div class="item">
+                        <ul>
+                            <li ng-repeat="organisation in organisations" ng-click="setOrganisation(organisation,loginData)">{{organisation.organizationName}} <span class="pull-right">&gt;</span></li>
+                        </ul>
+                    </div>
+                </form>
+        </div>
+    </div>
+
+    <div class="login-register" ng-hide="getNextStep()" ng-show="!showOrganizations">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active first"><a data-target="#login " data-toggle="tab">Login</a></li>
+            <li><a data-target="#register " data-toggle="tab">Register</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+
+        <!-- LOGIN -->
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="login">
+                <form name="loginForm" ng-submit="login(loginData,loginForm)" method="post" action="" class="clearfix"
+                      novalidate>
+                    <div class="item "
+                         ng-class = "getValidationCls(loginForm.loginEmail.$viewValue,'email',loginForm.loginEmail.$pristine,loginSubmit)" >
+                        <small class="error">
+                            The email address that you provided is not valid.
+                        </small>
+
+                        <input type="email" name="loginEmail"
+                               ng-model="loginData.email" placeholder="Email*"
+                               autofill="autofill"
+                               required />
+
+                    </div>
+                    <div class="item"
+                            ng-class = "getValidationCls(loginForm.loginPassword.$viewValue,'password',loginForm.loginPassword.$pristine,loginSubmit)">
+
+                        <small class="error">
+                            The password must contain at least 6 characters.
+                        </small>
+
+                        <input type="password" name="loginPassword"
+                               placeholder="Password*" ng-model="loginData.password" ng-minlength=6
+                               autofill="autofill"
+                               required/>
+
+
+                    </div>
+                    <a href="#" data-toggle="modal" data-target="#forgotPassword">Forgot Password</a>
+                    <button class="orangeBtn" type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- LITTLE REGISTER -->
+            <div class="tab-pane fade" id="register" novalidate>
+                <form method="post" action="" class="clearfix" name="register1">
+                    <div class="item"
+                         ng-class = "getValidationCls(register1.test1.$viewValue,'email',register1.test1.$pristine,registerSubmit)">
+
+                        <small class="error">
+                            The email adress that you provided is not valid.
+                        </small>
+                        <input type="text"
+                               name="test1"
+                               ng-model="register.email"
+                               placeholder="(Professional) Email *"
+                               required
+                                />
+                    </div>
+
+                    <div class="row small-register">
+                        <div class="item half  pull-left"
+                            ng-class = "getValidationCls(register1.firstName1.$viewValue,'word',register1.firstName1.$pristine,registerSubmit)">
+
+                            <small class="error">
+                                Please provide first name.
+                            </small>
+                            <input type="text"
+                                   ng-model="register.firstName"
+                                   placeholder="First Name *"
+                                   name="firstName1"
+                                   required
+                            />
+                        </div>
+
+                        <div class="item half  pull-right"
+                            ng-class = "getValidationCls(register1.lastName1.$viewValue,'word',register1.lastName1.$pristine,registerSubmit)">
+
+                            <small class="error">
+                                Please provide last name.
+                            </small>
+                            <input type="text"
+                                   ng-model="register.lastName"
+                                   placeholder="Last Name *"
+                                   name="lastName1"
+                                   required
+                            />
+                        </div>
+                    </div>
+
+                    <button type="button" class="blueBtn" id="next-step" ng-click="setNextStep(true,register)">Next</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- BIG REGISTER -->
+    <div class="register-step2 animate-show" ng-show="getNextStep()">
+        <h1>Register</h1>
+
+        <form method="post" action="" class="clearfix" name="register2" novalidate>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="item"
+                         ng-class = "getValidationCls(register2.test2.$viewValue,'email',register2.test2.$pristine,registerSubmit)">
+
+                        <small class="error">
+                            The email adress that you provided is not valid.
+                        </small>
+                        <input type="text"
+                               name="test2"
+                               ng-model="register.email"
+                               placeholder="(Professional) Email *"
+                               required
+                        />
+                    </div>
+
+
+                    <div class="item half  pull-left"
+                         ng-class = "getValidationCls(register2.firstName.$viewValue,'word',register2.firstName.$pristine,registerSubmit)">
+
+                        <small class="error">
+                            Please provide first name.
+                        </small>
+                        <input type="text"
+                               ng-model="register.firstName"
+                               placeholder="First Name *"
+                               name="firstName"
+                               required
+                        />
+                    </div>
+
+
+                    <div class="item half  pull-right"
+                         ng-class = "getValidationCls(register2.lastName.$viewValue,'word',register2.lastName.$pristine,registerSubmit)">
+
+                        <small class="error">
+                            Please provide last name.
+                        </small>
+                        <input type="text"
+                               ng-model="register.lastName"
+                               placeholder="Last Name *"
+                               name="lastName"
+                               required
+                        />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="item"
+                         ng-class = "getValidationCls(register2.registerCompany.$viewValue,'w',register2.registerCompany.$pristine,registerSubmit)">
+
+                        <small class="error">
+                            Please provide a company name.
+                        </small>
+                        <input type="text" ng-model="register.company"
+                               placeholder="Company Name *" name="registerCompany" required/>
+                    </div>
+
+
+                    <div class="item"
+                         ng-class = "getValidationCls(register2.registerPosition.$viewValue,'w',register2.registerPosition.$pristine,registerSubmit)">
+
+                        <small class="error">
+                            Please provide your position inside the company.
+                        </small>
+                        <input type="text" ng-model="register.position"
+                               placeholder="Position *" name="registerPosition" required/>
+                    </div>
+
+                    <div class="item"
+                         ng-class = "getValidationCls(register2.registerPassword.$viewValue,'password',register2.registerPassword.$pristine,registerSubmit)">
+
+                        <small class="error">
+                            The password must contain at least 6 characters.
+                        </small>
+
+                        <div class="pull-right" ng-class = "showPswdStrength(register2.registerPassword.$viewValue)">
+                            {{passwordStrength}}
+                        </div>
+
+                        <input type="password" ng-model="register.password"
+                               placeholder="Password *" ng-minlength=6 name="registerPassword" ng-class="{'my-input': register2.registerPassword.$dirty && !register2.registerPassword.$required && register2.registerPassword.$invalid}"
+                               required/>
+                    </div>
+
+
+                    <div class="item"
+                         ng-class = "getValidationCls(register2.registerPassword.$viewValue,'cpassword',register2.registerCPassword.$pristine,registerSubmit,register2.registerCPassword.$viewValue)">
+                        <small class="error">
+                            Passwords do not match.
+                        </small>
+
+                        <input type="password" ng-model="register.cpassword"
+                               placeholder="Confirm Password *" ng-minlength=6 name="registerCPassword" password-match = "register.password" required/>
+                    </div>
+                </div>
+
+                <div class="col-lg-2"></div>
+
+                <div class="col-lg-5">
+
+                    <div class="item"
+                         ng-class = "getValidationCls(register2.registerEmployees.$viewValue,'number',register2.registerEmployees.$pristine,'','', true )"> <!--last param missing witch means not required on submit-->
+                        <small class="error">
+                            Please provide a valid number.
+                        </small>
+                        <input type="text" ng-model="register.employees"
+                               placeholder="Number of employees inside the company" name = "registerEmployees" class="my-input" ng-pattern = "typeNumber" />
+                    </div>
+
+                    <div class="item"
+                        ng-class = "getValidationCls(register2.registerPhone.$viewValue,'phone',register2.registerPhone.$pristine,'','', true )"> <!--last param missing witch means not required on submit-->
+                        <small class="error">
+                            Please provide a valid phone number.
+                        </small>
+                        <input type="tel" ng-model="register.phone"
+                               placeholder="Phone" class="my-input" name="registerPhone" />
+                    </div>
+
+                    <div class="item"
+                         ng-class = "getValidationCls(register2.registerCountry.$viewValue,'word',register2.registerCountry.$pristine,'','', true )"> <!--last param missing witch means not required on submit-->
+                        <small class="error">
+                            Please provide a valid country.
+                        </small>
+                        <input type="text" placeholder="Country" class="my-input" name = "registerCountry" ng-pattern = "typeWord"
+                               ng-model="register.country"
+                               typeahead="country for country in countries | filter:$viewValue  | limitTo:10 "
+                               typeahead-editable="true">
+                    </div>
+                    <div class="item">
+                        <input type="text" ng-model="register.invitationCode" placeholder="Invitation Code"
+                               class="my-input"/>
+                    </div>
+
+                    <button class="orangeBtn pull-right" ng-click="submitRegister(register,register2)">Submit</button>
+                    <button class="greyBtn pull-right" ng-click="setNextStep(false)">Cancel</button>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5"
+                     ng-class = "getValidationCls(agreed2, 'agree', register2.agreeTerms.$pristine, registerSubmit)">
+
+                    <small class="error">
+                        Please read and agree with terms and conditions below.
+                    </small>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model = "agreed2" ng-click="agreeWithTerms()" name="agreeTerms" required />
+                            <span></span>
+                            I read and agreed with the <a href="http://now.iseeit.com/terms/" target="_blank">Terms and Conditions</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-5">
+                    <a href="http://static.iseeit.com/help/" target = "_blank" class="pull-right">Need Help?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="modal" id="sandboxModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Demo mode</h1>
+            </div>
+
+            <div class="modal-body">
+                <p>Welcome to iSEEit!</p>
+                <br/>
+                <p>This is the Demo Mode: a sandboxed version of iSEEit that comes pre-populated with contacts, leads, deals and tasks to let you experience the full range of iSEEit's functionality for the first 30 days.</p>
+                <br/>
+                <p>At any point, you can switch out of the Demo Mode and start working with your data by switching your organization in your settings page.</p>
+                <br/>
+                <p>Please note: any actions you make in the Demo Mode will not be available after your 30-day trial is over!</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="orangeBtn" ng-click="proceedFromDemoModal();">Ok</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>

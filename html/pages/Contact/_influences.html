@@ -1,0 +1,17 @@
+<div class="col-lg-6">
+    <div class="inner-box influences ellipsisHidden">
+        <h1>Influences</h1>
+
+        <p class="notes-text" ng-hide = "influences.contacts.length">{{influences.explanatoryText}}</p>
+        <div class="influence-scrollable-area" ng-show = "influences.contacts.length">
+            <div class="user" ng-repeat = "contact in influences.contacts">
+                <a >
+                    <img ng-src={{setImage(contact.imageURL)}} class = "smallRoundImg">
+                    <p class="bold c-blue">{{contact.firstName}} {{contact.lastName}}</p>
+                    <p>{{contact.position || "-"}}</p>
+                    <p>{{contact.hierarchicalPosition || "-"}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

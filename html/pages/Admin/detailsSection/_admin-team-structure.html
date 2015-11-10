@@ -1,0 +1,213 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="inner-box">
+            <h2>List of users</h2>
+            <a href="" class="c-orange btn-link" ng-show="device == 'ipad'" ng-click="showAddMemberModal();"><i class="icon-addcontact-menu"></i>Add new member</a>
+            <table cellpadding="0" cellspacing="0" class="full-table users">
+                <tr>
+                    <th style="width: 25%; padding-left: 25px;">Member</th>
+                    <th style="width: 20%; padding-left: 25px;">Role</th>
+                    <th style="width: 20%; padding-left: 25px;">Region</th>
+                    <th style="width: 15%; padding-left: 25px">Business Unit</th>
+                    <th style="width: 4%;"></th>
+                    <th style="width: 4%;"></th>
+                    <th style="width: 7%;" class="text-right">Is active</th>
+                </tr>
+            </table>
+            <script type="text/ng-template" id="nodes_renderer.html">
+                <div ui-tree-handle class="tree-node tree-node-content">
+                    <table cellpadding="0" cellspacing="0" class="full-table users">
+                        <tr>
+                            <td style="width: 25%;">
+                                <div class="user">
+                                    <img alt="" class="smallRoundImg" ng-src="{{node.imageURL || 'images/placeholder_contact-photo.png'}}">
+                                    <p class="ellipsisHidden" style="width: 180px;">{{node.firstName || '-'}} {{node.lastName || '-'}}</p>
+                                    <p class="ellipsisHidden" style="width: 180px;">{{node.position || '-'}}</p>
+                                </div>
+                            </td>
+                            <td style="width: 20%;">
+                                <div class="relative-pos" data-nodrag ng-init="extraMargin = node.level * -18; customStyle = {'margin-left': extraMargin + 'px'}" ng-style="customStyle">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" name="{{node.firstName}} {{node.lastName}}">{{node.role}}
+                                        <b class="icon-arrow-down"></b>
+                                    </a>
+                                    <ul role="menu" class="dropdown-menu" name="{{node.firstName}} {{node.lastName}}">
+                                        <li><a href="" ng-click="updateUserRole('Manager', this); node.role = 'Manager'">Manager</a></li>
+                                        <li><a href="" ng-click="updateUserRole('Co-worker', this); node.role = 'Co-worker'">Co-worker</a></li>
+                                        <li><a href="" ng-click="updateUserRole('External', this); node.role = 'External'">External</a></li>
+                                        <li><a href="" ng-click="updateUserRole('Sales Representative', this); node.role = 'Sales Representative'">Sales Representative</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td style="width: 20%; padding-right: 10px;">
+                                <input ng-init="extraMarginRegion = node.level * -13; customRegionStyle = {'margin-left': extraMarginRegion + 'px'}" ng-style="customRegionStyle" style="margin-bottom: 0;" type="search" placeholder="Region" class="searchCompanies search" ng-model="node.region.displayValue"
+                                       typeahead="territory.displayValue for territory in flattenTerritories || '' | filter: $viewValue" typeahead-on-select="updateUserRegion($item.id, this)" name="{{node.firstName}} {{node.lastName}}">
+
+                            </td>
+                            <td style="width: 15%; padding-right: 10px;">
+                                <input ng-init="extraMarginBU = node.level * -8; customBUStyle = {'margin-left': extraMarginBU + 'px'}" ng-style="customBUStyle" style="margin-bottom: 0;" type="search" placeholder="Business unit" class="searchCompanies search" ng-model="node.businessUnit.displayValue"
+                                       typeahead="businessUnit.displayValue for businessUnit in businessUnits || '' | filter: $viewValue" typeahead-on-select="updateBusinessUnitForTeamStructure($item.id, this)" name="{{node.firstName}} {{node.lastName}}">
+                            </td>
+                            <td style="width: 4%;" data-nodrag>
+                                <a href="" ng-init="extraMarginEdit = node.level * -3; customEditStyle = {'margin-left': extraMarginEdit + 'px'}" ng-style="customEditStyle" ng-click="editSubordinateModal(this)" ng-show="device == 'ipad'">Edit</a>
+                                <a href="" ng-init="extraMarginEdit = node.level * -3; customEditStyle = {'margin-left': extraMarginEdit + 'px'}" ng-style="customEditStyle" ng-click="showEditMember(this);" ng-show="device == 'webapp'">Edit</a>
+                            </td>
+                            <td style="width: 4%;" data-nodrag>
+                                <a href="" ng-init="extraMarginEdit = node.level * -2; customEditStyle = {'margin-left': extraMarginEdit + 'px'}" ng-style="customEditStyle" ng-click="addNewSubordinateModal(this)" ng-show="device == 'ipad'">Add</a>
+                                <a href="" ng-init="extraMarginEdit = node.level * -2; customEditStyle = {'margin-left': extraMarginEdit + 'px'}" ng-style="customEditStyle" ng-click="node.subordinates.unshift({}); addNewSubordinate(this)" ng-show="device == 'webapp'">Add</a>
+                            </td>
+                            <td class="text-right" style="width: 4%;">
+                                <label data-nodrag>
+                                    <input ng-click="updateActivationStatus(node.active, this); node.active = !node.active" type="checkbox" ng-checked="node.active" name="{{node.firstName}} {{node.lastName}}"/>
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <ol ui-tree-nodes="" ng-model="node.subordinates" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="node in node.subordinates" ui-tree-node ng-include="'nodes_renderer.html'">
+                    </li>
+                </ol>
+            </script>
+            <div ui-tree="teamTree"  id="tree-root" data-drag-enabled = "true">
+                <div class="row options" style="margin-top: -46px;">
+                    <a href="" style="padding: 0 10px; font-size: 12px;" class="pull-right" ng-click="expandAll()">Expand All</a>
+                    <a href="" style="font-size: 12px;" class="pull-right" ng-click="collapseAll()">Collapse All</a>
+                </div>
+                <ol ui-tree-nodes="" ng-model="data" style="padding-top: 5px;">
+                    <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog" style="width: 300px;">
+            <div class="modal-content">
+                <form class="detailsForm" name = "createdMember" action="" ng-submit="addNewMemberFromModal(newContactModal)" novalidate>
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="myModalLabel">Add new member</h1>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <small class="error" ng-show="firstnameError">
+                            Please provide first name.
+                        </small>
+                        <input type="text" placeholder="First Name *" name="firstName" ng-model="newContactModal.firstName"
+                               ng-class="{'my-input': firstnameError}" required >
+
+                        <small class="error" ng-show="lastnameError">
+                            Please provide last name.
+                        </small>
+                        <input type="text" placeholder="Last Name *" name="lastName" ng-model="newContactModal.lastName"
+                               ng-class="{'my-input': lastnameError}" required >
+
+                        <small class="error" ng-show="emailError">
+                            Please provide email.
+                        </small>
+                        <input type="email" name="email" placeholder="Email *" ng-model="newContactModal.email"
+                               ng-class="{'my-input': emailError}" required>
+
+                        <small class="error" ng-show="positionError">
+                            Please provide position.
+                        </small>
+                        <input type="text" placeholder="Position *" ng-model="newContactModal.position"
+                               ng-class="{'my-input': positionError}" required>
+
+                        <small class="error" ng-show="roleError">
+                            Please provide role.
+                        </small>
+                        <div class="relative-pos" style="border-bottom: 1px solid #d3d3d3; padding-bottom: 10px; margin-bottom: 10px;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">{{newContactModal.role || 'Role *'}}
+                                <b class="icon-arrow-down"></b>
+                            </a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a href="" ng-click="newContactModal.role = 'Manager'">Manager</a></li>
+                                <li><a href="" ng-click="newContactModal.role = 'Co-worker'">Co-worker</a></li>
+                                <li><a href="" ng-click="newContactModal.role = 'External'">External</a></li>
+                                <li><a href="" ng-click="newContactModal.role = 'Sales Representative'">Sales Representative</a></li>
+                            </ul>
+                        </div>
+
+                        <small class="error" ng-show="regionError">
+                            Please provide region.
+                        </small>
+                        <input type="search" placeholder="Region *" class="searchCompanies search" ng-model="region"
+                               typeahead="territory.displayValue for territory in flattenTerritories || '' | filter: $viewValue" typeahead-on-select="newContactModal.region = $item.id">
+
+                        <input type="search" placeholder="Business unit" class="searchCompanies search" ng-model="businessUnit"
+                               typeahead="businessUnit.displayValue for businessUnit in businessUnits || '' | filter: $viewValue" typeahead-on-select="newContactModal.businessUnit = $item.id">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="greyBtn" data-dismiss="modal" ng-click="newContactModal = {};">Cancel</button>
+                        <button type="submit" class="orangeBtn">Ok</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editMemberModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog" style="width: 300px;">
+            <div class="modal-content">
+                <form class="detailsForm" name = "createdMember" action="" ng-submit="editMemberFromModal(editContactModal)" novalidate>
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="myEditModalLabel">Edit member</h1>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <small class="error" ng-show="firstnameError">
+                            Please provide first name.
+                        </small>
+                        <input type="text" placeholder="First Name *" name="firstName" ng-model="editContactModal.firstName"
+                               ng-class="{'my-input': firstnameError}" ng-change="editContactModal.detailsModified = true;" required >
+
+                        <small class="error" ng-show="lastnameError">
+                            Please provide last name.
+                        </small>
+                        <input type="text" placeholder="Last Name *" name="lastName" ng-model="editContactModal.lastName"
+                               ng-class="{'my-input': lastnameError}" ng-change="editContactModal.detailsModified = true;" required >
+
+                        <small class="error" ng-show="positionError">
+                            Please provide position.
+                        </small>
+                        <input type="text" placeholder="Position *" ng-model="editContactModal.position"
+                               ng-class="{'my-input': positionError}" ng-change="editContactModal.detailsModified = true;" required>
+
+                        <small class="error" ng-show="roleError">
+                            Please provide role.
+                        </small>
+                        <div class="relative-pos" style="border-bottom: 1px solid #d3d3d3; padding-bottom: 10px; margin-bottom: 10px;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="">{{editContactModal.role || 'Role *'}}
+                                <b class="icon-arrow-down"></b>
+                            </a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a href="" ng-click="editContactModal.role = 'Manager'; editContactModal.roleModified = true;">Manager</a></li>
+                                <li><a href="" ng-click="editContactModal.role = 'Co-worker'; editContactModal.roleModified = true;">Co-worker</a></li>
+                                <li><a href="" ng-click="editContactModal.role = 'External'; editContactModal.roleModified = true;">External</a></li>
+                                <li><a href="" ng-click="editContactModal.role = 'Sales Representative'; editContactModal.roleModified = true;">Sales Representative</a></li>
+                            </ul>
+                        </div>
+
+                        <small class="error" ng-show="regionError">
+                            Please provide region.
+                        </small>
+                        <input type="search" placeholder="Region *" class="searchCompanies search" ng-model="region"
+                               typeahead="territory.displayValue for territory in flattenTerritories || '' | filter: $viewValue" typeahead-on-select="editContactModal.region = $item.id; editContactModal.regionModified = true;">
+
+                        <input type="search" placeholder="Business unit" class="searchCompanies search" ng-model="businessUnit"
+                               typeahead="businessUnit.displayValue for businessUnit in businessUnits || '' | filter: $viewValue" typeahead-on-select="editContactModal.businessUnit = $item.id; editContactModal.businessUnitModified = true;">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="greyBtn" data-dismiss="modal" ng-click="editContactModal = {};">Cancel</button>
+                        <button type="submit" class="orangeBtn">Ok</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

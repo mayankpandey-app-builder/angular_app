@@ -1,0 +1,32 @@
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"
+     id="organisationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Change profile</h1>
+            </div>
+            <div class="modal-body">
+
+                <div class="detailsForm">
+                    <input type="text" placeholder="Add an invitation code" ng-model="newCode">
+                </div>
+
+                <div class="row-fluid">
+                    <h1>Choose organization</h1>
+                    <ul>
+                        <li class="link-list-item" ng-repeat="organisation in organisations"
+                            ng-click="setOrganisation(organisation)">{{organisation.organizationName}} <span
+                                class="pull-right"> &gt;</span></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button class="greyBtn" data-dismiss="modal" ng-click="newCode=''">Cancel</button>
+                <button class="orangeBtn" ng-click="addOrganisationCode(newCode)">Add code</button>
+            </div>
+        </div>
+    </div>
+</div>

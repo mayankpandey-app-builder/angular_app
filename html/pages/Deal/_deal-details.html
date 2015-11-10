@@ -1,0 +1,19 @@
+<div class="inner-box sink">
+    <a href="" class="card-link deal-info"></a>
+    <div class="deal-box">
+        <div class="deal-logo">
+            <img class="bigRoundImg" ng-src="{{deal.companyImageURL || 'images/placeholder_company.png'}}" alt="{{deal.companyName}}" />
+        </div>
+        <div class="deal-info max-width-80">
+            <h2 class="ellipsisNoWrap"><i class="icon-deal"></i><a href=""> {{deal.dealName || '-'}}</a></h2>
+            <h2 class="ellipsisNoWrap"><i class="icon-company"></i><a href=""> {{deal.companyName || '-'}}</a></h2>
+            <h2><i class="icon-budget"></i><a href=""> {{deal.currency}} {{budget || '-'}}</a></h2>
+            <h2>
+                <i ng-class="{'icon-won-deal': deal.dealStatus == 'Commit', 'icon-dealtypes': deal.dealStatus == 'Best case', 'icon-pipeline': deal.dealStatus == 'Pipeline'}"></i>
+                <a href="">{{deal.dealStatus}}</a>
+            </h2>
+            <h2 class="black"><i class="icon-deadline"></i> Close date: {{deal.closeDate || '-' | date: 'd MMM, yyyy'}}</h2>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

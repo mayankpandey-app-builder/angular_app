@@ -1,0 +1,327 @@
+.admin {
+    .icon-arrow-down { font-size: 5px; }
+	.col-lg-12 > .inner-box:first-child { padding-top: 20px}
+	.inner-box {
+		.left-col p { color: @orange}
+		
+		i:before { font-size: 12px; color: @orange}
+		i.icon-arrow:before { font-size: 12px}
+
+		p { font-size:12px; line-height: 22px; margin: 0}
+		table { width:100%;
+			td { vertical-align: middle;
+				&.left-col {}
+				&.mid-col {}
+				&.right-col { text-align: right;
+					i { padding: 0}
+				}
+			}
+		}
+
+		&.collapsed {
+			i:before { color: @blue}
+			.left-col p { color: @blue}
+		}	
+		
+	}
+	
+	.collapse { padding-top: 20px}
+	
+	.row {
+      a.pull-right { color: @orange; font-size:14px; border:none;}
+      .inner-box h2 { margin-bottom: 10px; color: @blue; font-weight: @font-weight-semibold;
+			i { padding: 0}
+			i:before { font-size: 12px; color: @orange}
+		}
+		
+		.inner-box .content-links {
+          a {display: block;
+            color: @black;
+            margin-bottom: 5px;
+            padding-bottom: 0;
+            i {
+              float: right;
+              padding: 3px 2px 0 0;
+              cursor: pointer;
+            }
+            i:before {
+              font-size: 9px;
+              color: @grey
+            }
+            &:hover {
+              cursor:text;
+              i:before {
+                color: @orange;
+              }
+            }
+          }
+          a:hover{
+            color:@black;
+            border-color:@grey;
+          }
+          input[type=text]{
+            border-left: 0px;
+            border-right: 0px;
+            border-top: 0px solid #D3D3D3 !important;
+            border-bottom: 1px solid #D3D3D3;
+            background-color: white;
+            width: 100%;
+            height: 25px;
+//            padding: 0px 0px 10px 0px !important;
+          }
+		}
+	}
+
+	.full-table {
+		&.users  {
+			td, th { padding: 2px 0; /*border-top:1px solid @grey*/}
+			th { border-bottom: 1px solid @blue}
+			td.indenter { width: 10px; border: none}
+			a { color: @orange;
+				&:hover { color: @orange}
+			}
+
+			input[type=text] { border:none; border-bottom:1px solid @grey; margin:5px 0 0 0; padding:0 0 5px 0; width: 80%; color: @black}
+		}
+
+        &.structures{
+          td, th { padding: 2px 0; border-top:1px solid @grey}
+          th { border-bottom: 1px solid @blue}
+          td.indenter { width: 10px; border: none}
+          a { color: @grey;
+            &:hover { color: @orange}
+          }
+
+          input[type=text] { border:none; border-bottom:1px solid @grey; margin:5px 0 0 0; padding:0 0 5px 0; width: 80%; color: @black}
+        }
+
+		th { background: @blue; color: #FFF; font-weight: @font-weight-light; padding: 3px 5px}
+		th:first-child, th:last-child { width: 10px}
+		td:first-child, td:last-child { width: 10px;}
+		td { border-bottom: 1px solid @grey; padding: 8px 5px; font-size: 12px; line-height: 1}
+		td a i:before { font-size: 9px; color:@grey}
+		td a:hover i:before { color: @orange}
+		
+		&.indent-1 { margin-left:1%; width:99%}
+		&.indent-2 { margin-left:2%; width:98%}
+
+		.user { padding:10px 0 0 55px; position: relative; background: url(../images/drag-and-drop.png) top left no-repeat;
+			img { position: absolute; top:10px; left:20px}
+			p:first-child { color: @blue; font-weight: @font-weight-semibold}
+			p { margin:0; line-height: 16px}
+		}
+
+        .recursive-table{
+          margin-top: -15px;
+        }
+
+	}
+
+    #company-details{
+      .imgProcess input{
+        height:100px;
+        margin-top: -40px;
+      }
+    }
+
+	#deals-settings {
+		.deals-stages {
+			h2 { padding:0 5px 0 30px; color: @blue; font-weight: @font-weight-semibold;
+				i:before { color: @orange; font-size: 12px;}
+			}
+			.status-bar {
+				div { height:40px; width:16.6%; position: relative; padding: 10px 0 0 0;
+					&.first {.box-shadow-color(0px, 1px, 2px, 1px, #cdcdcd)}
+					&.last {.box-shadow-color(0px, 1px, 2px, 1px, #cdcdcd)}
+				}
+				input[type=text] { border:none; border-bottom:1px solid @grey; margin:0; padding:0 0 5px 0; width: 80%; color: @black}
+				a { position: absolute; top:10px; right:5px}
+				a:hover { text-decoration: none;
+					i:before { color: @orange}
+				}
+				/*
+				::-webkit-input-placeholder { color: @black}
+				:-moz-placeholder { color: @black}
+				::-moz-placeholder { color: @black}
+				:-ms-input-placeholder { color: @black}
+				*/
+
+			}
+		}
+
+        textarea{
+          color: #222222;
+          &:focus{
+            border-color: #d3d3d3;
+            box-shadow:none;
+          }
+        }
+
+        .relative-pos{
+          display:inline;
+          .scrollable-menu{
+            height: 200px;
+            overflow-y: scroll;
+          }
+          a>b:before{
+            font-size:5px;
+            margin-right:-4px;
+          }
+        }
+
+        .options{
+          margin-bottom:5px;
+//          margin-right:10px;
+          a.pull-right {margin:0px 10px;}
+        }
+
+        input[type=text]{
+          border-left: 0px;
+          border-right: 0px;
+          border-top: 0px solid #D3D3D3 !important;
+          border-bottom: 1px solid #D3D3D3;
+          background-color: white;
+          width: 100%;
+          height: 25px;
+        }
+
+        .newEntry {
+          a > i:before {
+            color: @orange;
+            font-size: 14px;
+          }
+        }
+
+		.col-lg-7 .inner-box { padding: 10px 0;
+			h2 { padding:0 18px 0 10px;
+			& > i:before { color: @blue; font-size: 14px; padding:0 10px 0 0}
+			}
+		}
+
+      .products{
+        .structure {
+          padding:5px 0 5px 25px; position: relative; line-height: 2;
+          background: url(../images/drag-and-drop.png) top left no-repeat;
+          p:first-child { color: @blue; font-weight: @font-weight-semibold; font-size:14px; vertical-align: middle;}
+          p { margin:0; line-height: 16px}
+          border-top: 1px solid @grey;
+          border-bottom: 1px solid @grey;
+          input[type=text]{
+            border:none;
+            border-bottom:1px solid #d3d3d3;
+            margin: 5px auto;
+          }
+          i{float: right;
+            padding: 5px 2px 5px 10px;}
+          i:before{
+            font-size:9px;
+          }
+          i.icon-arrow:before{
+            font-size:12px;
+          }
+
+        }
+      }
+	}
+
+	.users-actions {
+		i:before { color: @grey; font-size: 12px}
+		a { display: inline-block; margin-right: 10px; color: @orange;
+			&:hover i:before { color: @orange}
+		}
+	}
+
+	#financial-data{
+      input[type=text]{
+        border-left: 0px;
+        border-right: 0px;
+        border-top: 0px solid #D3D3D3 !important;
+        border-bottom: 1px solid #D3D3D3;
+        background-color: white;
+        width: 100%;
+        height: 25px;
+      }
+      .currencies{ color: @blue; padding:0 18px 0 10px;
+        input[type=text] { border:none; border-bottom:1px solid @grey; margin:0 0 10px 10px; padding:0 0 5px 0; width: 25%; color: @black}
+        .dropdown-underline{display:inline; margin:0 0 10px 10px}
+      }
+      .cards {margin-top: 20px;
+        input[type=text] { border:none; border-bottom:1px solid @grey; margin:0 0 10px 10px; padding:0 0 5px 0; width: 80%; color: @black}
+
+      }
+      .card{
+        border-bottom:1px solid @grey; margin:0 0 10px 10px; padding:0 0 5px 0; width: 80%; color: @black;
+      }
+      .col-lg-9 .inner-box { padding: 10px 0;
+        h2 { padding:0 18px 10px 10px;
+          & > i:before { color: @blue; font-size: 14px;}
+        a { color: @orange; font-size:14px;}
+        }
+      }
+      .dropdown{
+        display:inline;
+        .scrollable-menu{
+          height: 200px;
+          overflow-y: scroll;
+        }
+        a>b:before{
+          font-size:5px;
+          margin-right:-4px;
+        }
+      }
+      .newEntry {
+        a > i:before {
+          color: @orange;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .industries-and-solutions{
+
+      ul.see-more { margin: 10px 0 0 10px;
+       li:last-child, li:nth-last-child(2) {padding-bottom:25px;
+          a.pull-right {margin-top:10px;color:@orange;border:none;}
+          a:hover{color:@grey;}
+        }
+      }
+      a.pull{
+        color:@orange; font-size:14px; margin-left:4px;
+      }
+      .options{
+        margin-bottom:5px;
+        a.pull-right {margin:0px 10px;}
+      }
+      .add{border:none;}
+      .division {
+          color: @blue; font-size: 14px; border:none;
+      }
+      .inner-box{
+        .row{ margin-bottom:0px!important;  }
+      }
+      .structure {
+        padding:5px 0 5px 25px; position: relative; line-height: 2;
+        background: url(../images/drag-and-drop.png) top left no-repeat;
+        p:first-child { color: @blue; font-weight: @font-weight-semibold; font-size:14px; vertical-align: middle;}
+        p { margin:0; line-height: 16px}
+        border-top: 1px solid @grey;
+        border-bottom: 1px solid @grey;
+        input[type=text]{
+          border:none;
+          border-bottom:1px solid #d3d3d3;
+        }
+        i{float: right;
+          padding: 5px 2px 5px 10px;}
+        i:before{
+          font-size:9px;
+        }
+      }
+      .col-lg-1{
+        margin-top:5px;
+      }
+
+      i:before { font-size: 17px; color: @orange}
+      i.icon-arrow:before { font-size: 12px}
+    }
+
+}

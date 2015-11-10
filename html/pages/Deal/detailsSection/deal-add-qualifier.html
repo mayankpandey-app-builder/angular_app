@@ -1,0 +1,106 @@
+<div class="edit-qualifier">
+    <h1>Add Qualifier</h1>
+
+    <form class="detailsForm" name = "createQualifier" action="" ng-submit="addQualifier('qualifier',newQualifier)" novalidate>
+        <small class="error" ng-hide="validate(newQualifier.shortName, createQualifier.shortName.$pristine)"
+               ng-show="shortNameError">
+            Please provide short qualifier name.
+        </small>
+        <small class="error" ng-hide="validate(newQualifier.longName, createQualifier.longName.$pristine)"
+               ng-show="longNameError">
+            Please provide qualifier name.
+        </small>
+        <div class="inlineInputs">
+            <input type="text" placeholder="Qualifier Name *" name="longName" ng-model="newQualifier.longName"
+                   ng-change="longNameError = false"
+                   ng-class="{'my-input': !validate(newQualifier.longName, createQualifier.longName.$pristine) || longNameError}"
+                   required>
+            <input type="text" placeholder="Short Name *" name="shortName" ng-model="newQualifier.shortName"
+                   ng-change="shortNameError = false"
+                   ng-class="{'my-input': !validate(newQualifier.shortName, createQualifier.shortName.$pristine) || shortNameError}"
+                   required>
+        </div>
+        <div class="relative-pos zindex-10">
+            <a class="dropdown-toggle" id="dropdownDl" name="end" role="button" data-toggle="dropdown">
+                <input class="borderless-input pull-left" type="text" name="end" placeholder="Deadline" class="noM"
+                       ng-model="newQualifier.deadlineFormat" readonly>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" >
+                <datetimepicker data-ng-model="newQualifier.deadline"
+                                data-datetimepicker-config="{ dropdownSelector: '#dropdownDl', minView: 'day', view:'chooseDate'}"
+                                data-on-set-time="setDeadlineNewQualifier"/>
+            </ul>
+        </div>
+
+        <div class="dropdown-underline">
+            <div class="dropdown">
+                <div class="relative-pos">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                        <b class="icon-arrow-down"></b>
+                        {{newQualifier.stage || 'Select stage'}}
+                    </a>
+                    <ul role="menu" class="dropdown-menu">
+
+                        <li ng-repeat="stage in dealDetails.stages | limitTo:10">
+                            <a href="" ng-click="setNewValues('stage',stage.name);">{{stage.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2>Status</h2>
+        <div class="radios ">
+            <p>
+                <label class="c-green inline-standard" rel="tooltip" data-placement="bottom" title="Complete" ng-click="setNewValues('status','complete')">
+                    <i class="icon-full-circle"></i>
+                    <span ng-class="{'grey-disabled': newQualifier.status != 'complete','strong':newQualifier.status == 'complete' }"> Complete</span>
+                </label>
+            </p>
+            <p>
+                <label class="c-yellow inline-standard" rel="tooltip" data-placement="bottom" title="Validation" ng-click="setNewValues('status','validation')">
+                    <i class="icon-full-circle"></i>
+                    <span ng-class="{'grey-disabled': newQualifier.status != 'validation','strong':newQualifier.status == 'validation' }"> Validation</span>
+                </label>
+            </p>
+            <label class="c-orange inline-standard" rel="tooltip" data-placement="bottom" title="Incomplete" ng-click="setNewValues('status','incomplete')">
+                <i class="icon-full-circle"></i>
+                <span ng-class="{'grey-disabled': newQualifier.status != 'incomplete','strong':newQualifier.status == 'incomplete' }"> Incomplete</span>
+            </label>
+            </p>
+            <p>
+                <label class="c-grey inline-standard" rel="tooltip" data-placement="bottom" title="Unknown" ng-click="setNewValues('status','unknown')">
+                    <i class="icon-full-circle"></i>
+                    <span ng-class="{'grey-disabled': newQualifier.status != 'unknown','strong': newQualifier.status == 'unknown'}">Unknown</span>
+                </label>
+            </p>
+        </div>
+
+        <br/>
+        <p ng-repeat="list in newQualifier.checklist">
+            <label>
+                <input type="checkbox" ng-model="list.value" ng-checked="list.selected"
+                       ng-change="pushChecklist(this.list, $index)"/>
+                <span> {{list.text}}</span>
+            </label>
+            <a class="pull-right"><i class="icon-x grey-disabled" ng-click="removeChecklist($index)"></i></a>
+        </p>
+        <div class="qualifier-milestone-info">
+            <label>
+                <input type="checkbox" ng-model="checklist.selected" ng-change="pushChecklist(this.checklist)">
+                <span></span>
+            </label>
+            <input type="text" placeholder="Add info here" class="pull-right" ng-model="checklist.text" ng-blur="pushChecklist(this.checklist); checklist=[];" />
+        </div>
+
+        <textarea msd-elastic text="" description="" placeholder="Add description" rows="6" class="form-control form-textarea area"
+                  ng-model="contentText"  ng-blur="setNewValues('content',contentText)" >
+
+        </textarea>
+
+
+        <button type="button" class="greyBtn" ng-click="newQualifier = {}; changeActiveSection('')">Cancel</button>
+        <button type="submit" class="orangeBtn">Accept</button>
+    </form>
+
+</div>

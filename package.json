@@ -1,0 +1,21 @@
+{
+  "name": "iSEEit_Website",
+  "version": "0.0.0",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Claudia and Alin",
+  "license": "ISC",
+  "dependencies": {
+    "grunt-cli": "~0.1.13",
+    "express": "3.0.6",
+    "request": ""
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-less": "~0.5.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-contrib-concat": "~0.1.2"
+  }
+}

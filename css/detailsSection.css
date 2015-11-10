@@ -1,0 +1,236 @@
+html,
+body {
+  font-family: Helvetica;
+  height: 100%;
+  width: 100%;
+}
+.absolute-pos {
+  position: absolute;
+}
+.relative-pos {
+  position: relative;
+}
+.inline-display {
+  display: inline;
+}
+.center-right {
+  float: right;
+  height: 68px;
+  line-height: 68px;
+}
+.centered-h {
+  margin: 0 auto;
+}
+/*** For vertical centering ***/
+.container-centered-v {
+  text-align: center;
+  height: 100%;
+}
+/* The ghost, nudged to maintain perfect centering */
+.container-centered-v:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+/* The element to be centered, can
+   also be of any width and height */.centered-v {
+  display: inline-block;
+  vertical-align: middle;
+}
+.margin-10 {
+  margin: 20px 10px;
+}
+.detailsTitle {
+  font: bold 14px Helvetica, sans-serif;
+  line-height: 20px;
+  padding-bottom: 10px;
+}
+.detailsBody {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 20px;
+}
+.detailsForm {
+  padding: 20px 0px;
+}
+.detailsForm input[type="text"] {
+  font: 12px Helvetica, sans-serif;
+  border: 0px;
+  border-bottom: 1px solid #cecece;
+  padding: 20px 0px 10px 0px;
+  width: 100%;
+}
+.detailsForm .inlineInput {
+  width: auto !important;
+}
+.detailsForm .inlineInput input[type="text"] {
+  width: 47% !important;
+  float: right
+}
+.detailsForm .inlineInput :first-child {
+  margin-right: 5%;
+  float:left !important
+}
+.detailsForm .col-xs-6 {
+  width: 47% !important;
+}
+.margin-right {
+  margin-right: 20px;
+}
+.squareBtn {
+  height: 50px;
+  width: 50px;
+  color: white;
+  border-radius: 1px;
+  line-height: 20px;
+  border-color: #FFFAFA;
+  border: 1px solid transparent;
+  font: bold 10px helvetica, sans-serif;
+  line-height: 72px;
+  /*code for icon*/
+
+  background-repeat: no-repeat;
+  background-position: 50% 24%;
+}
+.orangeBtn, .blueBtn {
+  margin: 20px 10px;
+  height: 50px;
+  width: 50px;
+  color: white;
+  border-radius: 1px;
+  line-height: 20px;
+  border-color: #FFFAFA;
+  border: 1px solid transparent;
+  font: bold 10px helvetica, sans-serif;
+  line-height: 72px;
+  /*code for icon*/
+
+  background-repeat: no-repeat;
+  background-position: 50% 24%;
+  background-color: #ff9900;
+  background-image: url("../images/pics_right_panel/icn_ok-btn.png");
+}
+
+.blueBtn { background:#376091 url("../images/pics_right_panel/icn_ok-btn.png") 50% 24% no-repeat }
+
+.greyBtn {
+  margin: 20px 10px;
+  height: 50px;
+  width: 50px;
+  color: white;
+  border-radius: 1px;
+  line-height: 20px;
+  border-color: #FFFAFA;
+  border: 1px solid transparent;
+  font: bold 10px helvetica, sans-serif;
+  line-height: 72px;
+  /*code for icon*/
+
+  background-repeat: no-repeat;
+  background-position: 50% 24%;
+  background-color: #cecece;
+  background-image: url("../images/pics_right_panel/icn_cancel-btn.png");
+}
+.detailsSection {
+  height: 100%;
+  background: white;
+}
+.actionBtns {
+  height: auto;
+  width: 150px;
+  width: 100%;
+}
+.tplPerson {
+  font: normal 12px Helvetica, sans-serif;
+  line-height: 20px;
+}
+.tplPerson > ul > li {
+  border-bottom: 1px solid #cecece;
+  height: 68px;
+}
+.persName {
+  font-weight: bold;
+  color: #376293;
+}
+.container-vertical-img {
+  display: table-cell;
+  vertical-align: middle;
+}
+.parent {
+  display: table;
+}
+.child {
+  display: table-cell;
+  vertical-align: middle;
+}
+.beforeImg {
+  float: left;
+  height: 68px;
+  line-height: 68px;
+  margin:0 10px 0 0;
+}
+.persPic {
+  content: url("../images/pics_right_panel/placeholder_contact-photo.png");
+  display: inline;
+  padding-right: 10px;
+}
+/*general style*/
+.checkBox {
+  width: 12px;
+  height: 12px;
+  display: inline;
+}
+.checkedCls {
+  width: 12px;
+  height: 12px;
+  display: inline;
+  background-image: url("../images/pics_right_panel/sprite_checkmarks.png");
+}
+.uncheckedCls {
+  width: 12px;
+  height: 12px;
+  display: inline;
+  background-image: url("../images/pics_right_panel/sprite_checkmarks.png");
+}
+.xCls {
+    background: url("../images/pics_right_panel/icn_x.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: block;
+    height: 9px;
+    width: 9px;
+    margin: 28px 0 0;
+}
+.persDesc {
+  display: inline-block;
+}
+.searchPers {
+  border-left: 0px;
+  border-right: 0px;
+  border-top: 1px solid #adadad !important;
+  border-bottom: 1px solid #adadad;
+  background-color: #f7f7f7;
+  width: 100%;
+  height: 35px;
+  background: url("../images/pics_right_panel/icn_search-small.png") 10px 10px no-repeat;
+  padding: 0px 0px 0px 30px !important;
+}
+
+
+.radio-input{
+  font: normal 12px helvetica, sans-serif;
+  line-height: 20px;
+  padding-top: 10px;
+  }
+
+.radio-input input[type=radio] { display: none}
+
+.radio-btn-text{
+  display: inline;
+  padding-left: 20px;
+  background: url("../images/pics_right_panel/sprite_checkmarks.png") no-repeat;
+}
+
+.form-textarea{
+  margin-top: 20px;
+  border-radius: 0px;
+}

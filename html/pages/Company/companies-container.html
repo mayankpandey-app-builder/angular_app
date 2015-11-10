@@ -1,0 +1,26 @@
+<top-menu class=""></top-menu>
+<div class="main-content clearfix">
+    <!-- maine left -->
+    <div class="main-left">
+        <div class="container">
+            <div class="row contacts-select-all" ng-show="companies">
+                <a id="select-all" ng-click="selectAll(); allSelected = true;" ng-show="!allSelected">Select All</a>
+                <a id="reset-btn" ng-click="unselectAll(); allSelected = false;" ng-show="allSelected">Unselect All</a>
+            </div>
+            <div class="row scroll-box">
+                <div infinite-scroll="companies.nextPage()" infinite-scroll-disabled="companies.busy"
+                     infinite-scroll-distance="1">
+                    <company-info ng-repeat="company in companies.items"></company-info>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside class="right">
+
+        <section class="detailsSection " ng-include="showSection()">
+
+        </section>
+
+    </aside>
+</div>

@@ -1,0 +1,287 @@
+<div class="expanded-task-view">
+    <div class="task-details">
+        <div class="has-subtask" ng-show="taskDetails.parentTask" ng-click="openTaskDetails(taskDetails.parentTask.id)"><h1><i class="icon-{{taskDetails.parentTask.taskType}}"></i> {{taskDetails.parentTask.name}}</h1></div>
+        <div class="col-lg-12">
+        <h1 ng-click="taskSelectTab('task')">
+            <div class="dropdown task-icons">
+                <i class="icon-{{taskDetails.taskType}}" class="dropdown-toggle" data-toggle="dropdown"></i>
+                <ul role="menu" class="dropdown-menu">
+                    <li tooltip="Email" tooltip-placement="right"><a href="" ng-click="selectsTaskType(taskDetails.id, 'email')"><i class="icon-email"></i></a></li>
+                    <li tooltip="Follow-up" tooltip-placement="right"><a href="" ng-click="selectsTaskType(taskDetails.id, 'followup')"><i class="icon-followup"></i></a></li>
+                    <li tooltip="To do" tooltip-placement="right"><a href="" ng-click="selectsTaskType(taskDetails.id, 'todo')"><i class="icon-todo"></i></a></li>
+                    <li tooltip="Call" tooltip-placement="right"><a href="" ng-click="selectsTaskType(taskDetails.id, 'call')"><i class="icon-call"></i></a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href=""><i class="icon-meeting"></i></a>
+                        <ul class="dropdown-menu">
+                            <li tooltip="Channel" tooltip-placement="right"><a tabindex="-1" href=""  ng-click="selectsTaskType(taskDetails.id, 'channel')"><i class="icon-channel"></i></a></li>
+                            <li tooltip="Nbm" tooltip-placement="right"><a href=""  ng-click="selectsTaskType(taskDetails.id, 'nbm')"><i class="icon-nbm"></i></a></li>
+                            <li tooltip="New Contact" tooltip-placement="right"><a href=""  ng-click="selectsTaskType(taskDetails.id, 'newcontact')"><i class="icon-newcontact"></i></a></li>
+                            <li tooltip="Face to Face" tooltip-placement="right"><a href=""  ng-click="selectsTaskType(taskDetails.id, 'facetoface')"><i class="icon-facetoface"></i></a></li>
+                            <li tooltip="Internal" tooltip-placement="right"><a href=""  ng-click="selectsTaskType(taskDetails.id, 'internal')"><i class="icon-internal"></i></a></li>
+                        </ul>
+                </ul>
+            </div>
+            <input type="text" ng-hide="!updateName" ng-model="taskDetails.basicDetails.name" focus-me="focusEdit"
+                   placeholder="Edit name"
+                   ng-blur="updateName=false; updateBasicDetailsTask(taskDetails.id,taskDetails.basicDetails)"/>
+            <a ng-click="updateName=true; focusEdit=true" ng-show="!updateName">
+                {{taskDetails.basicDetails.name}}
+            </a>
+
+        </h1>
+
+        <div class="task-menu">
+            <div class="task-button" ng-if="isMeetingTask(taskDetails.taskType) && isTaskOwner(taskDetails.relatedPeople[0])" ng-click="showMeetingInviteModal(taskDetails.id)">
+                <i class="icon-send-invite"></i> Send Invite
+            </div>
+            <div class="task-button" ng-if="!taskDetails.basicDetails.deadline" ng-click="redirectToCreateMeetingMinutes(taskDetails.id)">
+                <i class="icon-meetingminutes-leftmenu"></i> Meeting Minutes
+            </div>
+            <div class="task-button" ng-click="updateTaskButtons(taskDetails.id, 'done')">
+                <i class="icon-ok-modal"></i> Mark as Done
+            </div>
+            <div class="task-button" ng-click="updateTaskButtons(taskDetails.id, 'delete')" analytics-on analytics-event="Delete task"  analytics-category="Tasks" analytics-label="Success">
+                <i class="icon-delete"></i> Delete task
+            </div>
+        </div>
+
+        <div class="subtasks">
+            <hr/>
+            <h2><strong>Subtasks</strong>   <a class="pull-right" href="" ng-click="createSubTaskModal(taskDetails.id);" analytics-on analytics-event="Create task"  analytics-category="Tasks" analytics-label="View">Add</a> </h2>
+
+            <!--<input type="text" placeholder="Task Name"/>-->
+
+            <div class="subtasks-list">
+                <div class="row" ng-repeat="subTask in taskDetails.subtasks" ng-click="goToSubtask(subTask.id)">
+                    <div class="col-lg-7 ellipsisNoWrap">
+                        <i class="icon-{{subTask.taskType}}" name="{{subTask.name}}"></i> {{subTask.name}}
+                    </div>
+                    <div class="col-lg-5 text-right">
+                        {{subTask.start | date:'dd MMM, HH:mm'}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr/>
+
+        <div class="task-description">
+            <div class="row tasks-assignee">
+                <div class="col-lg-4">
+                    Assigned to
+                </div>
+                <div class="col-lg-8 ellipsisNoWrap">
+                    <a href="" class="pull-right" ng-click="updateAssign=true; focusAssign=true; getOrganizationAssignee()" ng-hide="updateAssign">Change</a>
+                    <a href="" class="pull-right" ng-click="updateAssign=false;" ng-show="updateAssign">Collapse</a>
+                    <img ng-src="{{taskDetails.relatedPeople[1].imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg" title="{{taskDetails.relatedPeople[1].lastName}}"/>
+                    &nbsp; {{taskDetails.relatedPeople[1].firstName}} {{taskDetails.relatedPeople[1].lastName}}
+                </div>
+                <div class="col-lg-12" ng-hide="!updateAssign">
+                    <br/>
+                    <input type="search" ng-model="selectedAssignee" class="searchPers search" placeholder = "Search member to assign"
+                           focus-me="focusAssign"
+                           typeahead=" assignee as assignee.firstName + ' ' + assignee.lastName for assignee in assigneeList | filter:$viewValue | limitTo:10"
+                           typeahead-on-select="changeAssignee(taskDetails.id, $item, taskDetails.relatedPeople); selectedAssignee = '';updateAssign=false">
+                </div>
+            </div>
+            <hr/>
+            <div class="task-date">
+                <div class="clearfix" ng-if="!taskDetails.basicDetails.deadline">
+                    <img src="/images/calendar_small.png" width="18"/>&nbsp;
+                    <div class="relative-pos date-tag" ng-show="taskDetails.basicDetails.allDay">
+                        <a class="dropdown-toggle" id="dropdownAllDay" role="button" data-toggle="dropdown" data-target="" href="">
+                            <input type="text" name="start" placeholder="Day" class="fa dark noM" ng-model="taskDetails.basicDetails.start_format" readonly>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="taskDetails.basicDetails.start"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownAllDay', view: 'taskDetails', minView:'day' }" data-on-set-time="setTaskStartDate"/>
+                        </ul>
+                    </div>
+
+                    <div class="relative-pos date-tag" ng-hide="taskDetails.basicDetails.allDay">
+                        <a class="dropdown-toggle" id="filterDateStart" role="button" data-toggle="dropdown" data-target="" href="">
+                            <input type="text" class="fa dark NoM" placeholder="Start date"
+                                   ng-model="taskDetails.basicDetails.start_format" readonly/>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="taskDetails.basicDetails.start"
+                                            data-datetimepicker-config="{ dropdownSelector: '#filterDateStart', view: 'taskDetails' }"  data-on-set-time="setTaskStartDate"/>
+                        </ul>
+                    </div>
+
+
+                    <div class="relative-pos date-tag" style="margin-top: 20px;" ng-hide="taskDetails.basicDetails.allDay">
+                        <a class="dropdown-toggle" id="filterDateEnd" role="button" data-toggle="dropdown" data-target="" href="">
+                            <input type="text" class="fa dark NoM" placeholder="End date"
+                                   ng-model="taskDetails.basicDetails.end_format" readonly/>
+                        </a>
+                        <ul class="dropdown-menu relative-pos" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="taskDetails.basicDetails.end"
+                                            data-datetimepicker-config="{ dropdownSelector: '#filterDateEnd',view: 'taskDetails' }" data-on-set-time="setTaskEndDate"/>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="radio-input" ng-if="!taskDetails.basicDetails.deadline">
+                    <label>
+                        <input type="checkbox" ng-model="taskDetails.basicDetails.allDay" ng-change="setTaskAllDay(taskDetails.basicDetails.allDay);"/>
+                        <span>All day event</span>
+                    </label>
+                </div>
+
+                <div class="clearfix" ng-if="taskDetails.basicDetails.deadline" style="margin-bottom: 20px;">
+                    <img src="/images/calendar_small.png" width="18"/>&nbsp;
+                    <div class="relative-pos date-tag">
+                        <a class="dropdown-toggle" id="filterDateDl" role="button" data-toggle="dropdown" data-target="" href="">
+                            <input type="text" class="fa dark NoM" placeholder="Deadline"
+                                   ng-model="taskDetails.basicDetails.start_format" readonly/>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="taskDetails.basicDetails.start"
+                                            data-datetimepicker-config="{ dropdownSelector: '#filterDateDl',view: 'taskDetails' }" data-on-set-time="setTaskStartDate"/>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="important-task" ng-click="updateTaskImportance(taskDetails.id, !taskDetails.important)">
+                <i class="icon-error" ng-class="{'important': taskDetails.important}"></i> Important task
+            </div>
+
+            <div class="meeting-minutes" ng-show="taskDetails.meetingMinutes.length>0">
+                <h2><strong>Meeting Minutes</strong></h2>
+                <div class="row mm-list" ng-repeat="meetingMinute in taskDetails.meetingMinutes" >
+                    <div class="col-lg-6 ellipsisNoWrap">
+                        <a href="" analytics-on analytics-event="View details"  analytics-category="Meeting Minutes" analytics-label="View" ng-click="redirectToMeetingMinute(taskDetails.id, meetingMinute.id)">{{meetingMinute.title}}</a>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        {{meetingMinute.timestamp | date:'dd MMM, HH:mm'}}
+                    </div>
+                </div>
+
+            </div>
+
+            <h2><strong>Notes</strong>   <a class="pull-right" href="" ng-click="viewNote=true;focusNewNote=true;note=''">Add</a></h2>
+
+            <div class="task-notes">
+                <div class="row detailsForm" ng-hide="!viewNote">
+                    <div class="col-lg-8">
+                        <input type="text" placeholder="Note title*" ng-model="note.title" focus-me="focusNewNote"/>
+                    </div>
+                    <!--<div class="col-lg-4">-->
+                    <a class="pull-right" ng-click="viewNote=false;" ><i class="icon-x"></i></a>
+                    <a class="pull-right" ng-click="viewNote=false; addTaskNote(taskDetails.id, note);" ><i class="icon-ok-modal"></i></a>
+                    <!--</div>-->
+                    <textarea msd-elastic placeholder="Add description" rows="6" class="form-control form-textarea"
+                              ng-model="note.text" ng-blur="viewNote=false; addTaskNote(taskDetails.id, note);"></textarea>
+                </div>
+
+                <div class="row notes-list" ng-repeat="note in taskDetails.notes">
+                    <div class="col-lg-6 ellipsisNoWrap">
+                        <a ng-click="updateNotes=true; focusUpdateNote=true" ng-show="!updateNotes">
+                            {{note.title || note.text}}
+                        </a>
+                        <input type="text" placeholder="Note title*" ng-model="note.title" focus-me="focusUpdateNote" ng-hide="!updateNotes" />
+                    </div>
+                    <div class="col-lg-6 action-remove" ng-hide="!updateNotes">
+                        <a class="pull-right" ng-click="updateNotes=false;"><i class="icon-x"></i></a>
+                        <a class="pull-right" ng-click="updateNotes=false; updateTaskNote(taskDetails.id, note);" ><i class="icon-ok-modal"></i></a>
+                    </div>
+
+                    <div class="col-lg-6 text-right" ng-show="!updateNotes">
+                        {{note.timestamp | date:'dd MMM, HH:mm'}}
+                        <a class="pull-right" href="" ng-click="deleteTaskNote(taskDetails.id, note.id)"><i class="icon-x"></i></a>
+                    </div>
+
+                    <div class="col-lg-12" ng-hide="!updateNotes">
+                        <textarea msd-elastic placeholder="Add description" rows="6" class="form-control form-textarea"
+                                  ng-model="note.text" ng-blur="updateNotes=false; updateTaskNote(taskDetails.id, note);"></textarea>
+                    </div>
+                </div>
+                <div ng-hide="!updateNotes">
+                    <input type="text" placeholder="Note title*" ng-model="note.title" focus-me="focusNewNote"/>
+                    <textarea msd-elastic placeholder="Add description" rows="6" class="form-control form-textarea"
+                              ng-model="note.text" ng-blur="viewNote=false; addTaskNote(taskDetails.id, note);"></textarea>
+                    <a class="pull-right" ng-click="viewNote=false;"><i class="icon-x"></i></a>
+                    <a class="pull-right" ng-click="viewNote=false; addTaskNote(taskDetails.id, note);"><i class="icon-ok-modal"></i></a>
+                </div>
+
+            </div>
+
+
+            <div class="simulate-textarea">
+                <!--<span class="date quicknotes">{{currentDate | date : 'dd-MMM-yyyy'}} - {{currentUser}}</span>-->
+                <textarea msd-elastic description="" ng-model="newQuickNote.text" ng-blur="addTaskQuickNote(taskDetails.id, newQuickNote, taskDetails.quickNotes)" placeholder="Add quick note..." rows="2" class="form-control form-textarea quicknotes"></textarea>
+                <br/>
+                <div class="quick-note" ng-repeat="quickNote in taskDetails.quickNotes">
+                    <span class="date quicknotes">{{quickNote.timestamp | date : 'dd-MMM-yyyy'}} - {{quickNote.author}}</span>
+                    <textarea msd-elastic description="" ng-model="quickNote.text" ng-blur="addTaskQuickNote(taskDetails.id, newQuickNote, taskDetails.quickNotes)" placeholder="Add quick note..." rows="2" class="form-control form-textarea quicknotes"></textarea>
+                </div>
+            </div>
+
+            <div class="task-stages text-center">
+                <div ng-repeat="taskStatus in taskDetails.status.list" tooltip="{{taskStatus}}"  tooltip-placement="bottom" ng-class="{'task-stage-phase-empty': taskDetails.status.current < $index, 'task-stage-phase-full': taskDetails.status.current >= $index}"
+                     ng-click="changeTaskStatus(taskDetails.id, taskDetails.status.list, $index)">
+                </div>
+            </div>
+
+            <div class="task-tags">
+                <i class="icon-tags float-left"></i>
+                <tags-input ng-model="tagsSelected" placeholder="Add tags" displayProperty="id, displayValue" replace-spaces-with-dashes="false"
+                            on-tag-added="selectTaskTag();" on-tag-removed="selectTaskTag();" >
+                    <auto-complete source="getTaskTags($query)" minLength="1"></auto-complete>
+                </tags-input>
+
+            </div>
+            <hr/>
+        </div>
+
+        <div class="task-context">
+            <h2><strong>Context</strong>   <a class="pull-right" href=""  ng-click="changeTaskContext(taskDetails)">Change</a> </h2>
+            <div class="row">
+                <div class="col-lg-12 ellipsisNoWrap">
+                    <img ng-src="{{taskContext.imageURL}}" class="smallRoundImg" title="{{taskContext.title}}"/>
+                    {{taskContext.title}}
+                </div>
+            </div>
+            <hr/>
+            <div class="row followers">
+                <div class="col-lg-4 ellipsisNoWrap">
+                    Followers
+                </div>
+                <div class="col-lg-8">
+                    <a href="" class="pull-right" ng-click="updateRelated=true; focusRelated=true;" ng-hide="updateRelated">Add</a>
+                    <a href="" class="pull-right" ng-click="updateRelated=false;" ng-show="updateRelated">Collapse</a>
+                    <div ng-repeat="follower in taskDetails.relatedPeople" class="follower-image">
+                        <img ng-src="{{follower.imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg overlay-trash" tooltip="Owner&Assignee: {{follower.firstName}} {{follower.lastName}}" tooltip-placement="bottom" ng-show="$index===0 && follower.isAssignee"
+                             ng-click="changeRelatedPeople(taskDetails.id, $item, taskDetails.relatedPeople,$index);"/>
+                        <img ng-src="{{follower.imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg overlay-trash" tooltip="Owner: {{follower.firstName}} {{follower.lastName}}" tooltip-placement="bottom" ng-show="$index===0 && !follower.isAssignee"
+                             ng-click="changeRelatedPeople(taskDetails.id, $item, taskDetails.relatedPeople,$index);"/>
+                        <img ng-src="{{follower.imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg overlay-trash" tooltip="Assigned to: {{follower.firstName}} {{follower.lastName}}" tooltip-placement="bottom" ng-show="$index===1 && !follower.isAssignee"
+                             ng-click="changeRelatedPeople(taskDetails.id, $item, taskDetails.relatedPeople,$index);"/>
+                        <img ng-src="{{follower.imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg overlay-trash" tooltip="Follower: {{follower.firstName}} {{follower.lastName}}" tooltip-placement="bottom" ng-show="$index>1"
+                             ng-click="changeRelatedPeople(taskDetails.id, $item, taskDetails.relatedPeople,$index);"/>
+                    </div>
+                </div>
+                <div class="col-lg-12" ng-hide="!updateRelated">
+                    <br/>
+                    <input type="search" ng-model="followersModel" class="searchPers search" placeholder = "Search contact "
+                           focus-me="focusRelated"
+                           ng-keyup = "getRelatedPeopleSuggestions(followersModel)"
+                           typeahead-min-length='2'
+                           typeahead=" related.displayValue for related in recipientsList || '' | filter:$viewValue | limitTo:10"
+                           typeahead-on-select="changeRelatedPeople(taskDetails.id, $item, taskDetails.relatedPeople); followersModel = '';">
+                </div>
+            </div>
+            <hr/>
+        </div>
+
+        </div>
+    <context-modal></context-modal>
+    <create-subtask></create-subtask>
+    <meeting-invite-modal attendees="meetingAttendees" taskid="taskId" special="true" refresh="true"></meeting-invite-modal>
+    </div>
+</div>

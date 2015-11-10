@@ -1,0 +1,37 @@
+<div class="col-lg-3">
+    <div class="inner-box">
+        <h2>Invited users</h2>
+        <a href="" class="c-orange btn-link" ng-show="device == 'ipad'" ng-click="showInviteMemberModal();"><i class="icon-addcontact-menu"></i>Invite member</a>
+        <ul class="content-links detailsForm">
+            <li class="ellipsisHidden" ng-repeat="pendingUser in pendingUsers track by $index">{{pendingUser}}</li>
+        </ul>
+    </div>
+    <div class="modal fade" id="inviteMemberModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog" style="width: 300px;">
+            <div class="modal-content">
+                <form class="detailsForm" name = "createdMember" action="" ng-submit="inviteNewMemberFromModal(newContactInviteModal)" novalidate>
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="myModalLabel">Invite contact</h1>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <small class="error" ng-show="emailInviteError">
+                            Please provide email.
+                        </small>
+                        <input type="email" name="email" placeholder="Email *" ng-model="newContactInviteModal.email"
+                               ng-class="{'my-input': emailInviteError}" required>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="greyBtn" data-dismiss="modal" ng-click="newContactInviteModal = {};">Cancel</button>
+                        <button type="submit" class="orangeBtn">Invite</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

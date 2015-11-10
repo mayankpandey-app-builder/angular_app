@@ -1,0 +1,12 @@
+<div class="inner-box double scrollableHidden">
+    <h1>Contacts</h1>
+    <ul class="contacts">
+        <li class="clearfix" ng-repeat="associatedContact in associatedContacts">
+            <a href="/#/contacts/{{associatedContact.id}}">
+                <img class="smallRoundImg" ng-src={{setImage(associatedContact.imageURL)}} />
+                <span class="pull-left">{{associatedContact.firstName}} {{associatedContact.lastName}}</span>
+                <span class="pull-right">{{associatedContact.position}} <i>></i></span>
+            </a>
+        </li>
+    </ul>
+</div>

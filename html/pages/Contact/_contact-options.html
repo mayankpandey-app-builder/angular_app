@@ -1,0 +1,17 @@
+<div class="col-lg-6">
+    <div class="inner-box sink ellipsisHidden scrollableHidden">
+        <a class="card-link options" ></a>
+        <h1 class="noM">Options</h1>
+        <p style="margin-bottom: 0;"><span class="w50">Newsletter</span> </p>
+        <p><span class="c-blue"><strong>{{optInVal()}}</strong></span></p>
+
+        <p class="doubleM" style="margin-bottom: 0;"><span class="w50">Type</span></p>
+        <p> <span class="c-blue"><strong ng-bind = "options.positionType || '-'"></strong></span></p>
+
+        <p class="doubleM" style="margin-bottom: 0;"><span>Solution area</span></p>
+
+        <div class="ellipsisNoWrap">
+            <div ng-repeat="area in options.solutionAreas" ng-if="area.selected">{{area.solutionName}}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<h1>Options</h1>
+<div class="radios-grey-orange">
+<p class="noM">
+	<span class="">Newsletter: </span>
+    &nbsp;&nbsp;
+    <label>
+        <input type="radio" name="opt-in" ng-click = "selectOptIn(true)" ng-checked = {{contactProfile.options.openForCommunication}} />
+        <span>Yes</span>
+    </label>
+    &nbsp;&nbsp;
+    <label>
+        <input type="radio" name="opt-in"  ng-click = "selectOptIn(false)"  ng-checked = {{!contactProfile.options.openForCommunication}} />
+        <span>No</span>
+    </label>
+
+</p>
+
+<p>
+
+</p>
+<p>
+
+</p>
+<p>
+	<span class="w50">Type:</span>
+	<label>
+		<input type="radio" name="type" ng-click = "selectOptionsType('Technical')" ng-checked="isChecked(options.positionType,'Technical')"  />
+		<span>Technical</span>
+	</label>
+ 	&nbsp;&nbsp;
+	<label>
+		<input type="radio" name="type"  ng-click = "selectOptionsType('Business')" ng-checked="isChecked(options.positionType,'Business')"  />
+		<span>Business</span>
+	</label>
+</p>
+</div>
+
+
+<h2>Interests</h2>
+<ul class="solutions-list" ng-repeat="option in contactProfile.options.solutionAreas">
+	<li> 
+		<label>
+			<input type="checkbox" ng-click = "selectIntrest($index)" ng-checked="option.selected" />
+			<span>{{option.solutionName}}</span>
+		</label>	
+	</li>
+
+</ul>

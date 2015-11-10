@@ -1,0 +1,12 @@
+<div class="col-lg-2" ng-repeat="note in notes">
+    <div class="inner-box sink link" ng-click="changeNoteSection(note)">
+        <h1>{{note.title}}</h1>
+
+        <p class="note-text-container">
+            <textarea msd-elastic ng-model="note.text" class="form-control form-textarea quicknotes"
+                      readonly></textarea>
+        </p>
+
+        <p class="text-right">{{note.timestamp |date : 'dd MMM, yyyy' }}</p>
+    </div>
+</div>

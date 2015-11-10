@@ -1,0 +1,14 @@
+<h1>Type</h1>
+
+<div class="radios-grey-orange"  ng-repeat = "typeVal in contactProfile.contactType.possibleValues">
+	<p class="noM">	
+		<label ng-class = "setColor(typeVal)">
+			<input type="radio" name="type"  ng-click = "selectType(typeVal)" ng-checked= "isChecked(contactProfile.contactType.selectedValue, typeVal)" />
+			<span>{{typeVal}}</span>
+		</label>
+	</p>	
+
+</div>
+
+
+<textarea msd-elastic text="" description="" placeholder={{contactProfile.contactType.explanatoryText}} rows="5" class="form-control form-textarea black" ng-model="contactProfile.contactType.comments"  ng-blur = "updateType()"></textarea>

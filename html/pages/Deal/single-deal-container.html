@@ -1,0 +1,110 @@
+<top-menu class=""></top-menu>
+<div class="main-content clearfix">
+    <div class="main-left">
+        <div class="container details deals-container">
+
+            <!-- Tabs nav -->
+            <ul class="nav nav-tabs tabs-filters" id="dealTabs">
+                <li class="active first" ng-click="clearMenu(); changeActiveSection(''); sectionContext = 'details';"><a data-target="#deal-sheet" data-toggle="tab"><i class="icon-deal"></i> Deal sheet</a></li>
+                <li ng-click="getTimelineView(); changeActiveSection('timeline-filters'); sectionContext = 'timeline';"><a data-target="#deal-timeline" data-toggle="tab"><i class="icon-collapse-01"></i> Timeline</a></li>
+                <li ng-click="getContactsAssociatedWithDeal(); sectionContext = 'contacts';"><a data-target="#deal-contacts" data-toggle="tab"><i class="icon-contacts-leftmenu-01"></i> Contacts</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content content-filters">
+                <div class="tab-pane fade in active" id="deal-sheet">
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <deal-details deal="dealDetails.basicDetails" ng-click="changeActiveSection('update-basic-details');getTerritories();"></deal-details>
+                        </div>
+                        <div class="col-lg-2">
+                            <next-steps next-steps="dealDetails.nextSteps"></next-steps>
+                        </div>
+                        <div class="col-lg-2">
+                            <followers-list followers="dealDetails.sharedWith" ng-click="changeActiveSection('followers');getDirectReports();"></followers-list>
+                        </div>
+                        <div class="col-lg-4">
+                            <notifications-card notifications="dealDetails.notifications"></notifications-card>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            <deal-stages stages="dealDetails.stages" id="dealDetails.id"></deal-stages>
+                    </div>
+
+                    <div class="row">
+                        <note-cards notes="dealDetails.notes"></note-cards>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="deal-timeline">
+                    <div class="row col-lg-12 timeline-qualifier" ng-repeat="result in timelineResults track by $index" style="margin-left: 5px; border-bottom: 1px solid #d3d3d3;" ng-class="{'extra-padding': result.tasks.length == 0}" ng-drop="true" ng-drop-success="onTaskDroppedOnStoneComplete($data, $event, this, $index);">
+                        <div class="col-lg-1" ng-show="result.qualifier.deadline && result.tasks.length > 0" style="padding-top: 25px; font-size: 9px;">
+                            {{result.qualifier.deadline | date: 'dd MMM, yyyy'}}
+                        </div>
+                        <div class="col-lg-1" ng-show="result.tasks.length == 0" style="padding-top: 25px; font-size: 9px;">
+                            -
+                        </div>
+                        <div class="col-lg-1" ng-show="!result.qualifier.deadline && result.tasks.length > 0" style="padding-top: 25px; font-size: 9px;">
+                            -style
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="inner-box link half" ng-class="getStoneColor(result.qualifier);" ng-show="result.qualifier.shortName">
+                                <div class="t-cell">
+                                    <p>{{result.qualifier.shortName}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-10">
+                            <script type="text/ng-template" id="task_tree.html">
+                                <div ng-drop="true" ng-drop-success="onTaskDroppedOnAnotherTask($data, $event, this);">
+                                    <div class="inner-box timeline-box sink {{task.borderColor}}" ng-drag="true" ng-drag-data="task" ng-click="goToTaskDetails(task)" name="{{task.name}}">
+                                        <div class="pull-left"> <!--ng-click="navigateToTask(task.id)" -->
+                                            <div class="timeline-container-top">
+                                                <div ng-show="task.important" class="inline-block-display"><img alt="" ng-src="{{'images/icn_important.png'}}"></div>
+                                                <div class="inline-block-display"><i class="icon-{{task.taskType}} timeline-task-type" ></i></div>
+                                                <div class="inline-block-display" ng-if="!task.allDay && task.dueOn">{{task.dueOn | date: 'dd MMM, HH:mm'}}</div>
+                                                <div class="inline-block-display" ng-if="task.allDay">{{task.start | date: 'dd MMM'}}, all day</div>
+                                            </div>
+                                            <div class="timeline-task-name ellipsisNoWrap"> {{task.name}}</div>
+                                            <div ng-repeat="stat in task.status.list" tooltip="{{stat}}"  tooltip-placement="bottom"  ng-class="{'timeline-task-status-empty': task.status.current < $index, 'timeline-task-status-full': task.status.current >= $index}">
+                                            </div>
+                                        </div>
+                                        <div class="pull-right timeline-assignee" ng-show="task.assignee.id != ownerId">
+                                            <img alt="" class="smallRoundImg" ng-src="{{task.assignee.imageURL || 'images/pics_right_panel/placeholder_contact-photo.png'}}">
+                                            <div>{{task.assignee.firstName}} {{task.assignee.lastName}}</div>
+                                            <div class="timeline-assignee-title">Assignee</div>
+                                        </div>
+                                        <i class="icon-expand-01 timeline-expand-icon" ng-show="(task.isCollapsed == 1 || task.isCollapsed == 2) && task.hideExpand == false" ng-click="expand_collapse_task(task);"></i>
+                                    </div>
+                                </div>
+                                <div ng-repeat="task in task.subtasks track by $index" ng-include="'task_tree.html'" class="timeline-second-container" ng-show="task.isCollapsed == 2"></div>
+                            </script>
+                            <div ng-repeat="task in result.tasks track by $index" ng-include="'task_tree.html'" class="timeline-main-container"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="deal-contacts">
+                    <div class="row scroll-box">
+                        <contact-info ng-repeat="contact in contactsAssociatedWithDeal" ng-click="goToContact(contact.id)"></contact-info>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- edit section -->
+    <aside class="right">
+
+        <section class="detailsSection " ng-include="showSection()">
+
+        </section>
+
+    </aside>
+
+</div>
+
+<meeting-invite-modal attendees="meetingAttendees" taskid="taskId"></meeting-invite-modal>

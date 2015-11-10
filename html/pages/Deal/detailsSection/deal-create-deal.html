@@ -1,0 +1,108 @@
+<h1>Create Deal</h1>
+
+<!--<div class="deal-type pull-left">
+    <a href="" ng-class="{'selected': newDeal.dealStatus == 'Best case'}" rel="tooltip" data-placement="bottom" title="Best Case" ng-click="setStatus('Best case')"><i class="icon-deal"></i></a>
+    <a href="" ng-class="{'selected': newDeal.dealStatus == 'Commit'}" rel="tooltip" data-placement="bottom" title="Commit" ng-click="setStatus('Commit')"><i class="icon-won-deal"></i></a>
+    <a href="" ng-class="{'selected': newDeal.dealStatus == 'Pipeline'}"  rel="tooltip" data-placement="bottom" title="Pipeline" ng-click="setStatus('Pipeline')"><i class="icon-pipeline"></i></a>
+</div>-->
+
+<form action="" class="detailsForm" name="addNewDeal" ng-submit="createDeal()" novalidate ng-init="addNewDeal.$setPristine();resetCreateDealForm();">
+
+    <input type="text" placeholder = "Deal Name" required
+           ng-model="newDeal.dealName" />
+
+    <small class="error" ng-hide="validate(newDeal.companyName, addNewDeal.companyName.$pristine)" ng-show="companyNameError">
+        Please provide a company name.
+    </small>
+    <input type="search" placeholder="Company Name *" name="companyName" required
+           class="searchCompanies search"
+           ng-model="newDeal.companyName"
+           ng-keyup = "companiesSearchSuggestions(newDeal.companyName)"
+           typeahead="company.displayValue for company in companiesSuggestions | limitTo:10"
+           typeahead-on-select="selectCompany($item)"
+           typeahead-min-length="3"
+           typeahead-wait-ms = "300"
+           ng-class="{'my-input': !validate(newDeal.companyName, addNewDeal.companyName.$pristine) || companyNameError}"
+           ng-change="setError('companyNameError',false);">
+
+    <small class="error" ng-hide="validate(newDeal.territoryName, addNewDeal.territoryName.$pristine)" ng-show="territoryError">
+        Please provide a territory.
+    </small>
+    <input type="search" placeholder="Territory *" name="territoryName" required
+           class="searchCompanies search"
+           ng-model="newDeal.territoryName"
+           typeahead="territory.displayValue for territory in userSettings.territories | filter: $viewValue | limitTo: 10"
+           typeahead-on-select="selectTerritory($item)"
+           ng-class="{'my-input': !validate(newDeal.territoryName, addNewDeal.territoryName.$pristine) || territoryError}"
+           ng-change="setError('territoryError',false);">
+
+    <small class="error" ng-hide="validate(newDeal.contactName, addNewDeal.contactName.$pristine)" ng-show="contactNameError">
+        Please provide a contact name.
+    </small>
+    <input type="search" placeholder="Contact Name *" name="contactName" required
+           class="searchCompanies search"
+           ng-model="newDeal.contactName"
+           ng-keyup = "contactsSearchSuggestions(newDeal.contactName)"
+           typeahead="contact.displayValue for contact in contactsSuggestions | limitTo:10"
+           typeahead-on-select="selectContact($item)"
+           typeahead-min-length="3"
+           typeahead-wait-ms = "300"
+           ng-class="{'my-input': !validate(newDeal.contactName, addNewDeal.contactName.$pristine) || contactNameError}"
+           ng-change="setError('contactNameError',false);">
+
+    <textarea msd-elastic placeholder="Deal Description" rows="5" class="form-control form-textarea black" ng-model="newDeal.description"></textarea>
+
+    <div class="dropdown add-product">
+        <p class="text-left"><a class="dropdown-toggle" data-toggle="dropdown" href="">Add Product Area</a></p>
+
+        <ul role="menu" class="dropdown-menu">
+            <li class="dropdown-submenu" ng-repeat="dealP in productsFilters">
+                <a href="" ng-click="addProduct('products', this.dealP)">{{dealP.name}}</a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="dealSubP in dealP.subProducts"><a href="" ng-click="addProduct('subProducts', this.dealSubP, $parent.dealP)">{{dealSubP.name}}</a></li>
+                </ul>
+        </ul>
+    </div>
+
+    <div class="clearfix">
+        <div class="small-col first"><p>Deal Value</p></div>
+        <div class="small-col center"><p>{{newDeal.dealValue}} {{newDeal.currency}}</p></div>
+        <div class="small-col last">
+            <div class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""> Currency
+                    <b class="carret"></b>
+                </a>
+
+                <ul role="menu" class="dropdown-menu scrollable-menu">
+                    <li ng-repeat="currency in currencies"><a href="" ng-click="setCurrency(currency)">{{currency}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix" ng-repeat="product in newDeal.products">
+        <div class="small-col first">
+            <a class="pull-left" ng-click="removeProduct(newDeal.products, $index)" ng-hide="product.subProducts.length > 0"><i class="icon-x"></i></a>
+            <p> {{product.name}}</p>
+        </div>
+        <div class="small-col center" >
+            <input type="text" placeholder="Deal Value" ng-model="product.amount" ng-readonly="product.subProducts.length > 0"></div>
+        <div class="small-col last">
+            <p class="text-note">{{newDeal.currency}}</p>
+        </div>
+        <div class="clearfix" ng-repeat="subproduct in product.subProducts">
+            <div class="small-col first subproduct">
+                <a class="pull-left" ng-click="removeProduct(product.subProducts, $index)"><i class="icon-x"></i></a>
+                <p> {{subproduct.name}}</p>
+            </div>
+            <div class="small-col center"><input type="text" placeholder="Deal Value" ng-model="subproduct.amount"></div>
+            <div class="small-col last">
+                <p class="text-note">{{newDeal.currency}}</p>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="greyBtnReset" ng-click="addNewDeal.$setPristine();resetCreateDealForm()">Reset</button>
+    <button analytics-on analytics-event="Create deal"  analytics-category="Deals" analytics-label="Cancel" class="greyBtn" ng-click="changeActiveSection('filters')">Cancel</button>
+    <button analytics-on analytics-event="Create deal"  analytics-category="Deals" analytics-label="Success" class="orangeBtn" type="submit">Create</button>
+</form>

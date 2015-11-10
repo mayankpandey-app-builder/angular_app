@@ -1,0 +1,25 @@
+<div class="general-card contacts">
+    <div class="check-uncheck">
+        <label>
+            <input type="checkbox" ng-click="selectCard(this, $event);"/>
+            <span></span>
+        </label>
+    </div>
+    
+    <div class="inner-box cursor-pointer" ng-click="redirectToContact(contact.id)" analytics-on analytics-event="View details"  analytics-category="Contacts" analytics-label="View">
+        <div class="head">
+            <img alt="{{contact.fullName}}" class = "smallRoundImg" ng-src="{{contact.imageURL}}">
+            <div class="c-blue ellipsisNoWrap name-header">{{contact.fullName }}</div>
+        </div>
+        <p class="ellipsisNoWrap"><strong>{{contact.company || '-' }}</strong></p>
+        <p class="ellipsisNoWrap">{{contact.position || '-' }}</p>
+        <p class="normal-one-line ellipsisNoWrap"><i class="icon-email c-grey"></i>{{contact.email || '-'}}</p>
+        <p class="ellipsisNoWrap"><i class="icon-call c-grey"></i>{{contact.mobileNo || '-'}}</p>
+
+        <div class="actions c-grey">
+            {{contact.hierarchicalPosition || '-'}}&nbsp;&nbsp;
+            {{contact.personality || '-'}}&nbsp;&nbsp;&nbsp;&nbsp;
+           <!-- <span>{{contact.numberOfTasks || '-'}}</span>-->
+        </div>
+    </div>
+</div>

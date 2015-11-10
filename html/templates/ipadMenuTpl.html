@@ -1,0 +1,20 @@
+<header >
+	<a class="logo">ISeeIt</a>
+	<nav class="actions-menu">
+		<ul id="main-actions">
+			<li ng-repeat='tab in tabs' class = "cursor-pointer">
+				<a ng-click = "tab.tabAction()" class={{tab.tabCls}}    >		<i class={{tab.tabIcon}}></i>{{tab.tabTitle}}
+				</a>
+			</li>
+		</ul>
+        <ul id="sub-actions">
+            <li ng-repeat="subTab in subTabs">
+                <a ng-click="subTab.tabAction()" data-toggle="modal" data-target="#{{subTab.tabCls}}">
+                    <i class={{subTab.tabIcon}}></i>
+                    {{subTab.tabTitle}}
+                </a>
+            </li>
+        </ul>
+	</nav>
+
+</header>

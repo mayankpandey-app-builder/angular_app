@@ -1,0 +1,22 @@
+<div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog" ng-style="{'width': myModal.width}">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Add new member</h1>
+            </div>
+
+            <div class="modal-body">
+                <h2>{{myModal.info}}</h2>
+            </div>
+
+            <div class="modal-footer">
+                <button class="greyBtn" data-dismiss="modal" ng-click = "myModal.declineAction()">{{myModal.decline}}</button>
+                <button class="orangeBtn" ng-click = "myModal.acceptAction()">{{myModal.accept}}</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

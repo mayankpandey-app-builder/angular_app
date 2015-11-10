@@ -1,0 +1,42 @@
+<top-menu class=""></top-menu>
+
+<div class="main-content clearfix">
+    <!-- maine left -->
+    <div class="main-left">
+        <div class="container details">
+            <div class="row">
+                <div class="col-lg-4">
+                    <lead-contacts associated-contacts="companyProfile.contacts"></lead-contacts>
+                </div>
+                <div class="col-lg-4">
+                    <company-basic-details basic-details="companyProfile.basicDetails" ng-click="changeActiveSection('update-basic')"></company-basic-details>
+                </div>
+                <div class="col-lg-4">
+                    <company-deals deals="companyProfile.deals"></company-deals>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <company-about about="companyProfile.about" ng-click="changeActiveSection('update-about')"></company-about>
+                </div>
+                <div class="col-lg-2">
+                    <company-details details="companyProfile.specificDetails" ng-click="changeActiveSection('update-details'); getOrganizationSettings();"></company-details>
+                </div>
+                <div class="col-lg-2">
+                    <solution-area areas="companyProfile.solutionArea" ng-click="changeActiveSection('update-solutions')"></solution-area>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <aside class="right">
+
+        <section class="detailsSection " ng-include="showSection()">
+
+        </section>
+
+    </aside>
+</div>

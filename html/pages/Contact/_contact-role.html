@@ -1,0 +1,9 @@
+<div class="col-lg-6">
+    <div class="inner-box sink ellipsisHidden">
+        <a class="card-link power-base"></a>
+        <h1 ng-hide="role.selectedValue">Role</h1>
+        <h1 ng-show="role.selectedValue">{{role.selectedValue}}</h1>
+        <p class="notes-text" ng-hide = "role.comments">{{role.explanatoryText}}</p>
+        <textarea class="notes-text black text-area-card" ng-show = "role.comments">{{role.comments}}</textarea>
+    </div>
+</div>

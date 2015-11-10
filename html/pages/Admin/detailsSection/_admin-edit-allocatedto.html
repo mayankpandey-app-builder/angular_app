@@ -1,0 +1,11 @@
+<div class="detailsTitle">{{whoIsAllocated.firstName}} {{whoIsAllocated.lastName}} - Allocated to</div>
+
+<form class="detailsForm" name = "createdContact" action="" ng-submit="updateAllocatedTo(whoIsAllocated)" novalidate>
+
+    <tags-input ng-model="whoIsAllocated.allocatedTo" placeholder="Allocated to" replace-spaces-with-dashes="false" on-tag-added="selectItem('allocatedTo');" on-tag-removed="selectItem('allocatedTo');">
+        <auto-complete source="searchInSuggestionList($query)" minLength="1" ></auto-complete>
+    </tags-input>
+
+    <button type="button" class="greyBtn " ng-click="changeActiveSection('')">Cancel</button>
+    <button type="submit" class="orangeBtn">Accept</button>
+</form>

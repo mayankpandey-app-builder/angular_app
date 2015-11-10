@@ -1,0 +1,9 @@
+<div class="col-lg-6">
+    <div ng-init = "setColor(selectedValue)" class="inner-box sink ellipsisHidden" ng-class="setCurrentColor(contactType.selectedValue)" >
+        <a class="card-link power-base"></a>
+        <h1 ng-hide="contactType.selectedValue">Type</h1>
+        <h1 ng-show="contactType.selectedValue">{{contactType.selectedValue}}</h1>
+        <p class="notes-text" ng-hide = "contactType.comments">{{contactType.explanatoryText}}</p>
+        <textarea class="notes-text black text-area-card" ng-show = "contactType.comments">{{contactType.comments}}</textarea>
+    </div>
+</div>

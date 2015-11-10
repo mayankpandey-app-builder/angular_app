@@ -1,0 +1,22 @@
+<div class="col-lg-3">
+    <div class="inner-box businessUnit">
+        <h2>Business unit <a href="" class="pull-right" ng-click="addBusiness=true; focusNew=true">Add</a></h2>
+
+        <ul class="content-links">
+            <li ng-show="addBusiness">
+                <input type="text" class="searchCompanies search" ng-model="newBusiness" focus-me="focusNew"
+                       placeholder="Business Unit Name"
+                       ng-blur="addBusinessUnit(newBusiness); addBusiness=false "/>
+            </li>
+            <li ng-repeat="business in businessUnits">
+                <input type="text" ng-hide="!updateEntry" ng-model="business.displayValue" focus-me="focusEdit"
+                       placeholder="Business Unit Name" name="{{business.displayValue}}"
+                       ng-blur="updateBusinessUnit(this,business.displayValue); updateEntry=false "/>
+                <a href="" ng-click="updateEntry=true; focusEdit=true" ng-show="!updateEntry">{{business.displayValue}}
+                <i class="icon-x" ng-click="deleteBusinessUnit(this)"></i>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>

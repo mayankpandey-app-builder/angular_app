@@ -1,0 +1,43 @@
+<header >
+	<a class="logo" href="/#/">ISeeIt</a>
+	<nav class="actions-menu">
+		<ul id="main-actions">
+			<li ng-repeat='tab in tabs' class = "cursor-pointer">
+				<a analytics-on analytics-event="{{analyticsAction}}"  analytics-category="{{analyticsContext}}" analytics-label="{{analyticsLabel}}" ng-click = "tab.tabAction()" class={{tab.tabCls}} ng-class="{'selected': activeSection === tab.tabCls}"   ><i class={{tab.tabIcon}}></i>{{tab.tabTitle}}
+				</a>
+			</li>
+		</ul>
+        <ul id="sub-actions">
+            <li ng-repeat="subTab in subTabs">
+                <a ng-click="subTab.tabAction()" data-toggle="modal" data-target="#{{subTab.tabCls}}" class={{subTab.tabCls}} ng-class="{'selected': activeSection === subTab.tabCls}">
+                    <i class={{subTab.tabIcon}}></i>
+                    {{subTab.tabTitle}}
+                </a>
+            </li>
+        </ul>
+	</nav>
+	<div class="top-right">
+		<div class="user">
+			<a href="#/user" analytics-on analytics-event="View list"  analytics-category="User profile" analytics-label="View">
+				<img class="smallRoundImg" ng-src={{userProfileImg||"images/placeholder_contact-photo.png"}} alt="" />
+				<span>{{user}}</span>
+			</a>
+		</div>
+		<div class="help">
+			<a href="{{helpPage}}" target="_blank"><i class="icon-question-mark"></i></a>
+		</div>
+       <!-- <div class="notifications">
+            <a href=""></a>
+        </div>-->
+		<div class="top-search" ng-click="search.searchAction()" ng-hide="search.hideSearch">
+            <input type="search" placeholder="Search"
+                   ng-model="search.model"
+                   ng-keyup = "search.keyupAction(search.model)"
+                   typeahead="s.displayValue for s in searchSuggestionsList || '' | limitTo:10"
+                   typeahead-on-select="search.searchSelectAction($item)"
+                   typeahead-min-length="3"
+                   typeahead-wait-ms = "300">
+        </div>
+
+    </div>
+</header>

@@ -1,0 +1,53 @@
+<h1>Select Source</h1>
+<div class="import-source pull-left">
+    <!--<a href="#" title="LinkedIn"><i class="fa fa-linkedin"></i></a>-->
+    <!--<div class="import-title">
+        <a class="import-entity-salesforce" title="SalesForce" ng-click="importFromSalesForce()"><i class="fa fa-cloud"></i></a>
+        <p class="import-entity-title">SalesForce</p>
+    </div>-->
+    <div class="import-title import-entity-space-between">
+        <a class="import-entity-vcard" title="vCard" onclick="$('#importVCard').trigger('click');"><i class="icon-vcard"></i></a>
+        <input type="file" id="importVCard" style="display: none;" onchange="angular.element(this).scope().loadVCard()"/>
+        <p class="import-entity-title">vCard</p>
+    </div>
+</div>
+
+<h2 ng-show="importSource.length > 0">Import contacts from {{importSource}}</h2>
+
+<form class="detailsForm" action="" ng-show="importSource.length > 0">
+
+    <!-- Search TPL-->
+
+    <input type="search" placeholder = "Search contact..." id="searchImportedContacts" class="searchPers search" ng-model="selectedImportedContact" typeahead="contact.FullName for contact in salesForceImportContacts | filter:$viewValue | limitTo:10" typeahead-on-select="selectContactSuggestion($item); selectedImportedContact = ''">
+
+    <p class="text-right">You have selected {{selectedContactsNumber}} of {{salesForceImportContacts.length}} contacts<br />
+        <a id="select-all" ng-click="selectAllImportedContacts();" ng-show="!allSelected">Select All</a>
+        <a id="reset-btn" ng-click="unselectAllImportedContacts();" ng-show="allSelected">Unselect</a>
+    </p>
+
+    <div class="tplPerson import-vcard">
+        <ul class="list-unstyled">
+            <li ng-repeat="contact in salesForceImportContacts">
+                <div class="beforeImg">
+                    <img class="smallRoundImg" ng-src="{{contact.imageURL}}" alt="" />
+                </div>
+                <div class="persDesc">
+                    <div class="persName">{{contact.FirstName}} {{contact.LastName}}</div>
+                    <div class="persFunction">{{contact.Title}}</div>
+                    <div class="persEmail">{{contact.Email}}</div>
+                </div>
+
+                <div class="center-right check-uncheck-imported">
+                    <label>
+                        <input type="checkbox" ng-click="selectContact(this, $event);" unchecked/>
+                        <span></span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</form>
+
+<button ng-show="importSource.length > 0" class="greyBtn" ng-click="goToFilters()">Cancel</button>
+<button ng-show="importSource.length > 0" class="orangeBtn" id="import-next-step" ng-click="goToSecondStep()">Next</button>

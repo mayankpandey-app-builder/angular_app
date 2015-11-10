@@ -1,0 +1,249 @@
+<h1>Sorting & Filters</h1>
+
+<ul class="selected-filters">
+    <li ng-repeat="product in productsFilters">
+        <ul>
+            <li ng-repeat="subproduct in product.subProducts">
+                <div ng-show="subproduct.isSelected">Products: {{product.name}} - {{subproduct.name}}<a class="pull-right" ng-click="onSubProductForecastClick($parent.$index, $index)"><i class="icon-x"></i></a></div>
+            </li>
+            <li ng-show="product.subProducts.length == 0 && product.isSelected">Products: {{product.name}}<a class="pull-right" ng-click="onProductForecastClick($index)"><i class="icon-x"></i></a></li>
+        </ul>
+    </li>
+    <li ng-show="sizeFilter.min && !sizeFilter.max">Dealsize: Min - {{getFormattedAmountFunc(sizeFilter.min)}}<a
+            class="pull-right" ng-click="removeForecastSizeFilter('min')"><i class="icon-x"></i></a></li>
+    <li ng-show="!sizeFilter.min && sizeFilter.max">Dealsize: Max - {{getFormattedAmountFunc(sizeFilter.max)}}<a
+            class="pull-right" ng-click="removeForecastSizeFilter('max')"><i class="icon-x"></i></a></li>
+    <li ng-show="sizeFilter.min && sizeFilter.max">Dealsize: {{getFormattedAmountFunc(sizeFilter.min)}} - {{getFormattedAmountFunc(sizeFilter.max)}}<a
+            class="pull-right" ng-click="removeForecastSizeFilter()"><i class="icon-x"></i></a></li>
+    <li ng-repeat="filter in allForecastFilters">{{filter.displayName}} - {{filter.name | date:'dd MMM yyyy' }}<a
+            class="pull-right" ng-click="removeForecastFilter(filter.type, filter.name);"><i class="icon-x"></i></a></li>
+    <li ng-if="dateForecastFilter.startSelected || dateForecastFilter.endSelected"> {{dateForecastFilter.startSelected}} - {{dateForecastFilter.endSelected}}
+        <a class="pull-right" ng-click="clearForecastDateRange();"><i class="icon-x"></i></a>
+    </li>
+</ul>
+<p class="text-right"><a class="cursor-pointer" ng-click="clearAllForecastFilters()">Clear All</a></p>
+
+<div class="panel-group" id="accordion">
+
+    <div class="panel panel-default overflow-visible">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#sorting" href=""
+                   ng-class="{'disabled-filter collapsed': companyFilters.countries==''}"><i></i>Sorting</a>
+            </h4>
+        </div>
+        <div id="sorting" class="panel-collapse collapse in">
+            <div class="relative-pos" ng-show="sortingCriteriaList.length == sortingCriteriaListLength">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""> Sort by
+                    <b class="icon-arrow-down" style="font-size: 9px;"></b>
+                </a>
+
+                <ul role="menu" class="dropdown-menu scrollable-menu">
+                    <li ng-repeat="sortingOption in sortingCriteriaList"><a analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" href="" ng-click="setSortingOrder(sortingOption);">{{sortingOption | capitalize}}</a></li>
+                </ul>
+            </div>
+            <br ng-show="sortingCriteriaList.length == sortingCriteriaListLength"/>
+            <ul>
+                <li ng-repeat="sortingOrder in appliedSortingOrder">
+
+                    <label>
+                        <input type="checkbox" ng-click="setSortingOrder(sortingOrder);"
+                               ng-checked="isSortedBy(sortingOrder);"/>
+                        <span>{{sortingOrder | capitalize}}</span>
+                    </label>
+                </li>
+            </ul>
+            <div class="relative-pos" ng-show="sortingCriteriaList.length > 0 && sortingCriteriaList.length < sortingCriteriaListLength">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""> Then by
+                    <b class="icon-arrow-down" style="font-size: 9px;"></b>
+                </a>
+
+                <ul role="menu" class="dropdown-menu scrollable-menu">
+                    <li ng-repeat="sortingOption in sortingCriteriaList"><a analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" href="" ng-click="setSortingOrder(sortingOption);">{{sortingOption | capitalize}}</a></li>
+                </ul>
+            </div>
+            <br ng-show="sortingCriteriaList.length > 0 && sortingCriteriaList.length < sortingCriteriaListLength"/>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#people" href=""
+                   ng-class="{'disabled-filter collapsed': companyFilters.countries==''}"><i></i>People</a>
+            </h4>
+        </div>
+        <div id="people" class="panel-collapse collapse in">
+            <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" ng-hide="organizationMembers.length == 0" type="search" class="searchPers search" id="searchCountry"
+                   ng-model="selectedPeople"
+                   typeahead="member.fullName for member in organizationMembers | filter:$viewValue | limitTo:10"
+                   typeahead-on-select="selectPeopleFilter('peopleForecastFilters', $item, selectedPeople); selectedPeople = ''">
+            <ul>
+                <li ng-repeat="peopleFilter in peopleForecastFilters">
+
+                    <label>
+                        <input type="checkbox" ng-click="applyPeopleFilter('people', peopleFilter, 'People')"
+                               ng-checked="peopleFilter.fullName.length>0"/>
+                        <span>{{peopleFilter.fullName}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#forecast-type" href="#forecast-type"><i></i>Forecast type</a>
+            </h4>
+        </div>
+        <div id="forecast-type" class="panel-collapse collapse in">
+            <ul>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="checkbox" ng-click="applyForecastFilter('dealStatuses', 'Commit', 'Deal status')" ng-checked="filterForecastList['Commit']"/>
+                        <span>Commit</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="checkbox" ng-click="applyForecastFilter('dealStatuses', 'Best case', 'Deal status')" ng-checked="filterForecastList['Best case']"/>
+                        <span>Best Case</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="checkbox" ng-click="applyForecastFilter('dealStatuses', 'Pipeline', 'Deal status')" ng-checked="filterForecastList['Pipeline']"/>
+                        <span>Pipeline</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#date" href="#date"><i></i>Date</a>
+            </h4>
+        </div>
+        <div id="date" class="panel-collapse collapse in">
+            <ul>
+                <li>
+
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="radio" ng-click="removeOtherForecastDates('currentQuarter');applyForecastFilter('date', 'currentQuarter', 'Date');" ng-checked="dateAppliedForecastFilters[0]==='currentQuarter'"/>
+                        <span>Current quarter</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="radio" ng-click="removeOtherForecastDates('nextQuarter');applyForecastFilter('date', 'nextQuarter', 'Date');" ng-checked="dateAppliedForecastFilters[0]==='nextQuarter'"/>
+                        <span>Next quarter</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="radio" ng-click="removeOtherForecastDates('nextSixMonths');applyForecastFilter('date', 'nextSixMonths', 'Date');" ng-checked="dateAppliedForecastFilters[0]==='nextSixMonths'"/>
+                        <span>Next 6 months</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="radio" ng-click="removeOtherForecastDates('yearToDate');applyForecastFilter('date', 'yearToDate', 'Date');" ng-checked="dateAppliedForecastFilters[0]==='yearToDate'"/>
+                        <span>Year to date</span>
+                    </label>
+                </li>
+            </ul>
+            <div class="clearfix">
+                <div style="margin-top: 10px;">
+                    <a analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown">
+                        <input class="borderless-input pull-left" style="margin-right: 20px;" type="text" name="start" placeholder="Start Date" class="noM" ng-model="dateForecastFilter.startSelected" readonly>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position: relative;">
+                        <datetimepicker data-ng-model="dateForecastFilter.start"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', minView: 'day', view: 'forecastFilter' }"
+                                        data-on-set-time="onStartTimeSetForecast"/>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <a analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" class="dropdown-toggle" id="dropdownEnd" name="end" role="button" data-toggle="dropdown">
+                        <input class="borderless-input pull-left" type="text" name="end" placeholder="End Date" class="noM" ng-model="dateForecastFilter.endSelected" readonly >
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position: relative;">
+                        <datetimepicker data-ng-model="dateForecastFilter.end"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', minView: 'day', view: 'forecastFilter' }"
+                                        data-on-set-time="onEndTimeSetForecast"/>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#deal-size" href="#deal-type"><i></i>Deal size</a>
+            </h4>
+        </div>
+        <div id="deal-size" class="panel-collapse collapse in">
+            <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" class="borderless-input pull-left" style="margin-right: 20px;" type="text" name="start" placeholder="50.000" class="noM" ng-model="sizeFilter.min" ng-blur="getForecastViewWithFilters();"/>
+            <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" class="borderless-input pull-left" style="margin-right: 20px;" type="text" name="end" placeholder="1.000.000" class="noM" ng-model="sizeFilter.max" ng-blur="getForecastViewWithFilters();"/>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#deal-type" href="#deal-type"><i></i>Deal type</a>
+            </h4>
+        </div>
+        <div id="deal-type" class="panel-collapse collapse in">
+            <ul>
+                <li ng-repeat="dealTypeFilter in dealFilters.dealTypes">
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="checkbox"  ng-click="applyForecastFilter('dealTypes', dealTypeFilter, 'Deal type')" ng-checked="filterForecastList[dealTypeFilter]"/>
+                        <span>{{dealTypeFilter}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#products" href="#products"><i></i>Products</a>
+            </h4>
+        </div>
+        <div id="products" class="panel-collapse collapse in">
+            <ul>
+                <li ng-repeat="productFilter in productsFilters">
+                    <label>
+                        <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="checkbox" ng-click="onProductForecastClick($index)" ng-checked="productFilter.isSelected"/>
+                        <span>{{productFilter.name}}</span>
+                    </label>
+                    <ul style="padding-left: 10px;">
+                        <li ng-repeat="subproductFilter in productFilter.subProducts">
+                            <label>
+                                <input analytics-on analytics-event="Filter" analytics-category="Deals" analytics-label="Success" type="checkbox" ng-click="onSubProductForecastClick($parent.$parent.$index, $index)" ng-checked="subproductFilter.isSelected"/>
+                                <span>{{subproductFilter.name}}</span>
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+    $('.panel-title > a').click(function(e) {
+        e.preventDefault();
+    });
+
+</script>

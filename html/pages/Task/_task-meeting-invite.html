@@ -1,0 +1,47 @@
+<div class="modal fade" id="meetingInvite" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Send meeting invite</h1>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row" style="padding: 0 20px;"><div class="pull-left">You have selected {{selectedAttendees.length}} of {{attendees.length}} of contacts.</div><div class="pull-right"><a href ng-click="selectedAttendees = [];" style="margin-right: 20px;">Unselect all</a><a href ng-click="selectedAttendees = []; selectAllAttendees();">Select all</a></div></div>
+                <div class="tplPerson">
+                    <ul class="list-unstyled" ng-repeat="attendee in attendees track by $index">
+                        <li ng-click="selectAttendee(attendee)">
+
+                            <div class="beforeImg">
+                                <img ng-src="{{attendee.imageURL || 'images/placeholder_contact-big.png'}}" class = "smallRoundImg" alt=""/>
+                            </div>
+
+                            <div class="persDesc">
+                                <div ng-class="{'c-grey': !getAttendeeEmail(attendee)}" class="persName ellipsisNoWrap">{{attendee.firstName }} {{attendee.lastName}}</div>
+                                <div ng-class="{'c-grey': !getAttendeeEmail(attendee)}" class="persFunction ellipsisNoWrap" ng-if="attendee.position && attendee.company">{{attendee.position || "-"}} at {{attendee.company}}</div>
+                                <div ng-class="{'c-grey': !getAttendeeEmail(attendee)}" class="persFunction ellipsisNoWrap" ng-if="attendee.position && !attendee.company">{{attendee.position || "-"}}</div>
+                                <div ng-class="{'c-grey': !getAttendeeEmail(attendee)}" class="persEmail ellipsisNoWrap">{{getAttendeeEmail(attendee) || '-'}}</div>
+                            </div>
+
+                            <div class="center-right" ng-if="getAttendeeEmail(attendee)">
+                                <label>
+                                    <input type="checkbox" class="checkbox" ng-click="selectAttendee(attendee)" ng-checked="isSelectedAttendee(attendee)"/>
+                                    <span></span>
+                                </label>
+                            </div>
+
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="greyBtn" data-dismiss="modal" ng-click="skipMeetingInvite()">Skip</button>
+                <button class="orangeBtn" ng-click="sendMeetingInvite()" ng-disabled="selectedAttendees.length == 0">Send</button>
+            </div>
+        </div>
+    </div>
+</div>

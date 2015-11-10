@@ -1,0 +1,31 @@
+<div class="general-card companies">
+    <div class="check-uncheck">
+        <label>
+            <input type="checkbox" ng-click="selectCard(this, $event);"/>
+            <span></span>
+        </label>
+    </div>
+    
+    <div class="inner-box" ng-click="redirectToCompany(company.id)" analytics-on analytics-event="View details"  analytics-category="Companies" analytics-label="View">
+        <div class="head">
+            <img alt="{{company.name}}" class = "smallRoundImg" ng-src="{{company.imageURL || 'images/icn_company.png'}} ">
+            <div class="ellipsisNoWrap smallCardTitle c-blue">{{company.name || '-'}}</div>
+            <div class="clear"></div>
+            <p class="bold">{{company.numberOfContacts}} {{contactText}}</p>
+        </div>
+
+        <p class="clearfix">
+            <span class="pull-left ellipsisNoWrap" style="width: 80px;"><i class="icon-address"></i>{{company.country || '-' | truncate:10:'..'}}</span>
+            <span class="pull-right ellipsisNoWrap max-full-width" style="width: 50px;"><i class="icon-meeting" style="font-size: 8px;"></i>{{getFormattedAmountFunc(company.numberOfEmployees) || '-'}}</span>
+        </p>
+        <p class="clearfix">
+            <span class="pull-left ellipsisNoWrap" style="width: 80px;"><i class="icon-budget"></i>{{budget || '-'}}</span>
+            <span class="pull-right ellipsisNoWrap" style="width: 50px;"><i class="icon-industry"></i>{{company.industry || '-' | truncate:8:'.'}}</span>
+        </p>
+        <div class="actions">
+            <i class="icon-call c-" ng-class="{blue: company.hasPhoneNumber}"></i>
+            <i class="icon-email c-" ng-class="{blue: company.hasEmailAddress}"></i>
+            <i class="icon-namedaccount c-" ng-class="{blue: company.namedAccount}"></i>
+        </div>
+    </div>
+</div>

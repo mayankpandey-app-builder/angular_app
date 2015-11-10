@@ -1,0 +1,39 @@
+.top-right { 
+	
+	float: right; padding: 10px 10px 0 0;
+	
+	.top-search, .notifications, .help { float: right; margin: 0 15px 0 0}
+	.top-search {
+		a { display: block; width: 26px; height: 26px; background: url(../images/sprite_search-notifications.png) 0 0 no-repeat}
+
+//		input[type=search] { background: url(../images/icn_search.png) 5px 5px no-repeat; border: 2px solid #fff; padding: 2px 10px 0 10px;	width: 26px; height:26px; line-height: 26px;
+		input[type=search] { background: url(../images/pics_right_panel/icn_search-small-orange.png) 5px 5px no-repeat #fff; border: 2px solid #fff; padding-left:23px;	width: 150px; height:26px; line-height: 26px;
+			//cursor: pointer; 
+			color: #335561;
+
+			.border-radius(10em, 10em, 10em, 10em);
+			
+//			-webkit-transition: all .5s;
+//			-moz-transition: all .5s;
+//			transition: all .5s;
+//
+//			&:focus {
+//				width: 150px;
+//				padding-left: 23px;
+//				cursor: auto;
+//				color:#FFF;
+//			}
+		}
+	}
+    .help a {display: block; font-size: 26px; color: white; text-decoration: none; margin-top: -3px;}
+	.notifications a {display: block; width: 26px; height: 26px; background: url(../images/sprite_search-notifications.png) -26px 0 no-repeat}	
+
+	.user { 
+
+		float: right; margin-top: -1px;
+		
+		a { color: @white; text-decoration: none; display: block; line-height: 27px}
+		img { width:27px; height:27px; float: left; margin:0 10px 0 0}
+		span { float: left}
+	}
+}

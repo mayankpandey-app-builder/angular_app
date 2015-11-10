@@ -1,0 +1,136 @@
+@media all and (max-width: 1280px) {
+  .main-content {
+    margin-left: 75px;
+  }
+  .main-left {
+    height: 605px;
+    padding-bottom: 0px;
+    padding-top: 10px;
+  }
+  .main-wrapper {
+    width: 100%;
+    min-width: 1264px;
+  }
+  aside.left {
+    width: 85px;
+  }
+  a.logo {
+    width: 84px;
+  }
+  aside.right {
+    min-width: 10px;
+    padding: 20px 10px;
+  }
+  .row .inner-box li {
+    font-size: 12px;
+  }
+  aside.left {
+    height: 100%;
+    min-height: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .scroll-box {
+    height: 510px;
+    overflow: auto;
+  }
+  #deal-view .scroll-box,
+  #probable-mode .scroll-box {
+    height: 340px;
+    overflow: auto;
+  }
+  .forecast-row-content {
+    overflow-x: hidden;
+  }
+  #leads-list.scroll-box {
+    height: 500px;
+    overflow: auto;
+  }
+  #task-scheduler {
+    height: 515px;
+    padding: 0px;
+  }
+  #calendar-view .row {
+    margin-bottom: 0;
+  }
+  .detailsSection .bootstrap-checkbox > button.btn {
+    width: 16px;
+  }
+  aside.right {
+    height: 570px;
+  }
+}
+@media all and (max-width: 1400px) and (min-width: 1281px) {
+  .main-left {
+    min-width: 10px;
+    height: 680px;
+  }
+  .row .inner-box li {
+    font-size: 12px;
+  }
+  .row .inner-box.solutions li {
+    font-size: 11px;
+  }
+  #calendar-view .row,
+  #list-view .row {
+    margin-bottom: 0;
+  }
+  .scroll-box {
+    height: 590px;
+    overflow: auto;
+  }
+  #task-scheduler {
+    height: 570px;
+    padding: 0px;
+  }
+  #deal-view .scroll-box,
+  #probable-mode .scroll-box {
+    height: 415px;
+    overflow: auto;
+  }
+  .forecast-row-content {
+    overflow-x: hidden;
+  }
+  #leads-list.scroll-box {
+    height: 570px;
+    overflow: auto;
+  }
+  aside.right {
+    height: 640px;
+  }
+}
+@media all and (min-width: 1401px) {
+  .main-left {
+    min-width: 10px;
+    height: 700px;
+  }
+  .row .inner-box li {
+    font-size: 12px;
+  }
+  .row .inner-box.solutions li {
+    font-size: 11px;
+  }
+  .scroll-box {
+    height: 600px;
+    overflow: auto;
+  }
+  #task-scheduler {
+    height: 580px;
+    padding: 0px;
+  }
+  #deal-view .scroll-box,
+  #probable-mode .scroll-box {
+    height: 430px;
+    overflow: auto;
+  }
+  .forecast-row-content {
+    overflow-x: hidden;
+  }
+  #leads-list.scroll-box {
+    height: 580px;
+    overflow: auto;
+  }
+  aside.right {
+    height: 650px;
+  }
+}

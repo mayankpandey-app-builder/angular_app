@@ -1,0 +1,42 @@
+<h1>Share this lead with team members</h1>
+
+<form class="detailsForm" action="">
+
+    <!-- Search TPL-->
+
+    <input type="search" ng-model="searchSharedWithMember" class="searchPers search" placeholder = "Search member...">
+
+    <p class="text-right">You have selected {{selectedSharedWithMembers.length}} of {{sharedWithList.length}} contacts<br />
+        <a id="select-all" ng-click="selectAllSharedWithMembers(filteredSharedWithMembers);">Select All</a>
+        <a id="reset-btn" ng-click="unselectAllSharedWithMembers();">Unselect All</a>
+    </p>
+
+    <div class="tplPerson">
+        <ul class="list-unstyled">
+            <li ng-repeat="sharedWithMember in (filteredSharedWithMembers = (sharedWithList | filter: searchSharedWithMember))" ng-click="selectSharedWithMember(sharedWithMember.id)">
+                <div class="beforeImg">
+                    <img class="smallRoundImg" ng-src={{setImage(sharedWithMember.imageURL)}} alt="" />
+                </div>
+                <div class="persDesc">
+                    <div class="persName ellipsisNoWrap">{{sharedWithMember.firstName}} {{sharedWithMember.lastName}}</div>
+                    <div class="persFunction ellipsisNoWrap">{{sharedWithMember.position}}</div>
+                    <div class="persEmail ellipsisNoWrap">{{sharedWithMember.email}}</div>
+                </div>
+
+                <div class="center-right check-uncheck-imported">
+                    <label>
+                        <input type="checkbox" ng-click="selectSharedWithMember(sharedWithMember.id)" ng-checked="isSharedWithMemberChecked(sharedWithMember.id)">
+                        <span></span>
+                    </label>
+                </div>
+               <!-- <div class="center-right check-uncheck-imported" ng-show="sharedWithMember.canBeDeleted">
+                    <a>Delete</a>
+                </div>-->
+            </li>
+        </ul>
+
+    </div>
+</form>
+
+<button class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
+<button class="orangeBtn" ng-click="shareWith()">Next</button>

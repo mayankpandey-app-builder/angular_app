@@ -1,0 +1,18 @@
+<aside class="left">
+	<nav class="main-menu">
+		<ul>
+			<li><a analytics-on analytics-event="View list"  analytics-category="Dashboard" analytics-label="View" href="#/dashboard" ng-class="{'selected': currentRoute === 'dashboard'}"><i class="icon-dashboard-leftmenu"></i>Dashboard</a></li>
+			<li><a analytics-on analytics-event="View list"  analytics-category="Contacts" analytics-label="View" href="#/contacts" ng-class="{'selected': currentRoute === 'contacts'}"><i class="icon-contacts-leftmenu-01"></i>Contacts</a></li>
+            <li><a analytics-on analytics-event="View list"  analytics-category="Companies" analytics-label="View" href="#/companies" ng-class="{'selected': currentRoute === 'companies'}"><i class="icon-company"></i>Companies</a></li>
+			<li><a analytics-on analytics-event="View list"  analytics-category="Leads" analytics-label="View" href="#/leads" ng-class="{'selected': currentRoute === 'leads'}"><i  class="icon-lead"></i>Leads</a></li>
+            <li><a analytics-on analytics-event="View list"  analytics-category="Tasks" analytics-label="View" href="#/tasks" ng-class="{'selected': currentRoute === 'tasks'}" ng-click="resetPath()"><i  class="icon-task"></i>Tasks & Activities</a></li>
+			<li ng-show="false" ><a href="#/goals" class="goals"><i></i>Goals</a></li>
+            <li><a analytics-on analytics-event="View list"  analytics-category="Deals" analytics-label="View" href="#/deals" ng-class="{'selected': currentRoute === 'deals'}"><i  class="icon-deal"></i>Deals</a></li>
+			<li ng-show="false"><a href="#"><i class="icon-playbook-leftmenu"></i>Playbook</a></li>
+			<li ng-show="false"><a href="#"><i class="icon-meetingminutes-leftmenu"></i>Meeting Minutes</a></li>
+			<li ng-show="false"><a href="#"><i  class="icon-KPI-leftmenu"></i>KPI</a></li>
+			<li><a analytics-on analytics-event="View details"  analytics-category="User profile" analytics-label="View" href="#/user" ng-class="{'selected': currentRoute === 'user'}"><i  class="icon-settings-menu-01"></i>Settings</a></li>
+			<li ng-show="isAdmin"><a href="#/admin" ng-class="{'selected': currentRoute === 'admin'}"><i  class="icon-admin"></i>Admin</a></li>
+		</ul>
+	</nav>
+</aside>

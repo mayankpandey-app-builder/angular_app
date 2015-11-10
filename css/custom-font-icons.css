@@ -1,0 +1,461 @@
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot?-7b4s48');
+    src:url('../fonts/icomoon.eot?#iefix-7b4s48') format('embedded-opentype'),
+    url('../fonts/icomoon.woff?-7b4s48') format('woff'),
+    url('../fonts/icomoon.ttf?-7b4s48') format('truetype'),
+    url('../fonts/icomoon.svg?-7b4s48#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-x:before {
+    content: "\e600";
+}
+.icon-won-deal:before {
+    content: "\e601";
+}
+.icon-warm-lead:before {
+    content: "\e602";
+}
+.icon-vcard:before {
+    content: "\e603";
+}
+.icon-unsorted-leads:before {
+    content: "\e604";
+}
+.icon-todo:before {
+    content: "\e605";
+}
+.icon-task:before {
+    content: "\e606";
+}
+.icon-tasksettings-01:before {
+    content: "\e607";
+}
+.icon-tags:before {
+    content: "\e608";
+}
+.icon-stalled-deal:before {
+    content: "\e609";
+}
+.icon-sortbylasttouch-01:before {
+    content: "\e60a";
+}
+.icon-sortalphabetically-01:before {
+    content: "\e60b";
+}
+.icon-skype:before {
+    content: "\e60c";
+}
+.icon-settings-leftmenu:before {
+    content: "\e60d";
+}
+.icon-selectmode-menu:before {
+    content: "\e60e";
+}
+.icon-search-menu:before {
+    content: "\e60f";
+}
+.icon-search_pressed-menu:before {
+    content: "\e610";
+}
+.icon-scheduledmeetings:before {
+    content: "\e611";
+}
+.icon-resetfilters:before {
+    content: "\e612";
+}
+.icon-reset-modal:before {
+    content: "\e613";
+}
+.icon-radiobutton-unselected:before {
+    content: "\e614";
+}
+.icon-radiobutton-selected:before {
+    content: "\e615";
+}
+.icon-qualifier-01:before {
+    content: "\e616";
+}
+.icon-products:before {
+    content: "\e617";
+}
+.icon-probablemode-menu:before {
+    content: "\e618";
+}
+.icon-private-01:before {
+    content: "\e619";
+}
+.icon-playbook-leftmenu:before {
+    content: "\e61a";
+}
+.icon-pipeline:before {
+    content: "\e61b";
+}
+.icon-personalphone:before {
+    content: "\e61c";
+}
+.icon-owner:before {
+    content: "\e61d";
+}
+.icon-outbound:before {
+    content: "\e61e";
+}
+.icon-ok-modal:before {
+    content: "\e61f";
+}
+.icon-officephone:before {
+    content: "\e620";
+}
+.icon-notifications-menu:before {
+    content: "\e621";
+}
+.icon-newcontact:before {
+    content: "\e622";
+}
+.icon-nbm:before {
+    content: "\e623";
+}
+.icon-namedaccount:before {
+    content: "\e624";
+}
+.icon-milestone:before {
+    content: "\e625";
+}
+.icon-merge:before {
+    content: "\e626";
+}
+.icon-meetingminutes-leftmenu:before {
+    content: "\e627";
+}
+.icon-meeting:before {
+    content: "\e628";
+}
+.icon-managetags-menu:before {
+    content: "\e629";
+}
+.icon-managecontacts-menu-01:before {
+    content: "\e62a";
+}
+.icon-lost-deal:before {
+    content: "\e62b";
+}
+.icon-close-menu:before {
+    content: "\e62c";
+}
+.icon-linked-tasks:before {
+    content: "\e62d";
+}
+.icon-lead:before {
+    content: "\e62e";
+}
+.icon-KPI-leftmenu:before {
+    content: "\e62f";
+}
+.icon-inviteuser-01:before {
+    content: "\e630";
+}
+.icon-internal:before {
+    content: "\e631";
+}
+.icon-industry:before {
+    content: "\e632";
+}
+.icon-inbound:before {
+    content: "\e633";
+}
+.icon-hot-lead:before {
+    content: "\e634";
+}
+.icon-googlesearch-menu:before {
+    content: "\e635";
+}
+.icon-goals:before {
+    content: "\e636";
+}
+.icon-forecast-01:before {
+    content: "\e637";
+}
+.icon-followup:before {
+    content: "\e638";
+}
+.icon-flag:before {
+    content: "\e639";
+}
+.icon-filters-menu:before {
+    content: "\e63a";
+}
+.icon-file-video:before {
+    content: "\e63b";
+}
+.icon-file-text-01:before {
+    content: "\e63c";
+}
+.icon-file-powerpoint-01:before {
+    content: "\e63d";
+}
+.icon-file-pdf-01:before {
+    content: "\e63e";
+}
+.icon-file-image-01:before {
+    content: "\e63f";
+}
+.icon-file-excel-01:before {
+    content: "\e640";
+}
+.icon-facetoface:before {
+    content: "\e641";
+}
+.icon-expand-01:before {
+    content: "\e642";
+}
+.icon-error:before {
+    content: "\e643";
+}
+.icon-employees-people:before {
+    content: "\e644";
+}
+.icon-emoticon-smile-01:before {
+    content: "\e645";
+}
+.icon-emoticon-sad-01:before {
+    content: "\e646";
+}
+.icon-emoticon-happy-01:before {
+    content: "\e647";
+}
+.icon-email:before {
+    content: "\e648";
+}
+.icon-duplicated-deal:before {
+    content: "\e649";
+}
+.icon-deletequalifier-menu:before {
+    content: "\e64a";
+}
+.icon-deletemilestone-menu:before {
+    content: "\e64b";
+}
+.icon-deletecontact-menu:before {
+    content: "\e64c";
+}
+.icon-deletecompany-menu:before {
+    content: "\e64d";
+}
+.icon-delete:before {
+    content: "\e64e";
+}
+.icon-declinelead-menu:before {
+    content: "\e64f";
+}
+.icon-dealtypes:before {
+    content: "\e650";
+}
+.icon-deal:before {
+    content: "\e651";
+}
+.icon-dealsettings-01:before {
+    content: "\e652";
+}
+.icon-deadline:before {
+    content: "\e653";
+}
+.icon-dashboard-leftmenu:before {
+    content: "\e654";
+}
+.icon-createtask-menu:before {
+    content: "\e655";
+}
+.icon-createlead-menu:before {
+    content: "\e656";
+}
+.icon-createdeal-menu:before {
+    content: "\e657";
+}
+.icon-converted:before {
+    content: "\e658";
+}
+.icon-contacts-leftmenu-01:before {
+    content: "\e659";
+}
+.icon-company:before {
+    content: "\e65a";
+}
+.icon-collapse-01:before {
+    content: "\e65b";
+}
+.icon-cold-lead:before {
+    content: "\e65c";
+}
+.icon-closeddeal:before {
+    content: "\e65d";
+}
+.icon-logoout:before {
+    content: "\e65e";
+}
+.icon-checkmark:before {
+    content: "\e65f";
+}
+.icon-checkbox:before {
+    content: "\e660";
+}
+.icon-checkbox_empty:before {
+    content: "\e661";
+}
+.icon-channel:before {
+    content: "\e662";
+}
+.icon-changepassword:before {
+    content: "\e663";
+}
+.icon-cancel-modal:before {
+    content: "\e664";
+}
+.icon-camera-01:before {
+    content: "\e665";
+}
+.icon-call:before {
+    content: "\e666";
+}
+.icon-budget:before {
+    content: "\e667";
+}
+.icon-bestcase:before {
+    content: "\e668";
+}
+.icon-assignlead-menu:before {
+    content: "\e669";
+}
+.icon-arrow:before {
+    content: "\e66a";
+}
+.icon-arrow-right:before {
+    content: "\e66b";
+}
+.icon-arrow-down:before {
+    content: "\e66c";
+}
+.icon-address:before {
+    content: "\e66d";
+}
+.icon-addqualifier-menu:before {
+    content: "\e66e";
+}
+.icon-addnote-menu:before {
+    content: "\e66f";
+}
+.icon-addmilestone-menu:before {
+    content: "\e670";
+}
+.icon-addcontact-menu:before {
+    content: "\e671";
+}
+.icon-addcompany-menu:before {
+    content: "\e672";
+}
+.icon-add-01:before {
+    content: "\e673";
+}
+.icon-addcode-01:before {
+    content: "\e674";
+}
+.icon-acceptlead-menu:before {
+    content: "\e675";
+}
+.icon-changecompany:before {
+    content: "\e676";
+}
+.icon-admin:before {
+    content: "\e677";
+}
+.icon-source:before {
+    content: "\e678";
+}
+.icon-changeprofile:before {
+    content: "\e679";
+}
+.icon-regionalstructure:before {
+    content: "\e67a";
+}
+.icon-expandarrowdown:before {
+    content: "\e67b";
+}
+.icon-expandarrowup:before {
+    content: "\e67c";
+}
+.icon-info-01:before {
+    content: "\e67d";
+}
+.icon-percentage:before {
+    content: "\e67e";
+}
+.icon-arrow-down2:before {
+    content: "\e67f";
+    font-size: 7px !important;
+}
+.icon-split-deal:before {
+    content: "\e680";
+}
+.icon-arrow-left:before {
+    content: "\e681";
+}
+.icon-full-circle:before {
+    content: "\e682";
+}
+.icon-arrow_circle:before {
+    content: "\e683";
+}
+.icon-createnewforecast:before {
+    content: "\e684";
+}
+.icon-previousforecast:before {
+    content: "\e685";
+}
+.icon-savefilters:before {
+    content: "\e686";
+}
+.icon-calendar:before {
+    content: "\e687";
+}
+.icon-settings-menu-01:before {
+    content: "\e688";
+}
+.icon-infotooltip:before {
+    content: "\e689";
+}
+.icon-info-01-01:before {
+    content: "\e68a";
+}
+.icon-edit:before {
+    content: "\e68b";
+}
+.icon-referral:before {
+    content: "\e68c";
+}
+.icon-question-mark:before {
+    content: "\e68d";
+}
+.icon-change-stage:before {
+    content: "\e68e";
+}
+.icon-send-invite:before {
+    content: "\e68f";
+}
+.icon-see-tasks:before {
+    content: "\e690";
+}

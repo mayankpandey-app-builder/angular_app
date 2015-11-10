@@ -1,0 +1,34 @@
+<div class="col-lg-6">
+	<div class="inner-box social-accounts sink">
+		<div class="edit">
+			<a ng-click = "changeActiveSection('social-accounts')"><i class="fa fa-pencil cursor-pointer" ></i></a>
+		</div>
+		<table width="100%" align="center">
+			<tr >
+				<td class="br bb" ng-click = "clickDetails('facebook')">
+					<a target="_blank" class = "cursor-pointer">
+						<i class="fa fa-facebook" ng-class="{'fb-linked': hasNetwork('facebook')}"></i>
+					</a>
+				</td>
+				<td class="bb"  ng-click = "clickDetails('linkedIn')">
+					<a target="_blank"  class = "cursor-pointer">
+						<i class="fa fa-linkedin" ng-class="{'ln-linked': hasNetwork('linkedIn')}"></i>
+					</a>
+				</td>
+			</tr>
+			<tr >
+				<td class="br"  ng-click = "clickDetails('googlePlus')">
+					<a target="_blank" class = "cursor-pointer">
+						<i class="fa fa-google-plus" ng-class="{'gp-linked': hasNetwork('googlePlus')}"></i>
+					</a>
+				</td>
+				<td  ng-click = "clickDetails('twitter')">
+					<a target="_blank" class = "cursor-pointer">
+						<i class="fa fa-twitter" ng-class="{'tw-linked': hasNetwork('twitter')}"></i>
+					</a>
+				</td>
+			</tr>
+		</table>
+		
+	</div>
+</div>

@@ -1,0 +1,12 @@
+<div class="col-lg-12">
+    <div class="manage-attendees col-lg-1" ng-click="changeActiveSection('attendees')">
+        <i class="icon-managecontacts-menu-01"></i>
+        Manage <br/>Attendees
+    </div>
+    <div class="col-lg-11">
+        <div class="attendee-card" ng-repeat="attendee in attendeesList" ng-click="setAttendee(attendee);" ng-show="attendee.selected">
+            <img alt="" class="smallRoundImg" ng-src="{{attendee.imageURL || 'images/pics_right_panel/placeholder_contact-photo.png'}}">
+            <div>{{attendee.firstName}} {{attendee.lastName}}</div>
+        </div>
+    </div>
+</div>

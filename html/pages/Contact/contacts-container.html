@@ -1,0 +1,107 @@
+<top-menu class=""></top-menu>
+<div class="main-content clearfix">
+    <!-- maine left -->
+    <div class="main-left">
+        <div class="container" >
+            <div class="row contacts-select-all" ng-show="contacts">
+                <a id="select-all" ng-click="selectAll(); allSelected = true;" ng-show="!allSelected">Select All</a>
+                <a id="reset-btn" ng-click="unselectAll(); allSelected = false;" ng-show="allSelected">Unselect All</a>
+            </div>
+            <div class="row scroll-box">
+                <div infinite-scroll="contacts.nextPage()" infinite-scroll-disabled="contacts.busy" infinite-scroll-distance="1">
+                    <contact-info ng-repeat="contact in contacts"></contact-info>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside class="right">
+
+        <section class="detailsSection " ng-include="showSection()">
+
+        </section>
+
+    </aside>
+</div>
+
+<div class="modal fade" id="importConflictsModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Partial matches</h1>
+                <p>These {{partialMatches}} contacts already exist in the application. Please make a choice on which
+                    version we should keep. If you skip, no new contacts will be imported.</p>
+            </div>
+
+            <div class="modal-body">
+                <div class="tplPerson import">
+                    <ul class="list-unstyled group1" id="merge-conflicts-source" style="width: 380px; display: inline-block;">
+                        <p>Contacts from {{importSource}}</p>
+                        <li ng-repeat="conflict in conflicts" ng-show="conflict.partialMatch">
+                            <div class="beforeImg">
+                                <img src="images/pics_right_panel/placeholder_contact-photo.png" alt="" />
+                            </div>
+
+                            <div class="persDesc">
+                                <div class="persName">{{conflict.new.firstName}} {{conflict.new.lastName}}</div>
+                                <div class="persFunction">{{conflict.new.position || '-'}}</div>
+                                <div class="persEmail">{{conflict.old.emailAddress || '-'}}</div>
+                                <div class="persCountry"><i class="icon-address c-grey"></i> {{conflict.new.country || '-'}}</div>
+                                <div class="persCompany"><i class="icon-company c-grey"></i> {{conflict.new.company || '-'}}</div>
+                            </div>
+
+                            <div class="center-right">
+                                <label>
+                                    <input type="checkbox" id="group1_1" onclick="$(this).parents('li').toggleClass('selected');" ng-click="selectConflictNew(conflict, $index)" />
+                                    <span></span>
+                                </label>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <ul class="list-unstyled group2" id="merge-conflicts-iseeit" style="width: 380px; display: inline-block; margin-left: 20px;">
+                        <p>Contacts from iSEEit</p>
+                        <li ng-repeat="conflict in conflicts" ng-show="conflict.partialMatch">
+                            <div class="beforeImg">
+                                <img src="images/pics_right_panel/placeholder_contact-photo.png" alt="" />
+                            </div>
+
+                            <div class="persDesc">
+                                <div class="persName">{{conflict.old.firstName}} {{conflict.old.lastName}}</div>
+                                <div class="persFunction">{{conflict.old.position || '-'}}</div>
+                                <div class="persEmail">{{conflict.old.emailAddress || '-'}}</div>
+                                <div class="persCountry"><i class="icon-address c-grey"></i> {{conflict.old.country || '-'}}</div>
+                                <div class="persCompany"><i class="icon-company c-grey"></i> {{conflict.old.company || '-'}}</div>
+                            </div>
+
+                            <div class="center-right">
+                                <label>
+                                    <input type="checkbox" id="group2_1" onclick="$(this).parents('li').toggleClass('selected');" ng-click="selectConflictOld(conflict, $index)"/>
+                                    <span></span>
+                                </label>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <ul class="pull-right" id="merge-conflicts">
+                        <li ng-repeat="conflict in conflicts" ng-show="conflict.partialMatch" style="border: none;">
+                            <div class="merge-conflicts" ng-click="selectConflictForMerge(conflict, $index)">
+                                <i class="icon-merge"></i>Merge</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="greyBtn" data-dismiss="modal" ng-click="goToFilters()">Skip</button>
+                <button class="orangeBtn" ng-click="importConflicts()">Import</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,126 @@
+<h1>Deal Info</h1>
+
+<div class="deal-type pull-left">
+    <a href="" ng-class="{'selected': deal.dealStatus == 'Best case'}" rel="tooltip" data-placement="bottom" title="Best Case" ng-click="setDealStatus('Best case')"><i class="icon-deal"></i></a>
+    <a href="" ng-class="{'selected': deal.dealStatus == 'Commit'}" rel="tooltip" data-placement="bottom" title="Commit" ng-click="setDealStatus('Commit')"><i class="icon-won-deal"></i></a>
+    <a href="" ng-class="{'selected': deal.dealStatus == 'Pipeline'}"  rel="tooltip" data-placement="bottom" title="Pipeline" ng-click="setDealStatus('Pipeline')"><i class="icon-pipeline"></i></a>
+</div>
+
+<form action="" class="detailsForm" novalidate>
+
+    <input type="text" placeholder = "Deal Name *" required
+           ng-model="deal.dealName"
+           ng-blur ="updateBasicDetails()"/>
+
+
+    <input type="search" placeholder="Company Name *" name="companyName" required
+           class="searchCompanies search"
+           ng-model="deal.companyName"
+           ng-keyup = "companiesSearchSuggestions(deal.companyName)"
+           typeahead="company.displayValue for company in companiesSuggestions | limitTo:10"
+           typeahead-on-select="updateCompany($item)"
+           typeahead-min-length="3"
+           typeahead-wait-ms = "300">
+
+    <input type="search" placeholder="Contact Name *" name="contactName" required
+           class="searchCompanies search"
+           ng-model="deal.contactName"
+           ng-keyup = "contactsSearchSuggestions(deal.contactName)"
+           typeahead="contact.displayValue for contact in contactsSuggestions | limitTo:10"
+           typeahead-on-select="selectContact($item)"
+           typeahead-min-length="3"
+           typeahead-wait-ms = "300">
+
+    <input type="search" placeholder="Territory *" name="territoryName" required
+           class="searchCompanies search"
+           ng-model="deal.territory.displayValue"
+           typeahead="territory.displayValue for territory in territories | filter: $viewValue | limitTo:10"
+           typeahead-on-select="updateTerritory($item)">
+
+    <div >
+        <a class="dropdown-toggle" id="dropdownEnd" name="end" role="button" data-toggle="dropdown">
+            <input class="borderless-input pull-left" type="text" name="end" placeholder="Close date" class="noM"
+                   ng-model="deal.closeDateFormat" readonly >
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position: relative;">
+            <datetimepicker data-ng-model="deal.closeDateFormat"
+                            data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', minView: 'day', view:'chooseDate'}"
+                            data-on-set-time="setDeadline"/>
+        </ul>
+    </div>
+
+    <input type="search" placeholder="Channel Partner" name="companyName"
+           class="searchCompanies search"
+           ng-model="deal.channelPartnerName"
+           ng-keyup = "companiesSearchSuggestions(deal.channelPartnerName)"
+           typeahead="company.displayValue for company in companiesSuggestions | limitTo:10"
+           typeahead-on-select="selectCompany($item)"
+           typeahead-min-length="3"
+           typeahead-wait-ms = "300">
+
+    <ul>
+        <li>
+            <label>
+                <input type="checkbox" ng-model="deal.isNewLogo"  ng-change="updateBasicDetails()"/>
+                <span>New Logo</span>
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" ng-model="deal.isNewProduct" ng-change="updateBasicDetails()"/>
+                <span>New Product</span>
+            </label>
+        </li>
+    </ul>
+
+    <div class="dropdown add-product">
+        <p class="text-left"><a class="dropdown-toggle" data-toggle="dropdown" href="" >Add product</a></p>
+
+        <ul role="menu" class="dropdown-menu">
+            <li class="dropdown-submenu" ng-repeat="dealP in dealProducts">
+                <a href="" ng-click="addProduct('products',this.dealP)">{{dealP.name}}</a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="dealSubP in dealP.subProducts"><a href=""  ng-click="addProduct('subProducts',this.dealSubP, $parent.dealP)">{{dealSubP.name}}</a></li>
+                </ul>
+        </ul>
+    </div>
+
+    <div class="clearfix">
+        <div class="small-col first"><p>Deal Value</p></div>
+        <div class="small-col center"><p>{{getFormattedAmountFunc(deal.dealValue)}}</p></div>
+        <div class="small-col last">
+            <div class="relative-pos">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""> Currency
+                    <b class="carret"></b>
+                </a>
+
+                <ul role="menu" class="dropdown-menu scrollable-menu">
+                    <li ng-repeat="currency in currencies"><a href="" ng-click="setCurrency(currency)">{{currency}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix" ng-repeat="product in deal.products">
+        <div class="small-col first">
+            <a class="pull-left" ng-click="removeProduct(deal.products,$index)" ng-hide="product.subProducts"><i class="icon-x"></i></a>
+            <p> {{product.name}}</p>
+        </div>
+        <div class="small-col center" >
+            <input type="text" placeholder="Deal Value" ng-model="product.amount" ng-blur ="updateBasicDetails()" ng-readonly="product.subProducts.length>0"></div>
+        <div class="small-col last">
+            <p class="text-note">{{deal.currency}}</p>
+        </div>
+        <div class="clearfix" ng-repeat="subproduct in product.subProducts">
+            <div class="small-col first subproduct">
+                <a class="pull-left" ng-click="removeProduct(product.subProducts,$index)"><i class="icon-x"></i></a>
+                <p> {{subproduct.name}}</p>
+            </div>
+            <div class="small-col center"><input type="text" placeholder="Deal Value" ng-model="subproduct.amount" ng-blur ="updateBasicDetails()" ng-change="updateExpandedDealProductValue(product)"></div>
+            <div class="small-col last">
+                <p class="text-note">{{deal.currency}}</p>
+            </div>
+        </div>
+    </div>
+
+</form>

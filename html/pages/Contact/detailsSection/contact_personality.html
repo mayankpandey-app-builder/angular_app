@@ -1,0 +1,14 @@
+<h1>Personality</h1>
+
+<div class="radios-grey-orange" ng-repeat = "personalityVal in contactProfile.personality.possibleValues">
+	<p class="noM">	
+		<label>
+			<input type="radio" name="position" ng-click = "selectPersonality(personalityVal)" ng-checked= "isChecked(contactProfile.personality.selectedValue, personalityVal)" />
+            <span>{{personalityVal}}</span>
+		</label>
+	</p>	
+
+</div>
+
+<textarea msd-elastic text="" description="" placeholder={{contactProfile.personality.explanatoryText}} rows="5" class="form-control form-textarea black" ng-blur = "updatePersonalityComments(contactProfile.personality.comments)" ng-model = "contactProfile.personality.comments"></textarea>
+

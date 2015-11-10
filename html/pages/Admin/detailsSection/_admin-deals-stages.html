@@ -1,0 +1,15 @@
+<div class="deals-stages">
+
+    <h2>Deals Stages <a href="" ng-click="addStage(stage.name); focusStage=true;" class="pull-right">Add</a></h2>
+
+    <div class="status-bar">
+
+        <div ng-repeat="stage in stages track by $index" ng-class="{'first': $index==0, 'last':$index==stages.length-1}">
+            <input type="text" placeholder="Stage name" name={{stage.name}} ng-model="stage.name" focus-me="focusStage" ng-blur="updateStages(stages)"/>
+            <a ng-click="removeStage(stage.name)" name="{{stage.name}}"><i class="icon-x"></i></a>
+        </div>
+
+
+    </div>
+</div>
+

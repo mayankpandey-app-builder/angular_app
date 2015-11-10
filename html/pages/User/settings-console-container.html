@@ -1,0 +1,35 @@
+<!--<default-menu class=""></default-menu>-->
+<div class="main-content clearfix" ng-show="isAuthenticated">
+	<div class="main-left">
+
+        <div class="container admin panel-group">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-box link collapsed" data-toggle="collapse" data-target="#earnings-and-achievements"
+                         ng-click="isCollapsed=!isCollapsed; getEA()">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="25%" class="left-col"><p><i class="icon-company"></i>Earnings and Achievements</p></td>
+                                <td width="73%" class="mid-col"><p>Edit the list of users in your organisation. Add,
+                                    delete, etc.</p></td>
+                                <td width="2%" class="right-col">
+                                    <i ng-class="{'icon-arrow': !isCollapsed,'icon-arrow-down2':isCollapsed }"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="earnings-and-achievements" class="collapse fade" >
+                        <div class="row">
+                            <commision-plan></commision-plan>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<div class="main-content clearfix" ng-show="!isAuthenticated">
+    <h1>You are not authorized to view this page.</h1>
+</div>

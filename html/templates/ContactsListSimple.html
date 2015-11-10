@@ -1,0 +1,13 @@
+<div class="col-lg-12">
+	<div class="inner-box reports-to">
+		<h1>{{contactsListSimple.title}}</h1>
+		<div class="user" ng-repeat = "contact in contactsListSimple.contacts">
+			<a>
+				<img alt="" class = "smallRoundImg" ng-src={{contact.imageURL||"images/placeholder_contact-photo.png"}} />
+				<p class="c-blue">{{contact.firstName}} {{contact.lastName}}</p>
+				<p>{{contact.position}}</p>
+			</a>
+		</div>
+        <p ng-hide = "contactsListSimple.contacts.length">{{contactsListSimple.placeholder}}</p>
+	</div>
+</div>

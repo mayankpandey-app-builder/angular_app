@@ -1,0 +1,50 @@
+<div class="inner-box double sink company-basic-details">
+    <a class="card-link basic-details"></a>
+    <div class="head clearfix">
+        <img alt="" class="bigRoundImg" ng-src="{{basicDetails.imageURL}}">
+        <div class="info  col-lg-12">
+            <h2  class = "ellipsisNoWrap">{{basicDetails.name}}</h2>
+        </div>
+    </div>
+    <p ng-if="basicDetails.country"><i class="icon-address"></i>{{basicDetails.country}}</p>
+    <i class="icon-address c-grey" style="padding-right: 2px;" ng-if="getAddressIcon(basicDetails.contactInformation)"></i>
+    <div ng-repeat="companyInfo in basicDetails.contactInformation" style="display:inline-flex;">
+        <p ng-if="companyInfo.contactType === 'street' && companyInfo.contactValue.length>0" class="ellipsisNoWrap normalWhiteSpace">
+            {{companyInfo.contactValue}}&nbsp;
+        </p>
+
+        <p ng-if="companyInfo.contactType === 'city' && companyInfo.contactValue.length>0" class="ellipsisNoWrap normalWhiteSpace">
+            {{companyInfo.contactValue}}&nbsp;
+        </p>
+
+        <p ng-if="companyInfo.contactType === 'postalCode' && companyInfo.contactValue.length>0" class="ellipsisNoWrap normalWhiteSpace">
+            {{companyInfo.contactValue}}&nbsp;
+        </p>
+
+        <p ng-if="companyInfo.contactType === 'state' && companyInfo.contactValue.length>0" class="ellipsisNoWrap normalWhiteSpace">
+            {{companyInfo.contactValue}}&nbsp;
+        </p>
+    </div>
+    <div ng-repeat="companyInfo in basicDetails.contactInformation">
+        <p ng-if="companyInfo.contactType == 'mobilePhoneNumber'" class="ellipsisNoWrap">
+            <i class="icon-call"></i>{{companyInfo.contactValue}}
+        </p>
+
+        <p ng-if="companyInfo.contactType == 'personalPhoneNumber'" class="ellipsisNoWrap">
+            <i class="icon-personalphone c-grey"></i>{{companyInfo.contactValue}}
+        </p>
+
+
+        <p ng-if="companyInfo.contactType == 'officePhoneNumber'" class="ellipsisNoWrap">
+            <i class="icon-officephone c-grey"></i>{{companyInfo.contactValue}}
+        </p>
+
+        <p ng-if="companyInfo.contactType == 'skypeName'" class="ellipsisNoWrap">
+            <i class="icon-skype c-grey"></i>{{companyInfo.contactValue}}
+        </p>
+
+        <p ng-if="companyInfo.contactType == 'emailAddress'" class="ellipsisNoWrap">
+            <i class="icon-email c-grey"></i>{{companyInfo.contactValue}}
+        </p>
+    </div>
+</div>

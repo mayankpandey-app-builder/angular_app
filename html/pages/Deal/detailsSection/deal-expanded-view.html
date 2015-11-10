@@ -1,0 +1,206 @@
+<div class="head">
+    <img class="smallRoundImg" ng-src="{{expandedDealInfo.basicInfo.companyImageURL || 'images/icn_company.png'}}" alt="" />
+    <h2 class="ellipsisNoWrap smallCardTitle expanded-view-inline" ng-click="redirectToDeal(expandedDealInfo.id)" style="cursor: pointer;">{{expandedDealInfo.basicInfo.companyName}}</h2>
+</div>
+<div class="head expanded-view-head">
+    <p class="c-blue expanded-view-inline"><strong>Close date</strong></p>
+    <div class="expanded-view-inline">{{expandedDealInfo.basicInfo.closeDate || '-' | date: 'd MMM'}}</div>
+</div>
+
+<ul class="nav nav-tabs expanded-view-tabs">
+    <li ng-repeat="qualifier in expandedDealInfo.qualifiers" ng-class="getQualifierStatus(qualifier);" ng-click="hideExpandedView($index);">
+        <a data-target="#tab{{$index + 1}}" data-toggle="tab">{{qualifier.shortName | limitTo: 1}}</a>
+    </li>
+</ul>
+<div ng-hide="expandedViewHide">
+    <h2 class="ellipsisNoWrap smallCardTitle"><i ng-class="{'c-blue': expandedDealInfo.basicInfo.probable}" class="icon-flag"></i> {{expandedDealInfo.basicInfo.dealName}}</h2>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-12">
+            {{expandedDealInfo.contact.firstName}} {{expandedDealInfo.contact.lastName}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2 class="expanded-view-inline-simple">Territory</h2>
+        </div>
+        <div class="col-sm-6">
+            {{expandedDealInfo.territory.displayValue}}
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2 class="expanded-view-inline-simple">Total</h2>
+        </div>
+        <div class="col-sm-6">
+            {{expandedDealInfo.basicInfo.dealValue.currency}} {{getFormattedAmount(expandedDealInfo.basicInfo.dealValue.amount) || 0}}
+        </div>
+    </div>
+
+    <div class="row link" ng-repeat="product in expandedDealInfo.products" ng-click="editDealProducts(expandedDealInfo);">
+        <div class="col-sm-6 expanded-view-h2">
+            <h2 class="expanded-view-inline-simple">{{product.name}}</h2>
+        </div>
+        <div class="col-sm-6 expanded-view-values">
+            {{getFormattedAmount(product.amount)}}
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2 class="expanded-view-inline-simple">Next step</h2>
+        </div>
+        <dic class="col-sm-6">
+            <i class="icon-arrow-circle"></i>{{expandedDealInfo.nextMilestone}}
+        </dic>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div ng-repeat="dealStage in expandedDealInfo.basicInfo.stage.list" tooltip="{{dealStage}}"  tooltip-placement="bottom" rel="tooltip" data-placement="top" title="{{dealStage}}" ng-class="{'deal-stage-phase-empty': expandedDealInfo.basicInfo.stage.current < $index, 'deal-stage-phase-full': expandedDealInfo.basicInfo.stage.current >= $index}">
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="deal-type pull-left">
+            <a href="" ng-class="{'selected': expandedDealInfo.basicInfo.dealStatus == 'Best case'}" rel="tooltip" data-placement="bottom" title="Best Case" ng-click="changeDealStatus(expandedDealInfo.id, 'Best case')"><i class="icon-deal"></i></a>
+            <a href="" ng-class="{'selected': expandedDealInfo.basicInfo.dealStatus == 'Commit'}" rel="tooltip" data-placement="bottom" title="Commit" ng-click="changeDealStatus(expandedDealInfo.id, 'Commit')"><i class="icon-won-deal"></i></a>
+            <a href="" ng-class="{'selected': expandedDealInfo.basicInfo.dealStatus == 'Pipeline'}"  rel="tooltip" data-placement="bottom" title="Pipeline" ng-click="changeDealStatus(expandedDealInfo.id, 'Pipeline')"><i class="icon-pipeline"></i></a>
+    </div>
+</div>
+<div class="tab-content qualifier-expanded-tab" ng-hide="!expandedViewHide">
+    <div class="tab-pane fade in" id="tab{{$index + 1}}" ng-repeat="qualifier in expandedDealInfo.qualifiers">
+        <div class="row">
+            <table class="col-lg-12">
+                <tr>
+                    <td class="col-lg-4">
+                        <p class="c-blue"><strong>Long name</strong></p>
+                    </td>
+                    <td class="col-lg-8">
+                        <p> {{qualifier.longName}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-lg-4">
+                        <p class="c-blue"><strong>Short name</strong></p>
+                    </td>
+                    <td class="col-lg-8">
+                        <p> {{qualifier.shortName}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-lg-4">
+                        <p class="c-blue"><strong>Stage</strong></p>
+                    </td>
+                    <td class="col-lg-8">
+                        <p> {{qualifier.stage}}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="zindex-10">
+                    <a class="dropdown-toggle" id="dropdownDeadline" name="deadline" role="button" data-toggle="dropdown">
+                        <input class="borderless-input pull-left" type="text" name="end" placeholder="Deadline" class="noM"
+                               ng-model="qualifier.deadlineFormat" readonly style="width: 40%;">
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position: relative;">
+                        <datetimepicker data-ng-model="qualifier.deadlineFormat"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdownDeadline', minView: 'day', view:'chooseDate'}"
+                                        data-on-set-time="setDeadlineQualifier"/>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="c-blue"><strong>To Do list</strong></p>
+            </div>
+            <div class="col-lg-8">
+                <p ng-repeat="list in qualifier.checklist">
+                    <label>
+                        <input type="checkbox" ng-model="list.selected" ng-checked="list.selected"
+                               ng-change="selectChecklist(this.list, $index)"/>
+                        <span></span>
+                    </label>
+                    <input type="text" placeholder="Add item here" class="borderless-input" ng-model="list.text"
+                           ng-blur="selectChecklist(list, $index);" style="width: 70%;"/>
+                </p>
+                <div class="qualifier-milestone-info">
+                    <label>
+                        <input type="checkbox" ng-model="checklist.selected" ng-change="pushEditChecklist(this.checklist)">
+                        <span></span>
+                    </label>
+                    <input type="text" placeholder="Add item" class="borderless-input" ng-model="checklist.text"
+                           ng-blur="pushEditChecklist(this.checklist); checklist=[];" style="width: 70%;"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="c-blue"><strong>State</strong></p>
+            </div>
+            <div class="col-lg-6">
+                <div class="radios" ng-if="qualifier.type=='qualifier'">
+                    <p>
+                        <label class="c-green" rel="tooltip" data-placement="bottom" title="Complete" ng-click="setValue('status','Complete')">
+                            <i class="icon-full-circle c-green"></i>
+                            <span ng-class="{'grey-disabled': !getRadioChecked(qualifier,'Complete'),'strong':getRadioChecked(qualifier,'Complete') }"> Complete </span>
+                        </label>
+                    </p>
+                    <p>
+                        <label class="c-yellow" rel="tooltip" data-placement="bottom" title="Validation" ng-click="setValue('status','Validation')">
+                            <i class="icon-full-circle c-yellow"></i> <span ng-class="{'grey-disabled': !getRadioChecked(qualifier,'Validation'), 'strong':getRadioChecked(qualifier,'Validation') }"> Validation</span>
+                        </label>
+                    </p>
+                    <label class="c-orange" rel="tooltip" data-placement="bottom" title="Incomplete" ng-click="setValue('status','Incomplete')">
+                        <i class="icon-full-circle c-orange"></i> <span ng-class="{'grey-disabled': !getRadioChecked(qualifier,'Incomplete'),'strong':getRadioChecked(qualifier,'Incomplete') }"> Incomplete</span>
+                    </label>
+                    </p>
+                    <p>
+                        <label class="c-grey" rel="tooltip" data-placement="bottom" title="Unknown" ng-click="setValue('status','Unknown')">
+                            <i class="icon-full-circle c-grey"></i> <span ng-class="{'grey-disabled': !getRadioChecked(qualifier,'Unknown'),'strong':getRadioChecked(qualifier,'Unknown') }">Unknown</span>
+                        </label>
+                    </p>
+                </div>
+                <div class="radios" ng-if="qualifier.type=='milestone'">
+                    <p>
+                        <label class="c-green" rel="tooltip" data-placement="bottom" title="Done" ng-click="setValue('status','Done')">
+                            <i class="icon-full-circle c-green"></i>
+                            <span ng-class="{'grey-disabled': !getRadioChecked(qualifier,'Done'),'strong':getRadioChecked(qualifier,'Done') }"> Done</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label class="c-yellow" rel="tooltip" data-placement="bottom" title="Scheduled" ng-click="setValue('status','Scheduled')">
+                            <i class="icon-full-circle c-yellow"></i> <span ng-class="{'grey-disabled': !getRadioChecked(qualifier,'Scheduled'), 'strong':getRadioChecked(qualifier,'Scheduled') }"> Scheduled</span>
+                        </label>
+                    </p>
+                    <label class="c-orange" rel="tooltip" data-placement="bottom" title="Failed" ng-click="setValue('status','Failed')">
+                        <i class="icon-full-circle c-orange"></i> <span ng-class="{'grey-disabled': !getRadioChecked(qualifier,'Failed'),'strong':getRadioChecked(qualifier,'Failed') }"> Failed</span>
+                    </label>
+                    </p>
+                    <p>
+                        <label class="c-grey" rel="tooltip" data-placement="bottom" title="Planned" ng-click="setValue('status','Planned')">
+                            <i class="icon-full-circle c-grey"></i> <span ng-class="{'grey-disabled': !getRadioChecked(qualifier,'Planned'),'strong':getRadioChecked(qualifier,'Planned') }">Planned</span>
+                        </label>
+                    </p>
+                </div>
+                <!--<p ng-repeat="status in qualifier.statuses">{{status.name}}</p>-->
+            </div>
+        </div>
+    </div>
+</div>

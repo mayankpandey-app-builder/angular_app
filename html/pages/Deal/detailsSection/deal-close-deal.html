@@ -1,0 +1,153 @@
+<h1>Close Deal</h1>
+
+<ul class="nav nav-tabs simple-tabs">
+    <li class="first active"><a data-target="#won" data-toggle="tab" rel="tooltip" data-placement="bottom" title="Won" ng-click="closeADeal='';closeADeal.selected='won'"><i class="icon-won-deal"></i></a></li>
+    <li><a data-target="#lost" href="" data-toggle="tab" rel="tooltip" data-placement="bottom" title="Lost" ng-click="closeADeal=''; closeADeal.selected='lost'"><i class="icon-lost-deal"></i></a></li>
+    <li><a data-target="#stalled" href="" data-toggle="tab" rel="tooltip" data-placement="bottom" title="Stalled" ng-click="closeADeal='';closeADeal.selected='stalled'"><i class="icon-stalled-deal"></i></a></li>
+    <li><a data-target="#duplicated" href="" data-toggle="tab" rel="tooltip" data-placement="bottom" title="Duplicated" ng-click="closeADeal='';cdcloseADeal.selected='duplicated'"><i class="icon-duplicated-deal"></i></a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content simple-tabs-content">
+    <!-- won -->
+    <div class="tab-pane fade in active" id="won">
+        <form class="detailsForm" action="" name="closeADealWon" ng-submit="closeDeal(closeADeal)" novalidate>
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" name="won-radio" ng-click="closeADeal.reason = 'Value proposition'"/>
+                        <span>Value proposition</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="won-radio" ng-click="closeADeal.reason = 'Relation'"/>
+                        <span>Relation</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="won-radio"  ng-click="closeADeal.reason = 'ROI'"/>
+                        <span>ROI</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="won-radio" ng-click="closeADeal.reason = 'Service offering'"/>
+                        <span>Service offering</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="won-radio" ng-click="closeADeal.reason = 'Technical fit'"/>
+                        <span>Technical fit</span>
+                    </label>
+                </li>
+            </ul>
+
+            <p>
+                <label>
+                    <input type="checkbox" ng-model="closeADeal.qualifiedForInternalReference"/>
+                    <span>Qualified for Internal References</span>
+                </label>
+            </p>
+            <button type="button" class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
+            <button type="submit" class="orangeBtn">Close</button>
+        </form>
+
+    </div>
+
+    <!-- lost -->
+    <div class="tab-pane fade" id="lost">
+        <form class="detailsForm" action="" name="closeADealWon" ng-submit="closeDeal(closeADeal)" novalidate>
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" name="lost-radio" ng-click="closeADeal.reason = 'Value proposition'" />
+                        <span>Value proposition</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="lost-radio" ng-click="closeADeal.reason = 'Relation'" />
+                        <span>Relation</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="lost-radio" ng-click="closeADeal.reason = 'ROI'" />
+                        <span>ROI</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="lost-radio" ng-click="closeADeal.reason = 'Service offering'" />
+                        <span>Service offering</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="lost-radio" ng-click="closeADeal.reason = 'Technical fit'" />
+                        <span>Technical fit</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="lost-radio" ng-click="closeADeal.reason = 'Internal Development'" />
+                        <span>Internal Development</span>
+                    </label>
+                </li>
+            </ul>
+
+            <p>Please write the name of the competitor that won the deal:
+            <input type="text" placeholder="Company Name *" ng-model="closeADeal.competitorName" />
+            </p>
+
+            <button type="button" class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
+            <button type="submit" class="orangeBtn">Close</button>
+        </form>
+
+    </div>
+
+    <!-- stalled -->
+    <div class="tab-pane fade" id="stalled">
+        <form class="detailsForm" action="" name="closeADealWon" ng-submit="closeDeal(closeADeal)" novalidate>
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" name="stalled-radio" ng-click="closeADeal.reason = 'Budget'" />
+                        <span>Budget</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="stalled-radio" ng-click="closeADeal.reason = 'Changes in organisation'" />
+                        <span>Changes in organisation</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="stalled-radio" ng-click="closeADeal.reason = 'Changed priorities'" />
+                        <span>Changed priorities</span>
+                    </label>
+                </li>
+            </ul>
+
+            <p>If different reason please input it here:
+                <input type="text" placeholder="Other" ng-model="closeADeal.reason"/>
+            </p>
+
+            <button type="button" class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
+            <button type="submit" class="orangeBtn">Close</button>
+
+        </form>
+    </div>
+
+    <!-- duplicated -->
+    <div class="tab-pane fade" id="duplicated">
+
+        <button type="button" ng-click="changeActiveSection('')" class="greyBtn ">Cancel</button>
+        <button type="button" ng-click="closeDeal(closeADeal)"   class="orangeBtn">Close</button>
+    </div>
+
+</div>

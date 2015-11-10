@@ -1,0 +1,46 @@
+<h1>Save filter</h1>
+
+<form action="" class="detailsForm" novalidate>
+    <div class="forecast-list-name">
+        <div class="pull-left forecast-list-name-length ellipsisNoWrap" style="width: 50%;">
+            <input type="text" placeholder="Filter name" ng-model="newFilter.name">
+        </div>
+        <div class="pull-right">
+            Set as public <input type="checkbox" ng-model="newFilter.isPublic" ng-checked="newFilter.isPublic">
+            <span ng-click="newFilter.isPublic = !newFilter.isPublic" ></span>
+        </div>
+    </div>
+
+</form>
+
+<p><b>Saved filters</b></p>
+
+<div class="tplPerson">
+
+    <ul class="list-unstyled">
+        <li ng-repeat="quickFilter in quickFilters" class="forecast-list-cursor">
+            <div class="forecast-list-name">
+                <div><i class="icon-x" style="color: orange" ng-show="quickFilter.canEdit" ng-click="deleteQuickFilter(quickFilter);"></i> <b>{{quickFilter.name}}</b></div>
+                <div class="pull-left c-blue forecast-list-name-length ellipsisNoWrap link">
+                    <div class="inline-display" style="white-space: normal;">
+                        <div class="inline-display" ng-repeat="dealStatus in quickFilter.dealStatuses"> {{dealStatus}}</div>
+                        <div class="inline-display" ng-repeat="dealType in quickFilter.dealTypes"> {{dealType}}</div>
+                        <div class="inline-display" ng-show="!quickFilter.dealStatuses && !quickFilter.dealTypes">-</div>
+                        <div class="inline-display" ng-show="quickFilter.dealSize.min && !quickFilter.dealSize.max"> Min. {{getFormattedAmount(quickFilter.dealSize.min)}}</div>
+                        <div class="inline-display" ng-show="!quickFilter.dealSize.min && quickFilter.dealSize.max"> Max. {{getFormattedAmount(quickFilter.dealSize.max)}}</div>
+                        <div class="inline-display" ng-show="quickFilter.dealSize.min && quickFilter.dealSize.max"> Min. {{getFormattedAmount(quickFilter.dealSize.min)}} - Max. {{getFormattedAmount(quickFilter.dealSize.max)}}</div>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    Public <input type="checkbox" ng-checked="quickFilter.isPublic">
+                    <span ng-click="toggleQuickFilterShare(quickFilter);" ></span>
+                    <br/>
+                    <a class="link" ng-init="replacedFilter.name = quickFilter.name; replacedFilter.isPublic = quickFilter.isPublic" ng-click="saveFilter(replacedFilter, quickFilter.id);">Replace</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<button class="greyBtn" ng-click="changeActiveSection('forecast-filters')">Cancel</button>
+<button class="orangeBtn" ng-click="saveFilter(newFilter);">Save</button>

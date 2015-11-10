@@ -1,0 +1,95 @@
+.rating-10 {
+  height: 90%;
+}
+.rating-10:after {
+  content: '10';
+  display: block;
+  margin-top: -15px;
+}
+.rating-5 {
+  height: 45%;
+}
+.rating-5:after {
+  content: '5';
+  display: block;
+  margin-top: -15px;
+}
+.rating-3 {
+  height: 27%;
+}
+.rating-3:after {
+  content: '3';
+  display: block;
+  margin-top: -15px;
+}
+.rating-1 {
+  height: 10%;
+}
+.rating-1:after {
+  content: '1';
+  display: block;
+  margin-top: -15px;
+}
+.rating-0 {
+  height: 1%;
+}
+.rating-0:after {
+  content: '0';
+  display: block;
+  margin-top: -15px;
+}
+.stage-4 {
+  width: 100%;
+}
+.stage-3 {
+  width: 80%;
+}
+.stage-2 {
+  width: 60%;
+}
+.stage-1 {
+  width: 40%;
+}
+.stage-0 {
+  width: 20%;
+}
+.top-right .top-search .dropdown-menu a {
+  background: none;
+  width: auto;
+}
+.top-right .top-search .dropdown-menu > .active > a {
+  background: none;
+  background-color: #428bca;
+}
+.quicknotes,
+.quicknotes:focus {
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  color: #000000;
+}
+span.quicknotes {
+  color: #d3d3d3;
+}
+.tplReason {
+  font: normal 14px Helvetica, sans-serif;
+  line-height: 20px;
+  height: 180px;
+  overflow-y: scroll;
+}
+.dropdown-underline {
+  border-bottom: 1px solid #d3d3d3;
+  padding: 0 0 5px 0;
+  width: 30%;
+  color: #222222;
+  margin: 15px 0px;
+}
+.dropdown-underline a > b:before {
+  font-size: 8px;
+  margin-left: 3px;
+}
+.earnings-and-achievements label i:before {
+  font-size: 8px;
+}
+.

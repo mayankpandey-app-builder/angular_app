@@ -1,0 +1,35 @@
+<div class="modal" id="convertLead" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Convert lead</h1>
+                <div class="row" style="padding: 0 15px;">Are you sure you want to convert this lead into a deal?</div>
+            </div>
+            <form action="" class="detailsForm" name="convertLeadToDealForm" ng-submit="convertLeadToDeal()" novalidate>
+                <div class="modal-body">
+                    <p>Choose a territory first</p>
+
+                    <input type="search" ng-model="searchTerritory" class="searchPers search" placeholder = "Territory *"/>
+
+                    <div style="height: 200px; overflow-y: scroll;">
+                        <div class="row link" ng-repeat="territory in (territories | filter:searchTerritory) track by $index" style="border-bottom: 1px solid #d3d3d3; padding: 5px; width: 100%;" ng-click="selectTerritory(territory)">
+                            <div class="pull-left" style="margin-left: 10px;">
+                                {{territory.displayValue}}
+                            </div>
+                            <div class="pull-right">
+                                <a href="" ng-if="!territory.isSelected" style="color: orange;">Select</a>
+                                <a href="" ng-if="territory.isSelected"><i class="icon-checkmark" style="color: orange;"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="greyBtn" data-dismiss="modal">Cancel</button>
+                    <button class="orangeBtn" type="submit">Convert</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

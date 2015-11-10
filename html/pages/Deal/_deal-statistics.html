@@ -1,0 +1,31 @@
+<div class="inner-box deal-manager clearfix cursor-pointer sink">
+    <div class="row">
+        <div class="col-lg-6 text-center" ng-if="people.length > 1 || people.length == 0">
+            <img class="bigRoundImg" ng-src="{{manager.imageURL || 'images/placeholder_contact-big.png'}}" alt="" />
+            <h2 class="c-blue">{{manager.territory || '-'}}</h2>
+        </div>
+        <div class="col-lg-6 text-center" ng-if="people.length == 1">
+            <img class="bigRoundImg" ng-src="{{people[0].imageURL || 'images/placeholder_contact-big.png'}}" alt="" />
+            <h2 class="c-blue">{{people[0].firstName}} {{people[0].lastName}}</h2>
+            <h2>{{people[0].position || 'None'}}</h2>
+        </div>
+        <div class="col-lg-6 mtop20">
+            <div class="row noGutter">
+                <div class="col-lg-7">
+                    <p class="c-blue"><strong>Total Value</strong></p>
+                </div>
+                <div class="col-lg-5">
+                    <p class="c-blue"><strong>{{getFormattedAmount(statistics.commitValue + statistics.bestCaseValue + statistics.pipelineValue) || 0}} {{statistics.currency}}</strong></p>
+                </div>
+            </div>
+            <div class="row noGutter deals-statistics-products">
+                <div class="col-lg-7">
+                    <p ng-repeat="product in statistics.products">{{product.name}}</p>
+                </div>
+                <div class="col-lg-5">
+                    <p ng-repeat="product in statistics.products">{{getFormattedAmount(product.amount)}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

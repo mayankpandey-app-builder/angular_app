@@ -1,0 +1,54 @@
+<h1>Deal Products</h1>
+<div class="detailsForm">
+    <div class="dropdown add-product">
+        <p class="text-left"><a class="dropdown-toggle" data-toggle="dropdown" href="" >Add product</a></p>
+
+        <ul role="menu" class="dropdown-menu">
+            <li class="dropdown-submenu" ng-repeat="dealP in productsFilters">
+                <a href="" ng-click="addDealProduct('products',this.dealP)">{{dealP.name}}</a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="dealSubP in dealP.subProducts"><a href=""  ng-click="addDealProduct('subProducts',this.dealSubP, $parent.dealP)">{{dealSubP.name}}</a></li>
+                </ul>
+        </ul>
+    </div>
+    <div class="clearfix">
+        <div class="small-col first"><p>Deal Value</p></div>
+        <div class="small-col center"><p>{{getFormattedAmount(expandedDealInfo.basicInfo.dealValue.amount)}}</p></div>
+        <div class="small-col last">
+            <div class="relative-pos">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""> {{expandedDealInfo.currency}}
+                    <b class="carret"></b>
+                </a>
+
+                <ul role="menu" class="dropdown-menu scrollable-menu">
+                    <li ng-repeat="currency in currencies"><a href="" ng-click="expandedDealInfo.basicInfo.dealValue.currency = currency; expandedDealInfo.currency = currency;">{{currency}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix" ng-repeat="product in expandedDealInfo.products">
+        <div class="small-col first">
+            <a class="pull-left" ng-click="removeProduct(expandedDealInfo.products,$index)" ng-hide="product.subProducts.length > 0"><i class="icon-x"></i></a>
+            <p class="ellipsisNoWrap"> {{product.name}}</p>
+        </div>
+        <div class="small-col center" >
+            <input type="text" placeholder="Value" ng-model="product.amount" ng-readonly="product.subProducts.length>0"></div>
+        <div class="small-col last">
+            <p class="text-note">{{expandedDealInfo.currency}}</p>
+        </div>
+        <div class="clearfix" ng-repeat="subproduct in product.subProducts">
+            <div class="small-col first subproduct">
+                <a class="pull-left" ng-click="removeProduct(product.subProducts,$index)"><i class="icon-x"></i></a>
+                <p class="ellipsisNoWrap"> {{subproduct.name}}</p>
+            </div>
+            <div class="small-col center"><input type="text" placeholder="Value" ng-model="subproduct.amount" ng-keypress="validateNumber(event)" ng-change="updateExpandedDealProductValue(product)"></div>
+            <div class="small-col last">
+                <p class="text-note">{{expandedDealInfo.currency}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="greyBtn" ng-click="changeActiveSection('expanded-view')">Cancel</button>
+<button class="orangeBtn" ng-click="updateExpandedViewProducts(expandedDealInfo);">Save</button>

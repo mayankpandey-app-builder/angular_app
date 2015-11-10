@@ -1,0 +1,13 @@
+<h1>Role</h1>
+
+<div class="radios-grey-orange" ng-repeat = "roleVal in contactProfile.role.possibleValues">
+	<p class="noM">	
+		<label>
+			<input type="radio" name="position"  ng-click = "selectRole(roleVal)" ng-checked= "isChecked(contactProfile.role.selectedValue, roleVal)"/>
+			<span>{{roleVal}}</span>
+		</label>
+	</p>
+</div>
+
+
+<textarea msd-elastic text="" description="" placeholder={{contactProfile.role.explanatoryText}} rows="5" class="form-control form-textarea black" ng-model="contactProfile.role.comments" ng-blur = "updateRole()"></textarea>

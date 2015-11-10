@@ -1,0 +1,192 @@
+<div id="tasks-sidebar">
+    <div class="filters" ng-class="{'expanded-task': isActive=='filters'}" ng-click="taskSelectTab('filters')">
+        <h1>Filters</h1>
+
+        <div class="content" ng-show="isActive=='filters'">
+
+            <div class="panel-group" id="accordion">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-target="#date" href="#date" class="collapsed"><i></i>Date</a>
+                        </h4>
+                    </div>
+                    <div id="date" class="panel-collapse collapse">
+                        <ul>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="radio" ng-click="applyThisWeekFilter();" ng-checked="dateFilters['thisWeek']"/><span>This week</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="radio" ng-click="applyNextWeekFilter();" ng-checked="dateFilters['nextWeek']"/><span>Next week</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="radio" ng-click="applyTodayFilter();" ng-checked="dateFilters['today']"/><span>Today</span></label></li>
+
+                        </ul>
+                        <div class="clearfix">
+                            <div style="margin-top: 10px;">
+                                <a analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown">
+                                    <input class="borderless-input pull-left filters-bordless-input" style="margin-right: 20px;" type="text" name="start" placeholder="Start Date" class="noM" ng-model="dateFilters.startSelected" readonly>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position: relative; margin-left: -15px;">
+                                    <datetimepicker data-ng-model="dateFilters.start"
+                                                    data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', minView: 'day', view: 'chooseDate' }"
+                                                    data-on-set-time="onStartTimeSet"/>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div style="margin-top: 10px;">
+                                <a analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" class="dropdown-toggle" id="dropdownEnd" name="end" role="button" data-toggle="dropdown">
+                                    <input class="borderless-input pull-left filters-bordless-input" type="text" name="end" placeholder="End Date" class="noM" ng-model="dateFilters.endSelected" readonly >
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position: relative; margin-left: -15px;">
+                                    <datetimepicker data-ng-model="dateFilters.end"
+                                                    data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', minView: 'day', view: 'chooseDate' }"
+                                                    data-on-set-time="onEndTimeSet"/>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-target="#task-type" href="#task-type" class="collapsed"><i></i>Task is</a>
+                        </h4>
+                    </div>
+                    <div id="task-type" class="panel-collapse collapse">
+                        <ul>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyImportantFilter();" ng-checked="typeFilters['important']"/><span>Important ({{tasksFilters.counters.important}})</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyDoneFilter();" ng-checked="typeFilters['done']"/><span>Done ({{tasksFilters.counters.done}})</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyMeetingsFilter();" ng-checked="typeFilters['meetings']"/><span>Scheduled Meetings ({{tasksFilters.counters.scheduledMeetings}})</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyGoalFilter();" ng-checked="typeFilters['goal']"/><span>Goal ({{tasksFilters.counters.goals}})</span></label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-target="#task-types" href="#task-types" class="collapsed"><i></i>Task types</a>
+                        </h4>
+                    </div>
+                    <div id="task-types" class="panel-collapse collapse">
+                        <ul>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('email');" ng-checked="taskType['email']"/><span>Email</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('followup');" ng-checked="taskType['followup']"/><span>Follow-up</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('todo');" ng-checked="taskType['todo']"/><span>To do</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('call');" ng-checked="taskType['call']"/><span>Call</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('channel');" ng-checked="taskType['channel']"/><span>Channel</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('nbm');" ng-checked="taskType['nbm']"/><span>NBM</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('newcontact');" ng-checked="taskType['newcontact']"/><span>New contact</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('facetoface');" ng-checked="taskType['facetoface']"/><span>Face to face</span></label></li>
+                            <li><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTaskTypeFilter('internal');" ng-checked="taskType['internal']"/><span>Internal meeting</span></label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-target="#task-tags" href="#task-tags" class="collapsed"><i></i>Tags ({{tasksFilters.counters.tags}})</a>
+                        </h4>
+                    </div>
+                    <div id="task-tags" class="panel-collapse collapse">
+                        <ul>
+                            <li ng-repeat="tagFilter in tasksFilters.tags"><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyTagFilter(tagFilter.id);" ng-checked="tagFilters[tagFilter.id]"/><span>{{tagFilter.displayValue}}</span></label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-target="#task-people" href="#task-people" class="collapsed"><i></i>People ({{tasksFilters.counters.people}})</a>
+                        </h4>
+                    </div>
+                    <div id="task-people" class="panel-collapse collapse">
+                        <ul>
+                            <li ng-repeat="peopleFilter in tasksFilters.people"><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyFilter('people', 'personFilter', peopleFilter.id);" ng-checked="personFilter[peopleFilter.id]"/><span>{{peopleFilter.firstName}} {{peopleFilter.lastName}}</span></label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-target="#task-leads" href="#task-leads" class="collapsed"><i></i>Leads ({{tasksFilters.counters.leads}})</a>
+                        </h4>
+                    </div>
+                    <div id="task-leads" class="panel-collapse collapse">
+                        <ul>
+                            <li ng-repeat="leadFilter in tasksFilters.leads"><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyFilter('leads', 'leadFilters', leadFilter.id);" ng-checked="leadFilters[leadFilter.id]"/><span>{{leadFilter.leadName}}</span></label></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-target="#task-deals" href="#task-deals" class="collapsed"><i></i>Deals & Products ({{tasksFilters.counters.deals}})</a>
+                        </h4>
+                    </div>
+                    <div id="task-deals" class="panel-collapse collapse">
+                        <ul>
+                            <li ng-repeat="dealFilter in tasksFilters.deals"><label><input analytics-on analytics-event="Filter" analytics-category="Tasks" analytics-label="Success" type="checkbox" ng-click="applyFilter('deals', 'dealFilters', dealFilter.id);" ng-checked="dealFilters[dealFilter.id]"/><span>{{dealFilter.dealName}}</span></label></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <script>
+
+                $('.panel-title > a').click(function(e) {
+                    e.preventDefault();
+                });
+
+            </script>
+
+
+        </div>
+    </div>
+    <div class="overdue" ng-class="{'expanded-task': isActive=='overdue'}" ng-click="taskSelectTab('overdue')" id="treeBox">
+        <h1>Overdue</h1>
+
+        <div class="content" ng-show="isActive=='overdue'">
+            <span ng-hide="overdueEvents.length >0">No overdue tasks</span>
+            <div class="inner-box along " ng-class="getBorderRightColor(eventOverdue.end_date);" ng-repeat="eventOverdue in overdueEvents track by $index" ng-drag="true" ng-drag-data="eventOverdue">
+                <div class="along-header">
+                    <i class="icon-{{eventOverdue.task.taskType}}"></i>
+                    <strong>{{eventOverdue.start_date | date:'dd MMM, HH:mm'}} - {{eventOverdue.end_date | date:'dd MMM, HH:mm'}}</strong>
+                </div>
+                <div class="along-description">
+                    <i ng-class="{'icon-error important': eventOverdue.task.important}"></i>
+                    {{eventOverdue.task.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="unscheduled" ng-class="{'expanded-task': isActive=='unscheduled'}" ng-click="taskSelectTab('unscheduled')">
+        <h1>Unscheduled</h1>
+
+        <div class="content" ng-show="isActive=='unscheduled'">
+            <span ng-hide="unscheduledEvents.length>0">No unscheduled tasks</span>
+            <div class="inner-box along" ng-repeat="eventUnscheduled in unscheduledEvents track by $index">
+                <div class="along-header">
+                    <i class="icon-{{eventUnscheduled.task.taskType}}"></i>
+                    <strong>-</strong>
+                </div>
+                <div class="along-description">
+                    <i ng-class="{'icon-error important': eventUnscheduled.task.important}"></i>
+                    {{eventUnscheduled.task.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="task-view-details" ng-show="isActive=='task'" ng-class="{'expanded-task': isActive=='task'}">
+        <view-task-details task-id="currentTaskId" on-update="updateTaskEvents" done-delete="showFilters" task-created="taskCreated"></view-task-details>
+    </div>
+
+</div>
+
+<meeting-invite-modal attendees="meetingAttendees" taskid="taskId"></meeting-invite-modal>

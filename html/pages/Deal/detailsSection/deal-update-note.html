@@ -1,0 +1,15 @@
+<h1>Edit Note</h1>
+
+<span class="date quicknotes">{{editNote.timestamp | date : 'dd MMM, yyyy'}} - {{editNote.author}}</span>
+
+<div class="detailsForm">
+
+    <input type="text" placeholder="Note Title *" name="title" ng-model="editNote.title"
+           ng-blur="updateNote(editNote)">
+
+    <textarea msd-elastic placeholder="Add description" rows="6" class="form-control form-textarea"
+              ng-model="editNote.text" ng-blur="updateNote(editNote)"></textarea>
+
+    <button type="button" class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
+    <button type="button" class="greyBtnDelete" ng-click="deleteNote(editNote.id)">Delete</button>
+</div>

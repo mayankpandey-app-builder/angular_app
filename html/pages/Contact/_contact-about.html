@@ -1,0 +1,13 @@
+<div class="col-lg-6">
+    <div class="inner-box sink ellipsisHidden">
+        <a class="card-link about"></a>
+        <h1 class="noM">About</h1>
+        <p>In contact since </p>
+        <p class="doubleM">{{contactHistory.createdOn | date: 'mediumDate'}}</p>
+        <div>
+            <p class="c-blue"><strong>Previous Positions</strong></p>
+            <div class="text-area-card ellipsisNoWrap" ng-show="contactHistory.previousPositions">{{contactHistory.previousPositions || ''}}</div>
+            <div class="text-area-card c-grey ellipsisNoWrap" ng-hide="contactHistory.previousPositions">{{contactHistory.defaultText || ''}}</div>
+        </div>
+    </div>
+</div>

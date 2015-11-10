@@ -1,0 +1,186 @@
+<h1>Filters</h1>
+
+<ul class="selected-filters">
+    <li ng-repeat="filter in allFilters">{{filter.displayName}} - {{filter.name | date:'dd MMM yyyy' }}<a
+            class="pull-right" ng-click="removeFilter(filter.type, filter.name);"><i class="icon-x"></i></a></li>
+</ul>
+<p class="text-right"><a ng-click="clearAllFilters()">Clear All</a></p>
+
+<div class="panel-group" id="accordion">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#bantScore" href="" ng-class="{'disabled-filter collapsed': !leadFilters.bantScores || leadFilters.bantScores==''}"><i></i>Bant Scores</a>
+            </h4>
+        </div>
+        <div id="bantScore" class="panel-collapse collapse in">
+            <ul>
+                <li ng-repeat="bantScore in leadFilters.bantScores">
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="checkbox" ng-click="applyFilter('bantScore', bantScore, 'Bant Score')" ng-checked="filterList[bantScore]"/>
+                        <span>{{bantScore}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#special" href="" ng-class="{'disabled-filter collapsed': !leadFilters.stages || leadFilters.stages==''}"><i></i>Stages</a>
+            </h4>
+        </div>
+        <div id="special" class="panel-collapse collapse in">
+            <ul>
+                <li ng-repeat="stage in leadFilters.stages">
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="checkbox" ng-click="applyFilter('stages', stage, 'Stage')" ng-checked="filterList[stage]"/>
+                        <span>{{stage}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#named" href=""><i></i>Named Account</a>
+            </h4>
+        </div>
+
+        <div id="named" class="panel-collapse collapse in">
+            <ul>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="radio" name="namedAc" ng-click="applyFilter('named', 'Yes' , 'Named Account'); removeFilter('named','No');" ng-checked="namedAppliedFilters[0] === 'Yes'"/>
+                        <span>Yes</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="radio" name="namedAc" ng-click="applyFilter('named', 'No', 'Named Account'); removeFilter('named','Yes');" ng-checked="namedAppliedFilters[0] === 'No'"/>
+                        <span>No</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#phone" href=""><i></i>Phone</a>
+            </h4>
+        </div>
+        <div id="phone" class="panel-collapse collapse in">
+            <ul>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="radio"  name="hasPhone" ng-click="applyFilter('phone', 'Yes' , 'Phone'); removeFilter('phone','No');" ng-checked="phoneAppliedFilters[0] === 'Yes'"/>
+                        <span>Yes</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="radio" name="hasPhone"  ng-click="applyFilter('phone', 'No', 'Phone'); removeFilter('phone','Yes');" ng-checked="phoneAppliedFilters[0] === 'No'"/>
+                        <span>No</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#mail" href=""><i></i>Email</a>
+            </h4>
+        </div>
+        <div id="mail" class="panel-collapse collapse in">
+            <ul>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="radio" name="hasEmail"  ng-click="applyFilter('email', 'Yes' , 'Email'); removeFilter('email','No');" ng-checked="emailAppliedFilters[0] === 'Yes'"/>
+                        <span>Yes</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="radio" name="hasEmail" ng-click="applyFilter('email', 'No', 'Email'); removeFilter('email','Yes');" ng-checked="emailAppliedFilters[0] === 'No'"/>
+                        <span>No</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#sources" href="" ng-class="{'disabled-filter collapsed': !leadFilters.sources || leadFilters.sources==''}"><i></i>Sources</a>
+            </h4>
+        </div>
+        <div id="sources" class="panel-collapse collapse in">
+            <ul>
+                <li ng-repeat="source in leadFilters.sources">
+                    <label>
+                        <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" type="checkbox" ng-click="applyFilter('sources', source, 'Source')" ng-checked="filterList[source]"/>
+                        <span>{{source}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#country" href=""
+                   ng-class="{'disabled-filter collapsed':!leadFilters.countries || leadFilters.countries==''}"><i></i>Country</a>
+            </h4>
+        </div>
+        <div id="country" class="panel-collapse collapse in">
+            <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" ng-hide="!leadFilters.countries || leadFilters.countries==''" type="search" class="searchPers search" id="searchCountry"
+                   ng-model="selectedCountry"
+                   typeahead="country for country in leadFilters.countries | filter:selectedCountry | limitTo:10"
+                   typeahead-on-select="selectFilter('countryFilters', $item, selectedCountry); selectedCountry = ''">
+            <ul>
+                <li ng-repeat="countryFilter in countryFilters">
+                    <label>
+                        <input type="checkbox" ng-click="applyFilter('country', countryFilter, 'Country')"
+                               ng-checked="countryFilter.length>0"/>
+                        <span>{{countryFilter}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#industry" href=""
+                   ng-class="{'disabled-filter collapsed': !industries || industries==''}"><i></i>Industry</a>
+            </h4>
+        </div>
+        <div id="industry" class="panel-collapse collapse in">
+            
+            <input analytics-on analytics-event="Filter"  analytics-category="Leads" analytics-label="Success" ng-hide="!industries || industries==''" type="search" class="searchPers search" id="searchIndustry"
+                   ng-model="selectedIndustry"
+                   typeahead="industry for industry in industries | filter:selectedIndustry | limitTo:10"
+                   typeahead-on-select="selectFilter('industryFilters', $item, selectedIndustry); selectedIndustry = ''"/>
+            <ul>
+                <li ng-repeat="industryFilter in industryFilters">
+                    <label>
+                        <input type="checkbox" ng-click="applyFilter('industry', industryFilter, 'Industry')"
+                               ng-checked="industryFilter.length>0"/>
+                        <span>{{industryFilter}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+<h1>Contact Details</h1>
+
+<form action="" class="detailsForm" name = "cardDetails" ng-submit = "updateContactInformation(contactProfile.basicDetails)" novalidate>
+	<div class="browse-file imgProcess">
+		<img  alt="" ng-src="{{contactProfile.basicDetails.imageURL  ||'images/placeholder_contact-big.png'}}">
+        <input class="uploadBtn cursor-pointer" id="inputImage2" type="file" accept="image/*" image="uploadedImage" resize-max-height="200" resize-max-width="200" resize-quality="0.7"/>
+	</div>
+
+    <small class="error" ng-hide="validate(contactProfile.basicDetails.firstName, cardDetails.firstName.$pristine)" ng-show="firstNameError">
+        Please provide a name.
+    </small>
+	<input type="text" placeholder="First Name *" ng-model = "contactProfile.basicDetails.firstName" ng-blur ="updateContactInformation(contactProfile.basicDetails)" name="firstName" required
+           ng-class="{'my-input': !validate(contactProfile.basicDetails.firstName, cardDetails.firstName.$pristine) || firstNameError}"
+           ng-change="firstNameError = false"/>
+
+    <small class="error" ng-hide="validate(contactProfile.basicDetails.lastName, cardDetails.lastName.$pristine)" ng-show="lastNameError">
+        Please provide a surname.
+    </small>
+	<input type="text" placeholder="Last Name *"  ng-model = "contactProfile.basicDetails.lastName" ng-blur ="updateContactInformation(contactProfile.basicDetails)" name="lastName" required
+           ng-class="{'my-input': !validate(contactProfile.basicDetails.lastName, cardDetails.lastName.$pristine) || lastNameError}"
+           ng-change="lastNameError = false"/>
+
+	<input type="text" placeholder="Position"  ng-model = "contactProfile.basicDetails.position" ng-blur ="updateContactInformation(contactProfile.basicDetails)"/>
+
+    <input type="search" placeholder="Company" class="searchCompanies search"
+           ng-model="contactProfile.basicDetails.company"
+           ng-keyup = "companiesSearchSuggestions(contactProfile.basicDetails.company)"
+           typeahead="company.displayValue for company in contactCompanies"
+           typeahead-on-select="selectMatch($item)"
+           ng-blur ="updateContactInformation(contactProfile.basicDetails)">
+
+	<input type="search" placeholder="Country" class="searchCompanies search"
+           ng-model = "contactProfile.basicDetails.country"
+           typeahead="country for country in countries | filter:$viewValue | limitTo: 10"
+           typeahead-on-select="updateContactInformation(contactProfile.basicDetails)">
+
+	<div class="relative-pos pull-right">
+		<a class="dropdown-toggle" data-toggle="dropdown" href=""> Add
+			<b class="carret"></b>
+		</a>
+
+		<ul role="menu" class="dropdown-menu">
+			<li><a ng-click = "addField(contactProfile.basicDetails.contactInformation,'mobilePhoneNumber')">Mobile phone</a></li>
+		    <li><a ng-click = "addField(contactProfile.basicDetails.contactInformation,'personalPhoneNumber')">Home phone</a></li>
+		    <li><a ng-click = "addField(contactProfile.basicDetails.contactInformation,'officePhoneNumber')">Work phone</a></li>
+		    <li><a ng-click = "addField(contactProfile.basicDetails.contactInformation,'emailAddress')">Email address</a></li>
+		</ul>
+	</div>
+	<div class="clear"></div>
+	<div ng-repeat="contactInfo in contactProfile.basicDetails.contactInformation">
+
+		
+		<div class="icon-placeholder" ng-if = "contactInfo.contactType == 'mobilePhoneNumber'" ng-class = "{'state-displayErrMsg':!validateTel(contactInfo.contactValue,cardDetails.mobileTel.$pristine)}">						 
+			<small class="error small-padding">
+			    Please provide a valid phone number.
+		 	</small>
+
+			<i class="fa fa-phone"></i>
+			<input type="tel" placeholder="Mobile phone number" ng-model = "contactInfo.contactValue"  ng-blur ="updateContactInformation(contactProfile.basicDetails)" name= "mobileTel">
+		</div>
+		
+
+		<div class="icon-placeholder"  ng-if = "contactInfo.contactType == 'personalPhoneNumber'" ng-class = "{'state-displayErrMsg':!validateTel(contactInfo.contactValue, cardDetails.homeTel.$pristine)}">
+			<small class="error small-padding">
+			    Please provide a valid phone number.
+		 	</small>
+			<i class="icon-personalphone"></i>
+			<input type="tel" placeholder="Home phone number"  ng-model = "contactInfo.contactValue" ng-blur ="updateContactInformation(contactProfile.basicDetails)" name = "homeTel">
+		</div>
+
+		<div class="icon-placeholder"  ng-if = "contactInfo.contactType == 'officePhoneNumber'" ng-class = "{'state-displayErrMsg':!validateTel(contactInfo.contactValue,cardDetails.workTel.$pristine)}">
+			<small class="error small-padding" >
+			    Please provide a valid phone number.
+		 	</small>
+			<i class="icon-officephone"></i>	
+			<input type="tel" placeholder="Work phone number" ng-model = "contactInfo.contactValue" ng-blur ="updateContactInformation(contactProfile.basicDetails)"  name = "workTel">
+		</div>
+
+		<div class="icon-placeholder " ng-class = "{'state-displayErrMsg':!validateEmail(contactInfo.contactValue, cardDetails.emailAdr.$pristine)}" ng-if = "contactInfo.contactType == 'emailAddress'" >
+			<small class="error small-padding">
+			    Please provide a valid email address.
+		 	</small>
+			<i class="icon-email"></i>
+			<input type="text" placeholder="Email address" ng-model = "contactInfo.contactValue" ng-blur ="updateContactInformation(contactProfile.basicDetails)" name = "emailAdr">
+		</div>
+
+		<div class="icon-placeholder firstInput"  ng-if = "contactInfo.contactType == 'skypeName'">
+			<i class="icon-skype"></i>
+			<input type="text" placeholder="Skype"  ng-model ="contactInfo.contactValue" ng-blur ="updateContactInformation(contactProfile.basicDetails)">
+		</div>
+	</div>
+	
+	<div ng-repeat="contactInfo in contactProfile.basicDetails.contactInformation">
+		<div class="icon-placeholder"  ng-if = "contactInfo.contactType == 'street'">
+			<i class="icon-address"></i>
+			<input type="text" placeholder="Street"  ng-model = "contactInfo.contactValue" ng-blur ="updateContactInformation(contactProfile.basicDetails)">
+		</div>
+
+		<div class="icon-placeholder"  ng-if = "contactInfo.contactType == 'city'">
+			<i class="icon-address"></i>
+			<input type="text" placeholder="City"  ng-model = "contactInfo.contactValue" ng-blur ="updateContactInformation(contactProfile.basicDetails)">
+		</div>
+
+		<div class="icon-placeholder"  ng-if = "contactInfo.contactType == 'postalCode'">
+			<i class="icon-address"></i>
+			<input type="text" placeholder="Postal code "  ng-model = "contactInfo.contactValue" ng-blur ="updateContactInformation(contactProfile.basicDetails)">
+		</div>
+
+		<div class="icon-placeholder"  ng-if = "contactInfo.contactType == 'state'">
+			<i class="icon-address"></i>
+			<input type="text" placeholder="State / Province"  ng-model = "contactInfo.contactValue" ng-blur ="updateContactInformation(contactProfile.basicDetails)">
+		</div>
+	</div>	
+	<input type="submit" style="visibility:hidden;"> 
+</form>
+	

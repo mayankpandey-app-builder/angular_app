@@ -1,0 +1,149 @@
+<div id="create-calendar-task">
+    <div class="col-lg-12">
+        <h1>Create Task</h1>
+
+        <div class="pull-right">
+            Context: {{newTask.context.displayValue}}
+        </div>
+
+        <div class="dropdown task-icons-calendar">
+            <div class="relative-pos">
+                <a class="dropdown-toggle" data-toggle="dropdown" href=""> {{newTask.taskTypeDisplayValue || 'Select type *'}}
+                    <b class="carret"></b>
+                </a>
+                <ul role="menu" class="dropdown-menu">
+                    <li tooltip="Email" tooltip-placement="right"><a href="" ng-click="selectTaskType('Email', 'email',createTask.taskName.$pristine)"><i class="icon-email"></i></a></li>
+                    <li tooltip="Follow-up" tooltip-placement="right"><a href="" ng-click="selectTaskType('Follow-up', 'followup',createTask.taskName.$pristine)"><i class="icon-followup"></i></a></li>
+                    <li tooltip="To do" tooltip-placement="right"><a href="" ng-click="selectTaskType('To do', 'todo',createTask.taskName.$pristine)"><i class="icon-todo"></i></a></li>
+                    <li tooltip="Call" tooltip-placement="right"><a href="" ng-click="selectTaskType('Call', 'call',createTask.taskName.$pristine)"><i class="icon-call"></i></a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href=""><i class="icon-meeting"></i></a>
+                        <ul class="dropdown-menu">
+                            <li tooltip="Channel" tooltip-placement="right"><a tabindex="-1" href=""  ng-click="selectTaskType('Channel', 'channel',createTask.taskName.$pristine)"><i class="icon-channel"></i></a></li>
+                            <li tooltip="Nbm" tooltip-placement="right"><a href=""  ng-click="selectTaskType('Nbm', 'nbm',createTask.taskName.$pristine)"><i class="icon-nbm"></i></a></li>
+                            <li tooltip="New Contact" tooltip-placement="right"><a href=""  ng-click="selectTaskType('New Contact', 'newcontact',createTask.taskName.$pristine)"><i class="icon-newcontact"></i></a></li>
+                            <li tooltip="Face to Face" tooltip-placement="right"><a href=""  ng-click="selectTaskType('Face to Face', 'facetoface',createTask.taskName.$pristine)"><i class="icon-facetoface"></i></a></li>
+                            <li tooltip="Internal" tooltip-placement="right"><a href=""  ng-click="selectTaskType('Internal', 'internal',createTask.taskName.$pristine)"><i class="icon-internal"></i></a></li>
+                        </ul>
+                </ul>
+            </div>
+        </div>
+
+        <form action="" class="detailsForm" ng-submit="addTask(newTask)" name="createTask" novalidate>
+            <div class="col-lg-6">
+                <small class="error" ng-hide="validate(newTask.name,createTask.taskName.$pristine)" ng-show="showTaskNameError">
+                    Please provide a task name.
+                </small>
+                <input type="text" placeholder = "Task Name *" name="taskName" ng-model="newTask.name" ng-change="showTaskNameError = false"
+                       ng-class="{'my-input': !validate(newTask.name, createTask.taskName.$pristine) || showTaskNameError}" required>
+
+                <div class="clearfix" ng-if="!deadline">
+
+                    <div class="relative-pos" ng-show="newTask.allDay">
+                        <a class="dropdown-toggle" id="dropdownAllDay" role="button" data-toggle="dropdown" data-target="" href="">
+                            <input type="text" name="start" placeholder="Day" class="noM" ng-model="newTask.startDate" readonly>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="newTask.startDate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownAllDay', view: 'task', minView:'day' }" data-on-set-time="setCreateTaskAllDayStartDate"/>
+                        </ul>
+                    </div>
+
+                    <div class="relative-pos" ng-hide="newTask.allDay">
+                        <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="" href="">
+                            <input type="text" name="start" placeholder="Start Date " class="noM" ng-model="newTask.startDate" readonly>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="newTask.startDate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', view: 'task' }" data-on-set-time="setCreateTaskStartDate"/>
+                        </ul>
+                    </div>
+                    <div class="relative-pos" style="margin-top: 20px;" ng-hide="newTask.allDay">
+
+                        <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="" href="">
+                            <input type="text" name="end" placeholder="End Date " class="noM" ng-model="newTask.endDate" readonly>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="newTask.endDate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd',view: 'task' }" data-on-set-time="setCreateTaskEndDate"/>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clearfix" ng-if="deadline" style="margin-bottom: 20px;">
+                    <div class="relative-pos">
+                        <a class="dropdown-toggle" id="dropdownDeadline" role="button" data-toggle="dropdown" data-target="" href="">
+                            <input type="text" name="dl" placeholder="Deadline" class="noM" ng-model="newTask.startDate" readonly>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="newTask.startDate"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownDeadline',view: 'task' }" data-on-set-time="setCreateTaskStartDate"/>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="radio-input" ng-if="!deadline">
+                    <label>
+                        <input type="checkbox" ng-model="newTask.allDay" ng-change="setAllDay(newTask.allDay)"/>
+                        <span>All day event</span>
+                    </label>
+                </div>
+
+                <textarea msd-elastic text="" description="" placeholder="Description" rows="6" class="form-control form-textarea" ng-model="newTask.description"></textarea>
+
+                <div class="radio-input">
+                    <label>
+                        <input type="checkbox" value="false" ng-model="newTask.important"/>
+                        <span>Is this important?</span>
+                    </label>
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-6">
+                <input type="text" placeholder="Location" ng-model="newTask.location" ng-if="!deadline">
+
+                <input class="searchCompanies search" type="search" placeholder="Assignee"
+                       ng-model="search.model"
+                       ng-keyup="assigneeSearchSuggestion(search.model)"
+                       typeahead="s.displayValue for s in searchSuggestionsList || '' | limitTo:10"
+                       typeahead-on-select="selectAssignee($item)"
+                       typeahead-min-length="3"
+                       typeahead-wait-ms="300">
+
+                <div id="tasks-sidebar">
+                    <div class="task-details create-task-no-style">
+                        <div class="task-description">
+                            <div class="task-tags">
+                                <i class="icon-newcontact float-left"></i>
+                                <tags-input ng-model="newTask.recipients" placeholder="Add recipients" displayProperty="id, displayValue">
+                                    <auto-complete source="recipientsSearchSuggestions($query)" minLength="1" ></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="task-details create-task-no-style">
+                        <div class="task-description">
+                            <div class="task-tags">
+                                <i class="icon-tags float-left"></i>
+                                <tags-input ng-model="newTask.tagsList" placeholder="Add tags" displayProperty="id, displayValue" replace-spaces-with-dashes="false"
+                                            on-tag-added="checkIfNewTag($tag);">
+                                    <auto-complete source="tagsSearchSuggestions($query)" minLength="1"></auto-complete>
+                                </tags-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons pull-right">
+                    <button type="button" class="greyBtnReset" ng-click="createTask.$setPristine();resetCreateCalendarTaskForm()">Reset</button>
+                    <button analytics-on analytics-event="Create task"  analytics-category="Tasks" analytics-label="Cancel" class="greyBtn" ng-click="delete_event();">Cancel</button>
+                    <button analytics-on analytics-event="Create task"  analytics-category="Tasks" analytics-label="Success" type="submit" class="orangeBtn" ng-click="createNewTask();">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

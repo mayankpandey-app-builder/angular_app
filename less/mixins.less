@@ -1,0 +1,29 @@
+/* Mixin */
+.border-radius (@x: 3px, @y: 3px, @z: 3px, @t: 3px) {
+    -webkit-border-radius: @x @y @z @t;
+    -moz-border-radius: @x @y @z @t;
+    border-radius: @x @y @z @t;
+}
+
+/*Mixin */
+.box-shadow (@x: 1px, @y: 1px, @blur: 2px, @alpha: 0.5) {
+    -webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+    -moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+    box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+} 
+
+.box-shadow-color (@x: 1px, @y: 1px, @spread: 2px, @blur: 2px, @color: #CCC) {
+    -webkit-box-shadow: @x @y @spread @blur @color;
+    -moz-box-shadow: @x @y @spread @blur @color;
+    box-shadow: @x @y @spread @blur @color;
+}
+
+/* Mixin */
+.gradient (@origin: left, @start: #ffffff, @stop: #000000) {
+    background-color: @start;
+    background-image: -webkit-linear-gradient(@origin, @start, @stop);
+    background-image: -moz-linear-gradient(@origin, @start, @stop);
+    background-image: -o-linear-gradient(@origin, @start, @stop);
+    background-image: -ms-linear-gradient(@origin, @start, @stop);
+    background-image: linear-gradient(@origin, @start, @stop);
+}

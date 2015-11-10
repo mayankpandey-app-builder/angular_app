@@ -1,0 +1,66 @@
+<div class="modal fade" id="selectTaskContext" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Change task context</h1>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="row detailsForm">
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <input type="text" ng-model="changeContext.contact" placeholder="Choose contact"
+                               ng-disabled="changeContext.contactField"
+                               ng-keyup="setContextDisabled(changeContext.contact, 'contactField'); searchContactsSuggestions(changeContext.contact)"
+                               typeahead="s.displayValue for s in searchSuggestionsContactsList || '' | limitTo:10"
+                               typeahead-on-select="taskContextSelected('contacts',$item)"
+                               typeahead-min-length="2"
+                               typeahead-wait-ms = "300">
+                    </div>
+                </div>
+
+                <div class="row detailsForm">
+                    <!--<div class="col-lg-2 col-lg-offset-3">Company</div>-->
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <input type="text" ng-model="changeContext.company" placeholder="Choose company" ng-disabled="changeContext.companyField"
+                               ng-keyup="setContextDisabled(changeContext.company, 'companyField'); searchCompaniesSuggestions(changeContext.company)"
+                               typeahead="s.displayValue for s in searchSuggestionsCompaniesList || '' | limitTo:10"
+                               typeahead-on-select="taskContextSelected('companies',$item)"
+                               typeahead-min-length="2"
+                               typeahead-wait-ms = "300">
+                    </div>
+                </div>
+
+                <div class="row detailsForm">
+                    <!--<div class="col-lg-2 col-lg-offset-3">Deal</div>-->
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <input type="text" ng-model="changeContext.deal" placeholder="Choose deal" ng-disabled="changeContext.dealField"
+                               ng-keyup="setContextDisabled(changeContext.deal, 'dealField'); searchDealsSuggestions(changeContext.deal)"
+                               typeahead="s.displayValue for s in searchSuggestionsDealsList || '' | limitTo:10"
+                               typeahead-on-select="taskContextSelected('deals',$item)"
+                               typeahead-min-length="2"
+                               typeahead-wait-ms = "300">
+                    </div>
+                </div>
+
+                <div class="row detailsForm">
+                    <!--<div class="col-lg-2 col-lg-offset-3">Lead</div>-->
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <input type="text" ng-model="changeContext.lead" placeholder="Choose lead" ng-disabled="changeContext.leadField"
+                               ng-keyup="setContextDisabled(changeContext.lead, 'leadField'); searchLeadsSuggestions(changeContext.lead)"
+                               typeahead="s.displayValue for s in searchSuggestionsLeadsList || '' | limitTo:10"
+                               typeahead-on-select="taskContextSelected('leads',$item)"
+                               typeahead-min-length="2"
+                               typeahead-wait-ms = "300">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="greyBtn" data-dismiss="modal">Cancel</button>
+                <button class="orangeBtn" ng-click="taskChangeContextOk()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

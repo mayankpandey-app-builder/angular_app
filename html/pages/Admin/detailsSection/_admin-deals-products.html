@@ -1,0 +1,56 @@
+<div class="inner-box col-lg-12 products">
+    <h2>Products
+        <a href="" class="pull-right" ng-click="addDealsProduct(); newProduct=true; setDraggable = false">Add</a>
+    </h2>
+
+    <div ui-tree="productsTree" id="tree-root" data-max-depth="2" class="col-lg-12 col-lg-offset-0" data-drag-enabled = {{setDraggable}}>
+        <div class="row options">
+            <a href="" class="pull-right" ng-click="expandAll()">Expand All</a>
+            <a href="" class="pull-right" ng-click="collapseAll()">Collapse All</a>
+        </div>
+
+        <ol ui-tree-nodes="" ng-model="products">
+            <li ng-repeat="product in products" ui-tree-node ng-include="'products_renderer.html'"></li>
+        </ol>
+    </div>
+
+    <script type="text/ng-template" id="products_renderer.html">
+        <div ui-tree-handle class="tree-node tree-node-content">
+            <table cellpadding="0" cellspacing="0" class="structure">
+                <tr>
+                    <td></td>
+                    <td style="width: 5%;">
+                        <div class="user">
+                        </div>
+                    </td>
+                    <td width="20" data-nodrag>
+                        <a href="" ng-click="toggle(this)">
+                            <i ng-class="{'icon-arrow': collapsed, 'icon-arrow-down2': !collapsed }"
+                               ng-show="product.subProducts.length > 0"></i>
+                        </a>
+
+                    </td>
+                    <td width="10"></td>
+                    <td>
+                        <input type="text" ng-model="product.name"
+                               placeholder="Enter name" ng-click="setDraggableFct(false) "
+                               ng-blur="updateProduct(products);" name="{{product.name}}"/>
+                    </td>
+                    <td class="text-right" data-nodrag>
+                        <a href="" class="pull-right remove" ng-click="deleteProduct($parent.$parentNodeScope, $index)">
+                            <i class="icon-x"></i>
+                        </a>
+                        <a href="" class="pull-right" ng-click="addDealsSubProduct($index); newProduct=true;" ng-show="product.subProducts.length >= 0">Add</a>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <ol ui-tree-nodes=""  ng-model="product.subProducts" ng-class="{hidden: collapsed}">
+            <li ng-repeat="product in product.subProducts" ui-tree-node ng-include="'products_renderer.html'" >
+            </li>
+        </ol>
+    </script>
+
+
+</div>

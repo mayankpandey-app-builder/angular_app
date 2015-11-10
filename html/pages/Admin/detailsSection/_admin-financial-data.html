@@ -1,0 +1,83 @@
+<div class="inner-box">
+    <h2>Financial data </h2>
+
+    <div class="row-fluid currencies">Default currency for the Forecast
+
+        <input type="text" placeholder="Enter currency" name="currency" class="searchCompanies search"
+               ng-class="{'my-input': !validateSelection(currency.$invalid)}"
+               ng-model="financial.defaultCurrencyForForecast"
+               typeahead="currency for currency in organization.currency | filter:$viewValue  | limitTo:10 "
+               typeahead-editable="false"
+               typeahead-on-select="changeCurrency($item)">
+    </div>
+    <div class="row-fluid currencies">Currencies used for the Forecast
+        <div class="dropdown">
+            <input type="text" placeholder="Automatic (daily), Fixed" class="dropdown-toggle" data-toggle="dropdown"
+                   ng-model="financial.displayValueForRateUsedForForecast" name="{{financial.displayValueForRateUsedForForecast}}" readonly/>
+            <ul role="menu" class="dropdown-menu">
+                <li><a href="" ng-click="selectExchangeRate('realTime')">Automatic (daily)</a></li>
+                <li><a href="" ng-click="selectExchangeRate('fixed')">Fixed</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <h2><a href="" class="pull-right" ng-click="addCurrency=true; focusNew=true">Add</a></h2>
+
+    <table cellpadding="0" cellspacing="0" class="full-table">
+        <tr>
+            <th></th>
+            <th>Full name</th>
+            <th>Currencies (the default 10)</th>
+            <th>Automatic (daily) exchange rate</th>
+            <th>Fixed exchange rate</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        <tr ng-show="addCurrency" class="newEntry">
+            <td></td>
+            <td>
+                <input type="text"  ng-model="newCurrency.fullName"
+                       focus-me="focusNew" tabindex="1"
+                       placeholder="Currency Full Name"/>
+            </td>
+            <td>
+                <input type="text" ng-model="newCurrency.currencyCode"
+                       tabindex="2"
+                       placeholder="Currency Code"/>
+            </td>
+            <td>
+                <input type="text" ng-model="newCurrency.realTimeExchangeRate"
+                       placeholder="Automatically filled" disabled/>
+            </td>
+            <td>
+                <input type="text" ng-model="newCurrency.fixedExchangeRate"
+                       tabindex="3"
+                       placeholder="Fixed exchange rate"/>
+            </td>
+            <td><a href="" class="pull-right" ng-click="addCurrency=false; newCurrency = {}"><i class="icon-x"></i></a></td>
+            <td><a href="" class="pull-right" ng-click="addNewCurrency(newCurrency); addCurrency = false; newCurrency = {};"><i class="icon-ok-modal"></i></a></td>
+        </tr>
+        <tr ng-repeat="currency in financial.currencies">
+            <td></td>
+            <td>
+                <input type="text"  ng-model="currency.fullName"
+                       placeholder="Currency Full Name" ng-blur="updateFinancialConfig()"/>
+            </td>
+            <td>
+                <input type="text" ng-model="currency.currencyCode"
+                       placeholder="Currency Code" ng-blur="updateFinancialConfig()"/></td>
+            <td>
+                <input type="text" ng-model="currency.realTimeExchangeRate"
+                       placeholder="Real time exchange rate" disabled/>
+            </td>
+            <td>
+                <input type="text" ng-model="currency.fixedExchangeRate"
+                       placeholder="Fixed exchange rate" ng-blur="updateFinancialConfig()"/>
+            </td>
+            <td><a href="" class="pull-right" ng-click="removeCurrency($index);"><i class="icon-x"></i></a></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

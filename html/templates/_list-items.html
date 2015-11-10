@@ -1,0 +1,13 @@
+<div class="col-lg-12">
+    <div class="inner-box {{listHeight}} scrollableHidden">
+        <h1>{{title}}</h1>
+        <ul class="content-links" ng-repeat = "listItem in items">
+            <li ng-click="goTo(listItem.taskType, listItem.id, itemType)"  class="cursor-pointer"><a><i class="icon-{{listItem.taskType}} icon-{{itemType}}"></i>{{listItem[name]}} <span class="pull-right" ng-if="listItem.start != 0">{{listItem.start| date: 'mediumDate'}}  &gt;</span><span class="pull-right" ng-if="listItem.start == 0">-&nbsp;&nbsp;&nbsp;  &gt;</span></a></li>
+        </ul>
+
+        <ul class="content-links" ng-repeat = "listItem in items2">
+            <li ng-click="goTo(listItem.taskType, listItem.id, itemType2)"  class="cursor-pointer"><a><i class="icon-{{itemType2}}"></i>{{listItem[name] || listItem[name2]}} <span class="pull-right" ng-if="listItem.start != 0">{{listItem.start| date: 'mediumDate'}}  &gt;</span><span class="pull-right" ng-if="listItem.start == 0">-  &gt;</span></a></li>
+        </ul>
+
+    </div>
+</div>

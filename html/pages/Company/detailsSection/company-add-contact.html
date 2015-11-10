@@ -1,0 +1,39 @@
+<h1>Add New Contact</h1>
+<form class="detailsForm" name = "createdContact" action="" ng-submit="addContact()" novalidate ng-init="createdContact.$setPristine();resetCreateContactForm()">
+
+    <small class="error" ng-hide="validate(newContact.firstName, createdContact.firstName.$pristine)" ng-show="firstnameError">
+        Please provide first name.
+    </small>
+    <input type="text" placeholder="First Name *" name="firstName" ng-model="newContact.firstName" ng-change="setError('firstnameError', false);"
+           ng-class="{'my-input': !validate(newContact.firstName, createdContact.firstName.$pristine) || firstnameError}" required >
+
+    <small class="error" ng-hide="validate(newContact.lastName, createdContact.lastName.$pristine)" ng-show="lastnameError">
+        Please provide last name.
+    </small>
+    <input type="text" placeholder="Last Name *" name="lastName" ng-model="newContact.lastName" ng-change="setError('lastnameError', false);"
+           ng-class="{'my-input': !validate(newContact.lastName, createdContact.lastName.$pristine) || lastnameError}" required >
+
+    <input type="search" placeholder="Company Name" name="companyName"
+           class="searchCompanies search"
+           ng-model="companyProfile.basicDetails.name"
+           data-ng-disabled="true">
+
+    <input type="text" placeholder="Position" ng-model="newContact.position">
+
+    <div class="item">
+
+        <small class="error" ng-hide = "validateEmail(newContact.emailAddress, createdContact.emailAddress.$pristine)">
+            The email adress that you provided is not valid.
+        </small>
+        <input type="email" name="emailAddress" placeholder="Email Address" ng-model="newContact.emailAddress" ng-class = "{'my-input': !validateEmail(newContact.emailAddress, createdContact.emailAddress.$pristine)}">
+
+    </div>
+
+    <input type="text" placeholder="Mobile Phone" ng-model="newContact.mobilePhoneNumber">
+    <input type="text" placeholder="Office Phone" ng-model="newContact.officePhoneNumber">
+    <input type="text" placeholder="Skype Name" ng-model="newContact.skypeName">
+
+    <button type="button" class="greyBtnReset" ng-click="createdContact.$setPristine();resetCreateContactForm()">Reset</button>
+    <button analytics-on analytics-event="Create contact"  analytics-category="Companies" analytics-label="Cancel" type="button" class="greyBtn " ng-click="newContact = {}; changeActiveSection('')">Cancel</button>
+    <button analytics-on analytics-event="Create contact"  analytics-category="Companies" analytics-label="Success" type="submit" class="orangeBtn">Save</button>
+</form>

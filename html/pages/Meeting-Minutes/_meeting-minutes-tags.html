@@ -1,0 +1,23 @@
+<div class="col-lg-1 mm-tags-container">
+    <div class="row mm-tag">
+        <i class="icon-emoticon-happy-01 inline-display" ng-click="setMood(':)');"></i>
+    </div>
+    <div class="row mm-tag">
+        <i class="icon-emoticon-smile-01 inline-display" ng-click="setMood(':|');"></i>
+    </div>
+    <div class="row mm-tag">
+        <i class="icon-emoticon-sad-01 inline-display" ng-click="setMood(':(');"></i>
+    </div>
+    <div class="row mm-tag">
+        <i class="icon-private-01 inline-display" ng-click="setPrivate();"></i>
+    </div>
+    <div class="row mm-tag" ng-show="displayGeneralInfo">
+        <i class="icon-infotooltip inline-display" ng-click="setGeneralInfo();"></i>
+    </div>
+    <div class="row mm-tag">
+        <div class="browse-file imgProcess" style="height: 25px;">
+            <i class="icon-camera-01 inline-display"></i>
+           <input analytics-on analytics-event="Add a picture" analytics-category="Meeting Minutes" analytics-label="Success" class="uploadBtn mm-upload-btn" type = "file" onchange="angular.element(this).scope().setImage(angular.element(this))"/>
+        </div>
+    </div>
+</div>

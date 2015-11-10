@@ -1,0 +1,46 @@
+<h1>Select influences</h1>
+
+<form class = "detailsForm" action="">
+
+    <!-- Search TPL-->
+    <p ng-show = "contactsList.length">You have selected {{selectedContacts.length}} of {{contactsList.length}} contacts.</p>
+    <input type="search" ng-model = "searchContact" class="searchPers search" placeholder = "Contact or company name">
+    <div class="text-right">
+        <a ng-click="selectAll(filteredContacts)">Select All &nbsp;&nbsp;</a>
+        <a ng-click="unselectAll()">Unselect All</a>
+    </div>
+
+    <!-- PERSON TPL-->
+    <div class="tplPerson">
+        <ul class="list-unstyled" ng-repeat = "contact in (filteredContacts = (contactsList | filter: searchContact))">
+            <li  ng-click="selectContact(contact.id)" >
+
+                <div class="beforeImg">
+                    <img ng-src={{setImage(contact.imageURL)}} class = "smallRoundImg" alt="" />
+                </div>
+                <div class="persDesc">
+                    <div class="persName ellipsisNoWrap">{{contact.firstName }} {{contact.lastName}}  </div>
+                    <div class="persFunction ellipsisNoWrap">{{contact.position || contact.hierarchicalPosition || "-"}}</div>
+                    <div class="persEmail ellipsisNoWrap">{{contact.contactInformation[0].contactValue || "-"}}</div>
+                </div>
+
+                <div class="center-right">
+                    <label>
+                        <input type="checkbox" class="checkbox" ng-click="selectContact(contact.id)" ng-checked="isInfluenceChecked(contact.id)" />
+                        <span></span>
+                    </label>
+                </div>
+
+            </li>
+        </ul>
+
+
+    </div>
+
+    <div class = "pull-left">
+            <button class="greyBtn " ng-click = "changeActiveSection('') ">Close</button>
+            <button class="orangeBtn" ng-click = "updateInfluences()">Next</button>
+    </div>
+</form>
+
+

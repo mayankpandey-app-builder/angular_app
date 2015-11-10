@@ -1,0 +1,71 @@
+<h1>Create Lead</h1>
+
+<form  class = "detailsForm" name="createLead" action="" ng-submit="addLead(newLead)" novalidate>
+    <input type="text" placeholder = "Lead Name" ng-model="newLead.leadName">
+
+    <small class="error" ng-hide="validate(newLead.company.name,createLead.companyName.$pristine)" ng-show="companyError">
+        Please provide a company name.
+    </small>
+
+    <input type="search" placeholder="Company Name *" name="companyName"
+           class="searchCompanies search"
+           ng-class="{'my-input': !validate(newLead.company.name,createLead.companyName.$pristine) || companyError}" required
+           ng-model="newLead.company.name"
+           ng-keyup = "companiesSearchSuggestions(newLead.company.name)"
+           typeahead="company.displayValue for company in contactCompanies | limitTo:10"
+           typeahead-on-select="selectCompany($item)"
+           typeahead-min-length="3"
+           typeahead-wait-ms = "300" data-ng-disabled="disableContactInfo">
+
+    <input type="text" placeholder="Country" class="searchCompanies search" data-ng-disabled="disableCompanyInfo"
+           ng-model="newLead.company.country"
+           typeahead="country for country in countries | filter:$viewValue  | limitTo:10 "
+           typeahead-editable="true">
+
+    <input type="search" placeholder="Industry" class="searchCompanies search" data-ng-disabled="disableCompanyInfo"
+           ng-model="newLead.company.industry" data-ng-disabled="disableCompanyInfo"
+           typeahead="industry for industry in industries | filter:$viewValue | limitTo:10 "
+           typeahead-editable = "true" >
+
+    <!--<input type="text" placeholder = "Industry" ng-model="newLead.company.industry">-->
+    <input type="text" placeholder = "No. of employees" ng-model="newLead.company.employees" data-ng-disabled="disableCompanyInfo">
+    <div class="inlineInput">
+        <input class  = "" type="text" placeholder = "Revenue" ng-model="newLead.company.revenue" data-ng-disabled="disableCompanyInfo">
+        <input type="search" placeholder="Currency" class="searchCompanies search"
+               ng-model="newLead.company.currency" data-ng-disabled="disableCompanyInfo"
+               typeahead="currency for currency in currencies | filter:newLead.company.currency | limitTo:10" typeahead-editable = "true"
+               style="width:44%!important;">
+    </div>
+
+    <small class="error" ng-hide="validate(newLead.contact.name,createLead.contactName.$pristine)" ng-show="contactError">
+        Please provide a contact name.
+    </small>
+
+    <input type="search" placeholder="Contact Name *" name="contactName"
+           class="searchCompanies search"
+           ng-class="{'my-input': !validate(newLead.contact.name,createLead.contactName.$pristine)|| contactError}" required
+           ng-model="newLead.contact.name"
+           ng-keyup = "contactsSearchSuggestions(newLead.contact.name)"
+           typeahead="contact.displayValue for contact in contactsSuggestions | limitTo:10"
+           typeahead-on-select="selectContact($item)"
+           typeahead-min-length="3"
+           typeahead-wait-ms = "300" data-ng-disabled="disableContactInfo">
+
+    <input type="text" placeholder = "Position" ng-model="newLead.contact.position" data-ng-disabled="disableContactInfo">
+
+    <small class="error" ng-hide="validateTel(newLead.contact.mobileNo,createLead.mobileNo.$pristine)">
+        Please provide a valid phone number.
+    </small>
+    <input type="text" placeholder = "Telephone" ng-model="newLead.contact.mobileNo" name="mobileNo" data-ng-disabled="disableContactInfo"
+           ng-class="{'my-input': !validateTel(newLead.contact.mobileNo,createLead.mobileNo.$pristine)}">
+
+    <small class="error" ng-hide="validateEmail(newLead.contact.email,createLead.email.$pristine)">
+        Please provide a valid email address.
+    </small>
+    <input type="text" placeholder = "Email" ng-model="newLead.contact.email" name="email" data-ng-disabled="disableContactInfo"
+           ng-class="{'my-input': !validateEmail(newLead.contact.email,createLead.email.$pristine)}">
+
+    <button type="button" class="greyBtnReset" ng-click="createLead.$setPristine();resetCreateLeadForm()">Reset</button>
+    <button analytics-on analytics-event="Create lead"  analytics-category="Contacts" analytics-label="Cancel" type="button" class="greyBtn " ng-click="changeActiveSection('');">Cancel</button>
+    <button analytics-on analytics-event="Create lead"  analytics-category="Contacts" analytics-label="Success" type="submit" class="orangeBtn">Create</button>
+</form>

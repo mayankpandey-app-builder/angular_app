@@ -1,0 +1,39 @@
+<h1>Add followers to deal</h1>
+
+<form class="detailsForm" action="">
+
+    <!-- Search TPL-->
+
+    <input type="search" ng-model="searchFilteredMember" class="searchPers search" placeholder = "Search contact...">
+
+    <p class="text-right">You have selected {{selectedFilteredMembers.length || '0'}} of {{organizationMembers.length}} contacts<br />
+        <a id="select-all" ng-click="selectAllFilteredMembers(filteredMembers);">Select All</a>
+        <a id="reset-btn" ng-click="unselectAllFilteredMembers();">Unselect All</a>
+    </p>
+
+    <div class="tplPerson">
+        <ul class="list-unstyled">
+            <li ng-repeat="filterMember in (filteredMembers = (organizationMembers | filter: searchFilteredMember))" ng-click="selectFilteredMember(filterMember.id)">
+                <div class="beforeImg">
+                    <img class="smallRoundImg" ng-src="{{filterMember.imageURL || 'images/placeholder_contact-photo.png'}}" alt="" />
+                </div>
+                <div class="persDesc">
+                    <div class="persName ellipsisNoWrap">{{filterMember.firstName}} {{filterMember.lastName}}</div>
+                    <div class="persFunction ellipsisNoWrap">{{filterMember.position}}</div>
+                    <div class="persEmail ellipsisNoWrap">{{filterMember.contactInformation.contactValue}}</div>
+                </div>
+
+                <div class="center-right check-uncheck-imported">
+                    <label>
+                        <input type="checkbox" ng-click="selectFilteredMember(filterMember.id)" ng-checked="isFilteredMemberChecked(filterMember.id)">
+                        <span></span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</form>
+
+<button class="greyBtn" ng-click="changeActiveSection('');">Cancel</button>
+<button class="orangeBtn" ng-click="shareDealWithOrganizationMembers(); changeActiveSection('');">Next</button>

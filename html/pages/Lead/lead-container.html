@@ -1,0 +1,67 @@
+<top-menu class=""></top-menu>
+
+<div class="main-content clearfix">
+    <!-- maine left -->
+    <div class="main-left">
+        <div class="container">
+
+            <!-- Nav tabs -->
+            <div class="select-reset-btns" ng-show="leadsList">
+                    <a id="select-all" ng-click="selectAll(); allSelected = true;" ng-show="!allSelected">Select All</a>
+                    <a id="reset-btn" ng-click="unselectAll(); allSelected = false;" ng-show="allSelected">Unselect All</a>
+            </div>
+
+            <lead-nav></lead-nav>
+
+            <br/>
+            <div id="leads-list" class="row scroll-box">
+                <div infinite-scroll="leadsList.nextPage()" infinite-scroll-disabled="leadsList.busy"
+                     infinite-scroll-distance="1">
+                    <lead-info ng-repeat="lead in leadsList.items"></lead-info>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside class="right">
+
+        <section class="detailsSection " ng-include="showSection()">
+
+        </section>
+
+    </aside>
+</div>
+
+<div class="modal fade" id="selectReason" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Send to Trash</h1>
+
+            </div>
+
+            <div class="modal-body">
+                    <input type="text" placeholder = "Enter a tag" class="searchCompanies search" ng-model="reasonTag" />
+                    <h1 class="modal-title">Reasons</h1>
+                <br/>
+                <div class="tplReason">
+                    <table class="table table-striped">
+                        <tr ng-repeat="reason in reasons">
+                            <td class="col-lg-11">
+                            {{reason.displayValue}}
+                                <a ng-if="reasonTag !== reason.displayValue" class="pull-right c-blue" href="" ng-click="selectReason(reason)">Select</a>
+                                <i ng-if="reasonTag === reason.displayValue" class="icon-ok-modal c-blue pull-right" ng-click="reasonTag=''"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="greyBtn" data-dismiss="modal" ng-click="reasonTag='';">Cancel</button>
+                <button class="orangeBtn" ng-click="updateStatuses('Trash', reasonTag)">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="row cards">
+    <div class="col-lg-4">
+        <div class="inner-box">
+            <h2>Financial year start </h2>
+
+            <div class="card">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href=""> {{month || 'Select month'}}
+                        <b class="icon-arrow-down"></b>
+                    </a>
+                    <ul role="menu" class="dropdown-menu scrollable-menu">
+                        <li ng-repeat="month in months"><a href=""
+                                                           ng-click="selectFinancial('month', $index)">  {{month}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="inner-box">
+            <h2>Weekly forecast snapshot</h2>
+
+            <div class="card">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                        <!--<b class="icon-arrow-down"></b>-->
+                        {{weekday || 'Select weekday'}}
+                    </a>
+                    <ul role="menu" class="dropdown-menu scrollable-menu">
+                        <li ng-repeat="weekday in weekdays"><a href="" ng-click="selectFinancial('weekday', $index)">{{weekday}}</a></li>
+                    </ul>
+                </div>,
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href=""> {{hour || 'Select hour'}}
+                        <!--<b class="icon-arrow-down"></b>-->
+                    </a>
+                    <ul role="menu" class="dropdown-menu scrollable-menu">
+                        <li ng-repeat="hour in hours"><a href="" ng-click="selectFinancial('hour',hour)">{{hour}}</a></li>
+                    </ul>
+                </div>
+                :
+                <div class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href=""> {{minute || 'Select minute'}}
+                        <b class="icon-arrow-down"></b>
+                    </a>
+                    <ul role="menu" class="dropdown-menu scrollable-menu">
+                        <li ng-repeat="minute in minutes"><a href="" ng-click="selectFinancial('minute',minute)">{{minute}}</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

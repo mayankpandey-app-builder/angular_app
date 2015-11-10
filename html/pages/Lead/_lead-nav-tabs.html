@@ -1,0 +1,10 @@
+<ul class="nav nav-tabs tabs-filters">
+    <li class="active first" ng-click="selectTab('open')"><a href="" data-toggle="tab"><i class="icon-lead"></i>Open ({{open || '0'}})</a></li>
+    <li ng-click="selectTab('hot')"><a href="" data-toggle="tab"><i class="icon-hot-lead"></i>Hot ({{hotLeads || '0'}})</a></li>
+    <li ng-click="selectTab('warm')"><a href="" data-toggle="tab"><i class="icon-warm-lead"></i>Warm ({{warmLeads || '0'}} )</a></li>
+    <li ng-click="selectTab('cold')"><a href="" data-toggle="tab"><i class="icon-cold-lead"></i>Cold ({{coldLeads || '0'}})</a></li>
+    <li ng-click="selectTab('trash')"><a href="" data-toggle="tab"><i class="icon-delete"></i>Trash ({{trashLeads || '0'}})</a></li>
+    <li ng-click="selectTab('nostatus')"><a href="" data-toggle="tab"><i class="icon-unsorted-leads"></i>No status ({{nostatus || '0'}})</a></li>
+    <li ng-click="selectTab('converted')"><a href="" data-toggle="tab"><i class="icon-converted"></i>Converted ({{convertedLeads || '0'}})</a></li>
+</ul>
+

@@ -1,0 +1,49 @@
+<h1>Add New Contact</h1>
+<form class="detailsForm" name = "createdContact" action="" ng-submit="addContact(newContact)" novalidate ng-init="createdContact.$setPristine();resetCreateContactForm();">
+
+    <small class="error" ng-hide="validate(newContact.firstName,createdContact.firstName.$pristine)" ng-show="firstnameError">
+        Please provide first name.
+    </small>
+    <input type="text" placeholder = "First Name *" name="firstName" ng-model="newContact.firstName" ng-change="setError('firstnameError', false);"
+           ng-class="{'my-input': !validate(newContact.firstName,createdContact.firstName.$pristine)|| firstnameError}" required ng-keypress="validateLetters();">
+
+
+    <small class="error" ng-hide="validate(newContact.lastName,createdContact.lastName.$pristine)" ng-show="lastnameError">
+        Please provide last name.
+    </small>
+    <input type="text" placeholder = "Last Name *" name="lastName" ng-model="newContact.lastName" ng-change="setError('lastnameError', false);"
+           ng-class="{'my-input': !validate(newContact.lastName,createdContact.lastName.$pristine)|| lastnameError}" required ng-keypress="validateLetters();">
+
+    <input type="search" placeholder="Company Name" name="companyName"
+           class="searchCompanies search"
+           ng-model="newContact.company"
+           ng-keyup = "companiesSearchSuggestions(newContact.company)"
+           typeahead="company.displayValue for company in contactCompanies | limitTo:10"
+           typeahead-min-length="3"
+           typeahead-wait-ms = "300">
+
+    <input type="text" placeholder = "Position"  ng-model="newContact.position">
+
+    <div class="item">
+        <small class="error" ng-hide = "validateEmail(newContact.email, createdContact.email.$pristine)">
+            The email adress that you provided is not valid.
+        </small>
+        <i class="icon-email contact-placeholder"></i><input type="email" class="contact-custom-input" name="email" placeholder = "Email Address"  ng-model="newContact.email" ng-class = "{'my-input': !validateEmail(newContact.email, createdContact.email.$pristine)}">
+    </div>
+
+    <div class="item">
+        <i class="icon-call contact-placeholder"></i><input class="contact-custom-input" type="text" placeholder = "Mobile Phone"  ng-model="newContact.mobileNo">
+    </div>
+
+    <div class="item">
+        <i class="icon-officephone contact-placeholder"></i><input class="contact-custom-input" type="text" placeholder = "Office Phone"  ng-model="newContact.officeNo">
+    </div>
+
+    <div class="item">
+        <i class="icon-skype contact-placeholder"></i><input class="contact-custom-input" type="text" placeholder = "Skype Name"  ng-model="newContact.skypeName">
+   </div>
+
+    <button type="button" class="greyBtnReset" ng-click="createdContact.$setPristine();resetCreateContactForm()">Reset</button>
+    <button analytics-on analytics-event="Create contact"  analytics-category="Contacts" analytics-label="Cancel" type="button" class="greyBtn " ng-click="newContact='';changeActiveSection('')">Cancel</button>
+    <button analytics-on analytics-event="Create contact"  analytics-category="Contacts" analytics-label="Success" type="submit" class="orangeBtn">Save</button>
+</form>

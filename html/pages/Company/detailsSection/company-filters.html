@@ -1,0 +1,53 @@
+<h1>Filters</h1>
+
+<ul class="selected-filters">
+    <li ng-repeat="filter in allFilters">{{filter.displayName}} - {{filter.name}}<a
+            class="pull-right" ng-click="removeFilter(filter.type, filter.name);"><i class="icon-x"></i></a></li>
+</ul>
+<p class="text-right"><a ng-click="clearAllFilters()">Clear All</a></p>
+<div class="panel-group" id="accordion">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#country" href=""
+                   ng-class="{'disabled-filter collapsed': companyFilters.countries==''}"><i></i>Country</a>
+            </h4>
+        </div>
+        <div id="country" class="panel-collapse collapse in">
+            <input analytics-on analytics-event="Filter" analytics-category="Companies" analytics-label="Success" ng-hide="companyFilters.countries==''" type="search" class="searchPers search" id="searchCountry"
+                   ng-model="selectedCountry"
+                   typeahead="country for country in companyFilters.countries | filter:$viewValue | limitTo:10"
+                   typeahead-on-select="selectFilter('countryFilters', $item, selectedCountry); selectedCountry = ''">
+            <ul>
+                <li ng-repeat="countryFilter in countryFilters">
+                    <label>
+                        <input type="checkbox" ng-click="applyFilter('country', countryFilter, 'Country')"
+                               ng-checked="countryFilter.length>0"/>
+                        <span>{{countryFilter}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#industry" href="" ng-class="{'disabled-filter collapsed': companyFiltersIndustry==''}"><i></i>Industry</a>
+            </h4>
+        </div>
+        <div id="industry" class="panel-collapse collapse in">
+            <input analytics-on analytics-event="Filter" analytics-category="Companies" analytics-label="Success" ng-hide="companyFiltersIndustry==''" type="search" class="searchPers search" id="searchIndustry" ng-model="selectedIndustry" typeahead="industry for industry in companyFiltersIndustry | filter:$viewValue | limitTo:10" typeahead-on-select="selectFilter('industryFilters', $item, selectedIndustry); selectedIndustry = ''" />
+            <ul>
+                <li ng-repeat="industryFilter in industryFilters">
+                    <label>
+                        <input type="checkbox" ng-click="applyFilter('industry', industryFilter, 'Industry')" ng-checked="industryFilter.length>0"/>
+                        <span>{{industryFilter}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

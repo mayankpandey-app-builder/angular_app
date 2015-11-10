@@ -1,0 +1,182 @@
+<top-menu class=""></top-menu>
+
+<div class="main-content clearfix">
+    <!-- maine left -->
+    <div class="main-left">
+        <div class="container details">
+
+            <div class="select-reset-btns" ng-show="dealsList && tab != 'forecast' && tab != 'probable'">
+                <a id="select-all" ng-click="selectAll(tab); allSelected = true;" ng-show="!allSelected">Select All</a>
+                <a id="reset-btn" ng-click="unselectAll(tab); allSelected = false;" ng-show="allSelected">Unselect All</a>
+            </div>
+
+            <div class="select-reset-btns" ng-show="forecastView && tab == 'forecast' && isForecastMode">
+                <a id="select-all" ng-click="selectAll(tab); forecastAllSelected = true;" ng-show="!forecastAllSelected">Select All</a>
+                <a id="reset-btn" ng-click="unselectAll(tab); forecastAllSelected = false;" ng-show="forecastAllSelected">Unselect All</a>
+            </div>
+            <!-- Tabs nav -->
+            <ul class="nav nav-tabs tabs-filters" id="dealsTabs">
+                <li class="active first" ng-click="getEA(); changeActiveSection('filters'); clearMenu(); tab='deal'; changeView();"><a data-target="#deal-view" data-toggle="tab"><i class="icon-deal"></i> Deal View</a></li>
+                <li ng-click="getForecastView(); changeActiveSection('forecast-filters');tab='forecast';"><a data-target="#forecast" data-toggle="tab"><i class="icon-hot-lead"></i>Forecast Mode</a></li>
+                <li ng-click="getProbableDeals();changeActiveSection('filters'); clearMenu(); tab='probable'"><a data-target="#probable-mode" data-toggle="tab"><i class="icon-probablemode-menu"></i> Probable Mode</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content content-filters">
+
+                <!-- Deal View -->
+                <div class="tab-pane fade in active" id="deal-view">
+
+                    <div class="row">
+
+                        <div class="col-lg-4">
+                            <deal-statistics people="membersInStatistics" statistics="dealsStats" manager="personalStats" ng-click="changeActiveSection('members-filter'); getOrganizationMembers()"></deal-statistics>
+                        </div>
+                        <div class="col-lg-2">
+                            <deal-e-a></deal-e-a>
+                        </div>
+                        <div class="col-lg-2">
+                            <deal-forecast ng-click="changeActiveSection('forecast-list');"></deal-forecast>
+                        </div>
+
+                    </div>
+
+                    <div class="row scroll-box" id="deal-view-scroll">
+                        <div infinite-scroll="dealsList.nextPage()" infinite-scroll-disabled="dealsList.busy"
+                             infinite-scroll-distance="1">
+                            <deal-info ng-repeat="deal in dealsList.items"></deal-info>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Forecast View -->
+                <div class="tab-pane fade" id="forecast">
+                    <div class="row scroll-box forecast-row-content" >
+                    <script type="text/ng-template" id="anothertree.html">
+                        <div class="row forecast-deal-info"><img class="smallRoundImg" ng-src="{{text.userInfo.imageURL}}"/>{{text.userInfo.firstName}} {{text.userInfo.lastName}}</div>
+                        <div class="row forecast-row" ng-repeat="deal in text.deals">
+                            <div class="col-lg-2" style="clear:left"></div>
+                            <div class="col-lg-2 ellipsisNoWrap" ng-click="redirectToDeal(deal.id);"  analytics-on analytics-event="View details"  analytics-category="Deals" analytics-label="View"><br/>{{deal.country || '-'}}</div>
+                            <div class="col-lg-2" ng-style="bcStyle" style="height: 50px;" ng-click="redirectToDeal(deal.id);"  analytics-on analytics-event="View details"  analytics-category="Deals" analytics-label="View">
+                                <p class="ellipsisNoWrap">{{deal.companyName}}</p>
+                                <p ng-if="deal.qualifiers">
+                                    <div class="forecast-qualifier" ng-repeat="qualifier in deal.qualifiers | limitTo: 5" ng-class="{'green-btop': qualifier.status == 0, 'yellow-btop': qualifier.status == 1, 'orange-btop': qualifier.status == 2, 'grey-btop': qualifier.status == 3}">
+                                    </div>
+                                <div class="forecast-qualifier" ng-repeat="missingQualifier in getMissingQualifiers(5 - deal.qualifiers.length) track by $index" ng-class="{'green-btop': true}">
+                                </div>
+                                </p>
+                                <br ng-if="!deal.qualifiers"/>
+                                <p ng-if="deal.qualifiers.length > 0">
+                                <div class="forecast-qualifier" ng-repeat="qualifier in deal.qualifiers | limitTo: 5">
+                                    {{qualifier.shortName | limitTo: 1}}
+                                </div>
+                                <div class="forecast-qualifier" ng-repeat="missingQualifier in getMissingQualifiers(5 - deal.qualifiers.length) track by $index">
+                                    {{missingQualifier}}
+                                </div>
+                                </p>
+                                <br ng-if="deal.qualifiers.length == 0"/>
+                            </div>
+                            <div class="col-lg-2" ng-style="pStyle" style="border-right: 1px solid #d3d3d3;" ng-click="redirectToDeal(deal.id);"  analytics-on analytics-event="View details"  analytics-category="Deals" analytics-label="View">
+                                <p class="ellipsisNoWrap">{{deal.dealName}}</p>
+                                <p ng-if="deal.stage.list.length > 0">
+                                <div ng-repeat="dealStage in deal.stage.list" rel="tooltip" data-placement="top" title="{{dealStage}}" class="small-stage" ng-class="{'deal-stage-phase-empty': deal.stage.current < $index, 'deal-stage-phase-full': deal.stage.current >= $index}">
+                                </div>
+                                </p>
+                                <br ng-if="deal.stage.list.length == 0"/>
+                                <p ng-if="deal.nextMilestone.longName">{{deal.nextMilestone.longName}}</p>
+                                <br ng-if="!deal.nextMilestone.longName"/>
+                            </div>
+                            <div class="col-lg-3 link" ng-click="showOverride(deal);">
+                                <div class="col-lg-4 link">
+                                    <p ng-if="deal.forecastedValues.valueOverwritten" class="c-orange"><icon class="icon-error c-orange"></icon>Override</p>
+                                    <br ng-if="!deal.forecastedValues.valueOverwritten"/>{{getFormattedAmountFunc(deal.forecastedValues.dealValue) || '-'}}
+                                </div>
+                                <div class="col-lg-4 link">
+                                    <p ng-if="deal.forecastedValues.statusOverwritten" class="c-orange"><icon class="icon-error c-orange"></icon>Override</p>
+                                    <br ng-if="!deal.forecastedValues.statusOverwritten"/>{{deal.forecastedValues.status}}
+                                </div>
+                                <div class="col-lg-4 ellipsisNoWrap link">
+                                    <br/>{{deal.forecastedValues.comment}}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-1" style="border-left: 1px solid #d3d3d3; height: 51px;">
+                                <br/>
+                                <label ng-if="isForecastMode">
+                                    <input type="checkbox" ng-checked="deal.includedInForecast" ng-click="addToForecast(deal.id);"/>
+                                    <span> {{deal.displayId}}</span>
+                                </label>
+                                <p ng-if="!isForecastMode">{{deal.displayId}}</p>
+                                <br/>
+                            </div>
+                        </div>
+                        <ul>
+                            <li ng-repeat="text in text.groupedDeals" ng-include="'anothertree.html'" ng-init="bcPadding = bcPadding + 3; pPadding = pPadding + 6; tPadding = tPadding + 10; bcStyle = {'padding-left': bcPadding + 'px'}; pStyle = {'padding-left': pPadding + 'px'}; tStyle = {'padding-left': tPadding + 'px'};"></li>
+                        </ul>
+                    </script>
+
+                    <script type="text/ng-template" id="tree.html">
+                        <div class="row forecast-head level-1" ng-click="expand_collapse(item)">
+                            <div class="col-lg-1" style="width: 30px; padding: 0 0 0 10px;" ng-show="item.show"><i class="icon-arrow-down2"></i></div>
+                            <div class="col-lg-1" style="width: 30px; padding: 0 0 0 10px;" ng-show="!item.show"><i class="icon-arrow"></i></div>
+                            <div class="col-lg-1" ng-style="subGroupHeaderStyle"><p> {{item.name}}</p></div>
+                            <div class="col-lg-2"><p>Commit: {{getFormattedAmount(item.commitValue) || '-'}}</p></div>
+                            <div class="col-lg-2" ng-style="bcStyle"><p>Best Case: {{getFormattedAmount(item.bestCaseValue) || '-'}}</p></div>
+                            <div class="col-lg-2" ng-style="pStyle"><p>Pipeline: {{getFormattedAmount(item.pipelineValue) || '-'}}</p></div>
+                            <div class="col-lg-3" ng-style="tStyle"><p>{{getFormattedAmount(item.totalValue) || '-'}}</p></div>
+                        </div>
+                        <ul ng-show="item.show" >
+                            <li ng-repeat="text in item.groupedDeals" ng-include="'anothertree.html'" ng-init="groupedDealStyle = {'margin-left': extraMargin + 'px'}" ng-style="groupedDealStyle"></li>
+                            <li ng-repeat="item in item.subGroups" ng-include="'tree.html'" ng-init="bcPadding = bcPadding + 3; pPadding = pPadding + 6; tPadding = tPadding + 10; bcStyle = {'padding-left': bcPadding + 'px'}; pStyle = {'padding-left': pPadding + 'px'}; tStyle = {'padding-left': tPadding + 'px'};subGroupStyle = {'margin-left': extraMargin + 20 + 'px'}; extraWidth = extraWidth - 20; subGroupHeaderStyle = {'width': extraWidth + 'px'};" ng-style="subGroupStyle"></li>
+                        </ul>
+                    </script>
+
+                    <ul>
+                        <li ng-repeat="item in forecastView.results" ng-include="'tree.html'" ng-init="tPadding = 10; bcPadding = 10; pPadding = 10; extraMargin = 0; extraWidth = 175; headerPadding = 0; subGroupHeaderStyle = {'width': extraWidth + 'px'}"></li>
+                    </ul>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="probable-mode">
+
+                    <div class="row">
+
+                        <div class="col-lg-4">
+                            <deal-statistics people="membersInStatistics" statistics="dealsStats" manager="personalStats" ng-click="changeActiveSection('members-filter'); getOrganizationMembers()"></deal-statistics>
+                        </div>
+                        <div class="col-lg-2">
+                            <deal-e-a></deal-e-a>
+                        </div>
+                        <div class="col-lg-2">
+                            <deal-forecast ng-click="changeActiveSection('forecast-list');"></deal-forecast>
+                        </div>
+
+                    </div>
+
+                    <div class="row scroll-box" id="probable-scroll">
+                        <div infinite-scroll="dealsList.nextPage()" infinite-scroll-disabled="dealsList.busy"
+                             infinite-scroll-distance="1">
+                            <deal-info-probable ng-repeat="deal in probableDeals.items"></deal-info-probable>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- edit section -->
+    <aside class="right">
+
+        <section class="detailsSection" ng-include="showSection()">
+
+        </section>
+
+    </aside>
+
+    <meeting-invite-modal attendees="meetingAttendees" taskid="taskId"></meeting-invite-modal>
+</div>

@@ -1,0 +1,7 @@
+<div class="status-bar">
+    <div class="first cursor-pointer" ng-class="{'done': currentStage.current < 5}"><span>{{currentStage.list[0]}}</span></div>
+    <div ng-class="{'done': currentStage.current > 0 && currentStage.current < 5}"><span>{{currentStage.list[1]}}</span></div>
+    <div ng-class="{'done': currentStage.current > 1 && currentStage.current < 5}"><span>{{currentStage.list[2]}}</span></div>
+    <div ng-class="{'done': currentStage.current > 2 && currentStage.current < 5, 'link': currentStage.current == 2}" class="status-click cursor-pointer" ng-click="changeStageTo('Contacted')"><span>{{currentStage.list[3]}}</span></div>
+    <div ng-class="{'done': currentStage.current > 3 && currentStage.current < 5, 'link': currentStage.current == 3}" class="status-click last cursor-pointer" ng-click="changeStageTo('Action')"><span>{{currentStage.list[4]}}</span></div>
+</div>

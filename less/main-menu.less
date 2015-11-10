@@ -1,0 +1,23 @@
+/* main menu */
+nav.main-menu {
+	
+	li { height: 72px; border-bottom:1px solid #d0d0d0; text-align: center}
+	
+	a { outline:0; color: @main-menu-link-color; text-decoration: none; display: block; padding:10px 5px 0 5px; font-size:@normal-font-size; line-height: 14px; height: 71px; margin-right: -1px; border-right:1px solid #ccc;
+		
+		i { display:block; width:22px; height: 22px; background: url(../images/sprite_left-menu.png) top center no-repeat; margin: 0 auto 5px auto}
+
+		&.dashboard i { background-position: 0 0}
+		&.contacts i { background-position: -22px 0}
+		&.companies i { background-position: -44px 0}
+		&.leads i { background-position: -66px 0}
+		&.goals i { background-position: -88px 0}
+		&.tasks i { background-position: -110px 0}
+		&.plybook i { background-position: -132px 0}
+		&.meeting i { background-position: -154px 0}
+		&.kpi i { background-position: -176px 0}
+		&.settings i { background-position: -198px 0}
+
+		&:hover, &.selected { background: #FFF; border-right:1px solid #FFF}
+	}	
+}

@@ -1,0 +1,48 @@
+<div class="detailsTitle">Edit member</div>
+
+<form class="detailsForm" name = "createdContact" action="" ng-submit="editMember(editedContact)" novalidate>
+    <small class="error" ng-show="firstnameError">
+        Please provide first name.
+    </small>
+    <input type="text" placeholder="First Name *" name="firstName" ng-model="editedContact.firstName"
+           ng-class="{'my-input': firstnameError}" required ng-blur="editMember(editedContact)">
+
+    <small class="error" ng-show="lastnameError">
+        Please provide last name.
+    </small>
+    <input type="text" placeholder="Last Name *" name="lastName" ng-model="editedContact.lastName"
+           ng-class="{'my-input': lastnameError}" required ng-blur="editMember(editedContact)">
+
+    <small class="error" ng-show="positionError">
+        Please provide position.
+    </small>
+    <input type="text" placeholder="Position *" ng-model="editedContact.position"
+           ng-class="{'my-input': positionError}" required ng-blur="editMember(editedContact)">
+
+    <small class="error" ng-show="roleError">
+        Please provide role.
+    </small>
+    <div class="relative-pos" style="border-bottom: 1px solid #d3d3d3; padding-bottom: 10px; margin-bottom: 10px;">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="">{{editedContact.role || 'Role *'}}
+            <b class="icon-arrow-down" style="font-size: 5px;"></b>
+        </a>
+        <ul role="menu" class="dropdown-menu">
+            <li><a href="" ng-click="editMemberRole('Manager', editedContact.id); editedContact.role = 'Manager'">Manager</a></li>
+            <li><a href="" ng-click="editMemberRole('Co-worker', editedContact.id); editedContact.role = 'Co-worker'">Co-worker</a></li>
+            <li><a href="" ng-click="editMemberRole('External', editedContact.id); editedContact.role = 'External'">External</a></li>
+            <li><a href="" ng-click="editMemberRole('Sales Representative', editedContact.id); editedContact.role = 'Sales Representative'">Sales Representative</a></li>
+        </ul>
+    </div>
+
+    <small class="error" ng-show="regionError">
+        Please provide region.
+    </small>
+    <input type="search" placeholder="Region *" class="searchCompanies search" ng-model="region"
+           typeahead="territory.displayValue for territory in flattenTerritories || '' | filter: $viewValue" typeahead-on-select="editMemberRegion($item.id, editedContact.id); editedContact.region = $item.id">
+
+    <input type="search" placeholder="Business unit" class="searchCompanies search" ng-model="businessUnit"
+           typeahead="businessUnit.displayValue for businessUnit in businessUnits || '' | filter: $viewValue" typeahead-on-select="editMemberBU($item.id, editedContact.id); editedContact.businessUnit = $item.id">
+
+    <!--<button type="button" class="greyBtn " ng-click="changeActiveSection(''); editedContact = {};">Cancel</button>
+    <button type="submit" class="orangeBtn">Ok</button>-->
+</form>

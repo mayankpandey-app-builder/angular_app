@@ -1,0 +1,9 @@
+
+<div class="col-lg-4">
+    <div class="inner-box height-auto">
+        <h1>{{title}}</h1>
+        <ul class="content-links" ng-repeat = "listItem in listItems">
+            <li ng-click="goTo(listItem.linkValue)"  class = "cursor-pointer"><a>{{listItem.name}}<span class = "pull-right">&gt;</span> </a></li>
+        </ul>
+    </div>
+</div>

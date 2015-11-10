@@ -1,0 +1,49 @@
+<h1>Add contacts to deal</h1>
+
+<form class="detailsForm" action="">
+
+    <!-- Search TPL-->
+    <p ng-show="contactsToAssociatedWithDeal.length">You have selected {{selectedContactsAssociated.length}} of {{contactsToAssociatedWithDeal.length}} contacts.</p>
+    <input type="search" ng-model="searchContact" class="searchPers search" placeholder="Contact or company name">
+    <div class="text-right">
+        <a ng-click="selectAll(filteredContacts)">Select All &nbsp;&nbsp;</a>
+        <a ng-click="unselectAll()">Unselect All</a>
+    </div>
+
+    <!-- PERSON TPL-->
+    <div class="tplPerson">
+        <ul class="list-unstyled" ng-repeat="contact in (filteredContacts = (contactsToAssociatedWithDeal | filter: searchContact))">
+            <li  ng-click="selectContact(contact)" >
+
+                <div class="beforeImg">
+                    <img ng-src={{setImage(contact.imageURL)}} class="smallRoundImg" alt="" />
+                </div>
+
+                <div class="persDesc">
+                    <div class="persName ellipsisNoWrap">{{contact.firstName }} {{contact.lastName}}  </div>
+                    <div class="persFunction ellipsisNoWrap" ng-if="!contact.company">{{contact.position || "-"}}</div>
+                    <div class="persFunction ellipsisNoWrap" ng-if="contact.position && contact.company">{{contact.position}} at {{contact.company}}</div>
+                    <div class="persFunction ellipsisNoWrap" ng-if="!contact.position && contact.company">{{contact.company}}</div>
+                    <div class="persEmail ellipsisNoWrap">{{getContactEmailAddress(contact.contactInformation)}}</div>
+                </div>
+
+                <div class="center-right">
+                    <div class="pull-right">
+                        <a href="" ng-if="!isAssociatedContactChecked(contact.id)" style="color: orange;">Select</a>
+                        <a href="" ng-if="isAssociatedContactChecked(contact.id)"><i class="icon-checkmark" style="color: orange;"></i></a>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+
+
+    </div>
+
+    <div class = "pull-left">
+        <button class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
+        <button class="orangeBtn" ng-click="associateContactsWithDeal()">Next</button>
+    </div>
+</form>
+
+

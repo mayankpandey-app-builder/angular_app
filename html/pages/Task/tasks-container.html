@@ -1,0 +1,45 @@
+<top-menu class=""></top-menu>
+<div class="main-content clearfix">
+    <!-- maine left -->
+    <div class="main-left">
+        <div class="container" >
+
+            <ul class="nav nav-tabs tabs-filters" id="calendar-tabs">
+                <li class="active" ng-click="selectTab('calendar')"><a href="" data-toggle="tab" data-target="#calendar-view"><i class="icon-scheduledmeetings"></i> Calendar</a></li>
+                <li  ng-click="selectTab('list')" analytics-on analytics-event="View list"  analytics-category="Tasks" analytics-label="View"><a href="" data-toggle="tab" data-target="#list-view"><i class="icon-collapse-01"></i> List </a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content content-filters">
+
+                <!-- Calendar View -->
+                <div class="tab-pane fade in active" id="calendar-view">
+
+                    <calendar-scheduler></calendar-scheduler>
+
+                </div>
+
+                <!-- List View -->
+                <div class="tab-pane fade" id="list-view">
+                    <div class="row scroll-box">
+                        <tasks-list></tasks-list>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <aside class="right">
+
+        <section class="detailsSection " ng-include="showSection()">
+
+        </section>
+
+    </aside>
+
+    <manage-tags></manage-tags>
+    <create-task-calendar></create-task-calendar>
+    <meeting-invite-modal attendees="meetingAttendees" taskid="taskId" special="true" refresh="true"></meeting-invite-modal>
+</div>

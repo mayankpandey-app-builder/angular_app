@@ -1,0 +1,34 @@
+<h1>Assign lead to:</h1>
+<p>Write the name of a person you want to assign for this lead</p>
+
+<form class = "detailsForm" action="">
+
+    <!-- Search TPL-->
+    <input type="search" ng-model="searchOrganizationMember" class="searchPers search" placeholder = "Search contact...">
+
+    <!-- PERSON TPL-->
+    <div class="tplPerson">
+        <ul class="list-unstyled" ng-repeat = "organizationMember in organizationsMembers | filter: searchOrganizationMember | limitTo: 10">
+            <li ng-click="assignLeadToContact(organizationMember)">
+                <div class="beforeImg">
+                    <img class="smallRoundImg" ng-src={{setImage(organizationMember.imageURL)}} alt="" />
+                </div>
+
+                <div class="persDesc" style="width: 60%;">
+                    <div class="persName ellipsisNoWrap">{{organizationMember.firstName}} {{organizationMember.lastName}}</div>
+                    <div class="persFunction ellipsisNoWrap">{{organizationMember.position || '-'}}</div>
+                    <div class="persEmail ellipsisNoWrap">{{organizationMember.contactInformation.contactValue || '-'}}</div>
+                </div>
+
+                <div class="center-right">
+                    <a ng-click="">Assign</a>
+                </div>
+
+            </li>
+        </ul>
+
+
+    </div>
+</form>
+
+<button class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
