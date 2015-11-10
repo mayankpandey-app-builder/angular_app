@@ -1,0 +1,22 @@
+<div class="col-lg-3 col-lg-offset-3">
+    <div class="inner-box">
+        <h2>Solution Area <a href="" class="pull-right" ng-click="addSol=true; focusNew=true">Add</a></h2>
+
+        <ul class="content-links">
+            <li ng-show="addSol">
+                <input type="text" class="searchCompanies search" ng-model="newSolution" focus-me="focusNew"
+                       placeholder="Solution Area Name"
+                       ng-blur="addSol=false; addSolution(newSolution); "/>
+            </li>
+            <li ng-repeat="solution in (filteredSolution = (organization.solutionArea | filter: newSolution))">
+                <input type="text" ng-hide="!updateEntry" ng-model="solution" focus-me="focusEdit"
+                       placeholder="Solution Area Name"
+                       ng-blur="updateEntry=false; updateSolutionArea($index, solution);"/>
+                <a ng-click="updateEntry=true; focusEdit=true" ng-show="!updateEntry">{{solution}}
+                    <i class="icon-x" ng-click="updateSolutionArea($index);"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+

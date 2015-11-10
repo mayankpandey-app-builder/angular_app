@@ -1,0 +1,26 @@
+<div class="inner-box connected-profiles sink">
+    <h1>Connected Profiles</h1>
+    <ul>
+        <!--<li>
+            <a class="linkedin">
+                <span class="c-orange pull-left"   ng-click = "changeActiveSection('linkedin')">
+                    Linkedin
+                </span>
+                <span>&nbsp;</span>
+                <span class="c-grey pull-right">&gt;</span>
+            </a>
+        </li>-->
+        <li>
+            <div class="salesforce">
+					<!--<span class="c-orange pull-left cursor-pointer" ng-click="linkSalesForce()">
+						SalesForce
+					</span>-->
+                	<span class="c-blue pull-left" ng-show="connectedProfiles.salesForce.connected">
+						<b>SalesForce</b>
+					</span>
+                <span class="c-blue">{{connectedProfiles.salesForce.userName}}</span>
+                <a class="pull-right" ng-show="connectedProfiles.salesForce.connected"
+                      ng-click="unlinkSalesForce()"><i class="icon-x"></i></a>
+            </div></li>
+    </ul>
+</div>

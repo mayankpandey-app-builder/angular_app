@@ -1,0 +1,9 @@
+<h1>Forecast name</h1>
+
+<p>Please provide a name for this forecast</p>
+<form action="" class="detailsForm" novalidate ng-submit="submitForecast(newForecastName)">
+    <input type="text" placeholder="Forecast name" ng-model="newForecastName"></textarea>
+
+    <button class="greyBtn" ng-click="changeActiveSection('filters')">Cancel</button>
+    <button class="orangeBtn" type="submit">Create</button>
+</form>

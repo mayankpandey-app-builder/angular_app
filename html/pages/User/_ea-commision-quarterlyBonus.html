@@ -1,0 +1,49 @@
+<div class="row bonus">
+        <div class="col-lg-8">
+            <table>
+                <tbody>
+                <tr>
+                    <th></th>
+                    <th>target </th>
+                    <th></th>
+                    <th>payment</th>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <th width="20">Q1</th>
+                    <td width="50">{{quarterlySplit.Q1.target}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="80"><input type="text" ng-model="quarterlySplit.Q1.bonusAmount" ng-blur="formatNumber('quarterlySplit.Q1.bonusAmount',quarterlySplit.Q1.bonusAmount)"/> <strong>{{currency||'-'}}</strong></td>
+                </tr>
+                <tr>
+                    <th width="20">Q2</th>
+                    <td width="50">{{quarterlySplit.Q2.target}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="80"><input type="text" ng-model="quarterlySplit.Q2.bonusAmount" ng-blur="formatNumber('quarterlySplit.Q2.bonusAmount',quarterlySplit.Q2.bonusAmount)"/> <strong>{{currency||'-'}}</strong></td>
+                </tr>
+                <tr>
+                    <th width="20">Q3</th>
+                    <td width="50">{{quarterlySplit.Q3.target}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="80"><input type="text" ng-model="quarterlySplit.Q3.bonusAmount" ng-blur="formatNumber('quarterlySplit.Q3.bonusAmount',quarterlySplit.Q3.bonusAmount)"/> <strong>{{currency||'-'}}</strong></td>
+                </tr>
+                <tr>
+                    <th width="20">Q4</th>
+                    <td width="50">{{quarterlySplit.Q4.target}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="80"><input type="text" ng-model="quarterlySplit.Q4.bonusAmount" ng-blur="formatNumber('quarterlySplit.Q4.bonusAmount',quarterlySplit.Q4.bonusAmount)"/> <strong>{{currency||'-'}}</strong></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><hr/></td>
+                </tr>
+                <tr>
+                    <th width="20">Yearly</th>
+                    <td width="50">{{yearlyQuota |number:2}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="80"><input type="text" ng-model="yearlyBonusAmount" ng-blur="formatNumber('yearlyBonusAmount',yearlyBonusAmount)"/> <strong>{{currency||'-'}}</strong></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+</div>

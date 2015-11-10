@@ -1,0 +1,106 @@
+<div class="inner-box">
+    <h2><i class="icon-qualifier-01"></i>Qualifiers
+        <a href="" class="pull-right" ng-click="addQualifier=true; focusNew=true; qualifier = {};">Add</a></h2>
+
+    <table cellpadding="0" cellspacing="0" class="full-table">
+
+
+        <tr ng-show="addQualifier" class="newEntry">
+            <td></td>
+            <td>
+                <input type="text" ng-model="qualifier.longName"
+                       focus-me="focusNew" tabindex="1"
+                       placeholder="Qualifier Long Name"/>
+            </td>
+            <td>
+                <input type="text" ng-model="qualifier.shortName" tabindex="2"
+                       placeholder="Qualifier Short Name"/>
+            </td>
+            <td width="150" class="text-center">
+                <div class="relative-pos">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">{{qualifier.stage || 'Select stage'}}
+                        <b class="icon-arrow-down"></b>
+                    </a>
+                    <ul role="menu" class="dropdown-menu text-left">
+                        <li ng-repeat="stage in stages track by $index">
+                            <a href="" ng-click="selectStageQualifier(stage.name)">{{stage.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td class="text-center">
+                <label>
+                    <input type="checkbox" ng-model="qualifier.isGate"/>
+                    <span></span>
+                </label>
+            </td>
+            <td class="text-center">
+                <label>
+                    <input type="checkbox" ng-model="qualifier.isMainQualifier"/>
+                    <span></span>
+                </label>
+            </td>
+            <td><a href="" class="pull-right" ng-click="addQualifier=false;qualifier={} "><i class="icon-x"></i></a>
+            </td>
+            <td><a href="" class="pull-right" ng-click="addQualifierFct(qualifier)"><i class="icon-ok-modal"></i></a></td>
+        </tr>
+
+        <tr>
+            <th></th>
+            <th width="150">Long name</th>
+            <th width="150">Short name</th>
+            <th class="text-center" width="150">Stage</th>
+            <th class="text-center" width="150">Gate</th>
+            <th class="text-center" width="150">Main qualifier</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr class="empty-line"></tr>
+
+        <tr ng-repeat="stage in stages track by $index">
+            <td colspan="8" ng-hide="stage.qualifiers.length==0">
+                <table cellpadding="0" cellspacing="0" class="full-table recursive-table">
+
+                    <tr ng-repeat="qualifier in stage.qualifiers" class="edit-selected-qualifier" ng-click="checklistSection(qualifier,'qualifiers', $index, $parent.$index); checkList=qualifier">
+                        <td></td>
+                        <td width="180">
+                            <input type="text" ng-model="qualifier.longName"
+                                   placeholder="Qualifier Long Name" ng-blur="updateDeal(products, stages)" name="{{qualifier.longName}}"/>
+                        </td>
+                        <td width="150">
+                            <input type="text" ng-model="qualifier.shortName"
+                                   placeholder="Qualifier Short Name" ng-blur="updateDeal(products, stages)"/>
+                        </td>
+                        <td width="180" class="text-center">
+                            <div class="relative-pos">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="">{{stage.name || 'Select stage'}}
+                                    <b class="icon-arrow-down"></b>
+                                </a>
+                                <ul role="menu" class="dropdown-menu text-left">
+                                    <li ng-repeat="stage in stages track by $index">
+                                        <a href="" ng-click="setStageQualifier(qualifier,stage.name,$parent)">{{stage.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-center" width="150">
+                            <label>
+                                <input type="checkbox" ng-model="qualifier.isGate" ng-change="updateDeal(products, stages)"/>
+                                <span></span>
+                            </label>
+                        </td>
+                        <td class="text-center" width="150">
+                            <label>
+                                <input type="checkbox" ng-model="qualifier.isMainQualifier" ng-change="updateDeal(products, stages)"/>
+                                <span></span>
+                            </label>
+                        </td>
+                        <td name="{{qualifier.longName}}"><a href="" ng-click="removeQualifierMilestone('qualifier',$index, $parent.stage.name)" class="pull-right"><i
+                                class="icon-x"></i></a></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

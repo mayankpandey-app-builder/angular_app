@@ -1,0 +1,74 @@
+<div class="col-lg-12">
+    <div class="inner-box double sink scrollableHidden">
+        <a class="card-link contact-details" href=""></a>
+        <div class="head clearfix">
+            <div class = "imgProcess contact-header">
+                <img alt="" ng-src="{{basicDetails.imageURL ||'images/placeholder_contact-big.png'}}"  />
+                <h2>{{basicDetails.firstName}} {{basicDetails.lastName}}</h2>
+            </div>
+
+            <div class="info">
+                <p>{{basicDetails.position}}</p>
+                <p>{{basicDetails.company}}</p>
+                <p>{{basicDetails.country}}</p>
+            </div>
+        </div>
+
+
+        <div ng-repeat="contactInfo in basicDetails.contactInformation" >
+            <p ng-if = "contactInfo.contactType == 'skypeName'" class="ellipsisNoWrap">
+                <i class="icon-skype" ng-if = "displayIcon(basicDetails.contactInformation,'skypeName')"> </i>  {{contactInfo.contactValue}}
+            </p>
+        </div>
+
+        <div class="inline" ng-if = "displayIcon(basicDetails.contactInformation, 'adress')">
+            <i class="icon-address c-grey" > </i>
+
+            <div ng-repeat="contactInfo in basicDetails.contactInformation" style="display:inline-flex;">
+                <p ng-if="contactInfo.contactType === 'street' && contactInfo.contactValue.length>0" class="ellipsisNoWrap normalWhiteSpace">
+                    {{contactInfo.contactValue}} &nbsp;
+                </p>
+
+                <p ng-if="contactInfo.contactType === 'city' && contactInfo.contactValue.length>0" class="ellipsisNoWrap normalWhiteSpace">
+                    {{contactInfo.contactValue}} &nbsp;
+                </p>
+
+                <p ng-if="contactInfo.contactType === 'postalCode' && contactInfo.contactValue.length>0" class="ellipsisNoWrap normalWhiteSpace">
+                    {{contactInfo.contactValue}} &nbsp;
+                </p>
+
+                <p ng-if="contactInfo.contactType === 'state' && contactInfo.contactValue.length>0" class="ellipsisNoWrap normalWhiteSpace">
+                    {{contactInfo.contactValue}} &nbsp;
+                </p>
+            </div>
+        </div>
+
+
+
+
+        <div ng-repeat="contactInfo in basicDetails.contactInformation">
+            <p ng-if = "contactInfo.contactType == 'emailAddress'" class="ellipsisNoWrap">
+                <i class="icon-email"></i>  {{contactInfo.contactValue}}
+            </p>
+        </div>
+
+        <div ng-repeat="contactInfo in basicDetails.contactInformation">
+            <p ng-if = "contactInfo.contactType == 'mobilePhoneNumber'" class="ellipsisNoWrap">
+                <i class="icon-call"> </i>  {{contactInfo.contactValue}}
+            </p>
+
+
+            <p ng-if = "contactInfo.contactType == 'personalPhoneNumber'" class="ellipsisNoWrap">
+                <i class="icon-personalphone c-grey"> </i>  {{contactInfo.contactValue}}
+            </p>
+
+
+            <p ng-if = "contactInfo.contactType == 'officePhoneNumber'" class="ellipsisNoWrap">
+                <i class="icon-officephone c-grey"> </i>  {{contactInfo.contactValue}}
+            </p>
+
+        </div>
+    </div>
+
+
+</div>

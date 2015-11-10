@@ -1,0 +1,125 @@
+<div class="edit-qualifier">
+    <h1>Edit {{editStone.type}}</h1>
+
+    <form action="" class="detailsForm">
+        <div class="inlineInputs">
+            <input type="text" placeholder="Qualifier Name *" ng-model="editStone.longName"
+                   ng-blur="updateQualifierMilestone(editStone);"/>
+            <input type="text" placeholder="Qualifier Short Name *" ng-model="editStone.shortName"
+                   ng-blur="updateQualifierMilestone(editStone);"/>
+        </div>
+
+        <div class="zindex-10">
+            <a class="dropdown-toggle" id="dropdownDeadline" name="deadline" role="button" data-toggle="dropdown">
+                <input class="borderless-input pull-left" type="text" name="end" placeholder="Deadline" class="noM"
+                       ng-model="editStone.deadlineFormat" readonly>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position: relative;">
+                <datetimepicker data-ng-model="editStone.deadlineFormat"
+                                data-datetimepicker-config="{ dropdownSelector: '#dropdownDeadline', minView: 'day', view:'chooseDate'}"
+                                data-on-set-time="setDeadlineQualifier"/>
+            </ul>
+        </div>
+
+        <div class="deal-type">
+            <div class="inline-block-display col-lg-4">
+                <div class="dropdown task-icons">
+                    <div class="relative-pos">
+                        <a class="dropdown-toggle" data-toggle="dropdown" tooltip="Change Stage" tooltip-placement="bottom" style="font-size: 24px; color: #ffad1d !important;"> <i class="icon-change-stage"></i>
+                            <p class="c-orange">Change Stage</p>
+                            <b class="carret"></b>
+                        </a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li ng-repeat="stage in stages" tooltip="{{stage.name}}" tooltip-placement="right"><a href="" ng-click="setValue('stage',stage.name);">{{stage.name}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="inline-block-display col-lg-4">
+                <a ng-click="createTaskFromStone(editStone);" href="" rel="tooltip" data-placement="bottom" title="Create task" tooltip="Create Task" tooltip-placement="bottom" style="font-size: 24px; color: #ffad1d !important;" ><i class="icon-createtask-menu"></i>
+                    <p class="c-orange">Create Task</p>
+                </a>
+            </div>
+            <div class="inline-block-display col-lg-4" ng-if="editStone.hasTasks" >
+                <a ng-click="switchToTimelineTab();" href="" rel="tooltip" data-placement="bottom" title="See tasks" tooltip="See Tasks" tooltip-placement="bottom" style="font-size: 35px; color: #ffad1d !important; vertical-align: middle;"><i class="icon-see-tasks"></i>
+                    <p class="c-orange" style="margin-top: -15px;">See Tasks</p>
+                </a>
+            </div>
+        </div>
+        <div class="clear-both">
+            <h2 class="top-40">To do list</h2>
+            <p ng-repeat="list in editStone.checklist" style="margin-bottom: 9px;">
+                <label>
+                    <input type="checkbox" ng-model="list.value" ng-checked="list.selected"
+                           ng-change="selectChecklist(this.list, $index)"/>
+                    <span></span>
+                </label>
+                <input type="text" placeholder="Add item here" class="pull-right checkbox-deal-inline deal-qualifier-checkbox" ng-model="list.text"
+                       ng-blur="editChecklist(list.text,$index);"/>
+            </p>
+            <div class="qualifier-milestone-info">
+                <label>
+                    <input type="checkbox" ng-model="checklist.selected" ng-change="pushEditChecklist(this.checklist)">
+                    <span></span>
+                </label>
+                <input type="text" placeholder="Add item here" class="pull-right" ng-model="checklist.text"
+                       ng-blur="pushEditChecklist(this.checklist); checklist=[];"/>
+            </div>
+        </div>
+        <div class="simulate-textarea">
+            <div ng-repeat="note in editStone.content">
+                <textarea msd-elastic text="" description="" ng-model="note.text" name="{{note.text}}" ng-blur="addContent(newContent, editStone.content)" placeholder="If empty, content will be removed" rows="3" class="form-control form-textarea quicknotes"></textarea>
+            </div>
+            <textarea msd-elastic text="" description="" ng-model="newContent.text" ng-blur="addContent(newContent, editStone.content)" placeholder="Add description" rows="3" class="form-control form-textarea quicknotes"></textarea>
+
+        </div>
+
+        <h2 class="top-40">State</h2>
+        <div class="radios" ng-if="editStone.type=='qualifier'">
+            <p>
+            <label class="c-green" rel="tooltip" data-placement="bottom" title="Complete" ng-click="setValue('status','complete')">
+                <i class="icon-full-circle"></i>
+                <span ng-class="{'grey-disabled': !getRadioChecked(editStone,'Complete'),'strong':getRadioChecked(editStone,'Complete') }"> Complete</span>
+            </label>
+            </p>
+            <p>
+            <label class="c-yellow" rel="tooltip" data-placement="bottom" title="Validation" ng-click="setValue('status','validation')">
+                <i class="icon-full-circle"></i> <span ng-class="{'grey-disabled': !getRadioChecked(editStone,'Validation'), 'strong':getRadioChecked(editStone,'Validation') }"> Validation</span>
+            </label>
+            </p>
+            <label class="c-orange" rel="tooltip" data-placement="bottom" title="Incomplete" ng-click="setValue('status','incomplete')">
+                <i class="icon-full-circle"></i> <span ng-class="{'grey-disabled': !getRadioChecked(editStone,'Incomplete'),'strong':getRadioChecked(editStone,'Incomplete') }"> Incomplete</span>
+            </label>
+            </p>
+            <p>
+            <label class="c-grey" rel="tooltip" data-placement="bottom" title="Unknown" ng-click="setValue('status','unknown')">
+                <i class="icon-full-circle"></i> <span ng-class="{'grey-disabled': !getRadioChecked(editStone,'Unknown'),'strong':getRadioChecked(editStone,'Unknown') }">Unknown</span>
+            </label>
+            </p>
+        </div>
+
+        <div class="radios" ng-if="editStone.type=='milestone'">
+            <p>
+            <label class="c-green" rel="tooltip" data-placement="bottom" title="Done" ng-click="setValue('status','done')">
+                <i class="icon-full-circle"></i>
+                <span ng-class="{'grey-disabled': !getRadioChecked(editStone,'Done'),'strong':getRadioChecked(editStone,'Done') }"> Done</span>
+            </label>
+            </p>
+            <p>
+            <label class="c-yellow" rel="tooltip" data-placement="bottom" title="Scheduled" ng-click="setValue('status','scheduled')">
+                <i class="icon-full-circle"></i> <span ng-class="{'grey-disabled': !getRadioChecked(editStone,'Scheduled'), 'strong':getRadioChecked(editStone,'Scheduled') }"> Scheduled</span>
+            </label>
+            </p>
+            <label class="c-orange" rel="tooltip" data-placement="bottom" title="Failed" ng-click="setValue('status','failed')">
+                <i class="icon-full-circle"></i> <span ng-class="{'grey-disabled': !getRadioChecked(editStone,'Failed'),'strong':getRadioChecked(editStone,'Failed') }"> Failed</span>
+            </label>
+            </p>
+            <p>
+            <label class="c-grey" rel="tooltip" data-placement="bottom" title="Planned" ng-click="setValue('status','planned')">
+                <i class="icon-full-circle"></i> <span ng-class="{'grey-disabled': !getRadioChecked(editStone,'Planned'),'strong':getRadioChecked(editStone,'Planned') }">Planned</span>
+            </label>
+            </p>
+        </div>
+
+    </form>
+</div>

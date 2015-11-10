@@ -1,0 +1,24 @@
+nav.actions-menu {
+
+	float: left; border-left:1px solid #e48900;
+	
+	li { float: left; height:50px; border-right:1px solid #e48900}
+
+	a { color:@actions-color; text-decoration: none; display: block; padding:5px 10px 0 10px; height: 50px;
+		
+		i { font-size: 21px; display: block; width: 28px; height:22px; margin:0 auto 2px auto}
+
+		&:hover, &.selected { background: #FFF; color:@actions-hover-color}
+
+	}
+
+}
+
+#main-actions {}
+#sub-actions { display: none}
+
+#main-actions.unselected { display: none}
+#sub-actions.selected { display: block}
+
+
+

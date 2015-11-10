@@ -1,0 +1,30 @@
+<h1 ng-show="qualifiers.length > 0">Qualifiers</h1>
+
+<ul class="nav nav-tabs expanded-view-tabs" ng-show="qualifiers.length > 0">
+    <li ng-repeat="qualifier in qualifiers" ng-class="getQualifierStatus(qualifier);" ng-click="hideExpandedView($index);">
+        <a data-target="#tab{{$index + 1}}" data-toggle="tab">{{qualifier.shortName | limitTo: 1}}</a>
+    </li>
+</ul>
+
+<div class="tab-content qualifier-expanded-tab" ng-hide="!expandedViewHide">
+    <div class="tab-pane fade in" id="tab{{$index + 1}}" ng-repeat="qualifier in qualifiers">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>{{qualifier.longName}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <p class="c-blue"><strong>To Do list</strong></p>
+            </div>
+            <div class="col-lg-8">
+                <p ng-repeat="list in qualifier.checklist">
+                    <label>
+                        <input type="checkbox" ng-model="list.selected" ng-checked="list.selected" disabled/>
+                        <span> {{list.text}}</span>
+                    </label>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

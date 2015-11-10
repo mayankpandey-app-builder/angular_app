@@ -1,0 +1,35 @@
+<h1>Rate your meeting</h1>
+
+<form action="" class="detailsForm" ng-submit="updateMeetingMinute()" name="saveMM" novalidate>
+    <div class="radios">
+        <div class="inline-display">
+            <label class="c-green" rel="tooltip" data-placement="bottom" title="Great" ng-click="setMeetingMinuteMood('great')">
+                <i class="icon-full-circle c-green"></i>
+                <span ng-class="{'grey-disabled': meetingMinuteInfo.mood != 'great', 'black-enabled': meetingMinuteInfo.mood == 'great'}"> Great </span>
+            </label>
+        </div>
+        <div class="inline-display">
+            <label class="c-yellow" rel="tooltip" data-placement="bottom" title="Ok" ng-click="setMeetingMinuteMood('ok')">
+                <i class="icon-full-circle c-yellow"></i>
+                <span ng-class="{'grey-disabled': meetingMinuteInfo.mood != 'ok', 'black-enabled': meetingMinuteInfo.mood == 'ok'}"> Ok </span>
+            </label>
+        </div>
+        <div class="inline-display">
+            <label class="c-orange" rel="tooltip" data-placement="bottom" title="Incomplete" ng-click="setMeetingMinuteMood('bad')">
+                <i class="icon-full-circle c-orange"></i>
+                <span ng-class="{'grey-disabled': meetingMinuteInfo.mood != 'bad', 'black-enabled': meetingMinuteInfo.mood == 'bad'}"> Bad </span>
+            </label>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <small class="error" ng-hide="validateName(meetingMinuteInfo.name, saveMM.meetingMinuteName.$pristine)"
+           ng-show="requiredNameError">
+        Please provide meeting minute name.
+    </small>
+    <input type="text" name="meetingMinuteName" placeholder="* Meeting minute name"
+           ng-class="{'my-input': !validateName(meetingMinuteInfo.name, saveMM.meetingMinuteName.$pristine) || requiredNameError}"
+           ng-model="meetingMinuteInfo.name" required/>
+    <button type="button" class="greyBtn " ng-click="changeActiveSection('qualifiers');">Cancel</button>
+    <button type="submit" class="orangeBtn">Save & Close</button>
+</form>

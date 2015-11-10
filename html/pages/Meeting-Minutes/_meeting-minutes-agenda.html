@@ -1,0 +1,46 @@
+<div class="col-lg-11 meeting-minutes-agenda">
+    <div class="row agenda-row" ng-repeat="paragraph in details.paragraphs">
+        <div class="agenda-tags" ng-show="paragraph.tags.length > 0">
+            <div ng-repeat="tag in paragraph.tags" class="inline-display">
+                <span ng-show="tag.tagType != 'mood' && tag.tagType != 'private'" class="inline-display">{{tag.displayValue}} </span>
+                <i ng-show="tag.tagType == 'mood' && tag.displayValue == ':('" class="icon-emoticon-sad-01 inline-display"></i>
+                <i ng-show="tag.tagType == 'mood' && tag.displayValue == ':|'" class="icon-emoticon-smile-01 inline-display"></i>
+                <i ng-show="tag.tagType == 'mood' && tag.displayValue == ':)'" class="icon-emoticon-happy-01 inline-display"></i>
+                <i ng-show="tag.tagType == 'private'" class="icon-private-01 inline-display"></i>
+            </div>
+        </div>
+        <div class="agenda-tags" ng-if="paragraph.layoutInfo.layoutType == 'task'">
+            <i class="icon-{{paragraph.layoutInfo.iconType}} inline-display"></i>
+            {{paragraph.text}}
+        </div>
+        <textarea id="mmnote{{$index}}" msd-elastic ng-model="paragraph.text" rows="1"
+                  class="form-control form-textarea quicknotes agenda-padding"
+                  ng-keydown="listenEnter($event);" ng-click="paragraphIndex($index);" ng-if="paragraph.layoutInfo.layoutType != 'task'"></textarea>
+        <div class="agenda-tags" ng-show="paragraph.imageURL || paragraph.selectedImage">
+            <img ng-src="{{paragraph.selectedImage || paragraph.imageURL}}" style="width: 100px; height: 100px;" ng-click="showParagraphImage($index);"/>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mmModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog" ng-style="{'width': mmModal.width}">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                </div>
+
+                <div class="modal-body" style="text-align: center;">
+                    <img style="width: 100%;" ng-src="{{details.paragraphs[currentParagraphIndex].selectedImage || details.paragraphs[currentParagraphIndex].imageURL}}"/>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="greyBtn" data-dismiss="modal">Cancel</button>
+                    <button class="orangeBtn" ng-click="deleteParagraphImage();">Delete</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

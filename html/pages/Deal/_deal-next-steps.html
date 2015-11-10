@@ -1,0 +1,11 @@
+<div class="inner-box">
+    <h1>Next Steps</h1>
+    <ul>
+        <li ng-repeat="step in nextSteps">
+            <i class="icon-milestone"
+                    ng-class="{'warning': step.selectedStep==1, 'danger': step.selectedStep==2}"></i>
+            {{step.shortName}}
+            <span class="pull-right" ng-if="step.deadline">{{step.deadline | date: 'd MMM' || '-'}}</span>
+            <span class="pull-right" ng-if="!step.deadline">-</span></li>
+    </ul>
+</div>

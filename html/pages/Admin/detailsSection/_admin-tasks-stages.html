@@ -1,0 +1,18 @@
+<div class="inner-box">
+    <h2>Progress stages <a ng-show="false" href="" class="pull-right" ng-click="isAddProgressStage=true; focusNew=true">Add</a></h2>
+    <ul class="content-links">
+        <li ng-show="isAddProgressStage">
+            <input type="text" class="searchCompanies search" ng-model="newStage" focus-me="focusNew"
+                   placeholder="Progress Stage Name"
+                   ng-blur="addProgressStage(newStage); isAddProgressStage=false;"/>
+        </li>
+        <li ng-repeat="stage in (filteredSolution = (progressStages | filter: newStage)) track by $index">
+            <input type="text" ng-hide="!updateEntry" ng-model="stage" focus-me="focusEdit"
+                   placeholder="Progress Stage Name"
+                   ng-blur="updateEntry=false; updateStage($index, stage);"/>
+            <a ng-click="updateEntry=true; focusEdit=true" ng-show="!updateEntry">{{stage}}
+                <i ng-show="false" class="icon-x" ng-click="updateStage($index);"></i>
+            </a>
+        </li>
+    </ul>
+</div>

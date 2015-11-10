@@ -1,0 +1,20 @@
+<div class="inner-box">
+    <h2>Default tags <a href="" class="pull-right" ng-click="addTags=true; focusNewTag=true">Add</a></h2>
+    <ul class="content-links">
+
+        <li ng-show="addTags">
+            <input type="text" class="searchCompanies search" ng-model="newTag" focus-me="focusNewTag"
+                   placeholder="New tag name"
+                   ng-blur="addTag(newTag);addTags=false "/>
+        </li>
+        <li ng-repeat="tag in (filteredTags = (tags | filter: newTag)) track by $index">
+           <!-- <input type="text" ng-hide="!updateEntry" ng-model="tag" focus-me="focusEdit"
+                   placeholder="Tag Name"
+                   ng-blur="updateEntry=false; updateTag($index, tag)"/>-->
+            <!--<a ng-click="updateEntry=true; focusEdit=true" ng-show="!updateEntry">{{tag}}
+                <i class="icon-x" ng-click="updateTag($index)"></i>
+            </a>-->
+            <a href="">{{tag}}</a>
+        </li>
+    </ul>
+</div>

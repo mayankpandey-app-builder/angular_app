@@ -1,0 +1,157 @@
+html, body{
+  font-family: Helvetica;
+  height: 100%;
+  width: 100%;
+}
+
+a { outline: 0}
+a:focus { outline:0}
+
+//temporary
+.absolute-pos{
+    position: absolute;
+}
+
+.relative-pos{
+  position: relative;
+}
+
+.overflow-visible {
+  overflow: visible !important;
+}
+.inline-display{
+  display: inline;
+}
+
+.center-right{
+    float:right;
+    height: 68px;
+    line-height: 68px;
+    margin-right: 2px
+}
+.center-right label { color: @grey; margin: 0; font-weight: @font-weight-regular}
+
+.centered-h{
+  margin: 0 auto;
+}
+
+/*** For vertical centering ***/
+.container-centered-v{
+  text-align: center;
+  height:100%;
+}
+ 
+/* The ghost, nudged to maintain perfect centering */
+.container-centered-v:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  //margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+/* The element to be centered, can
+   also be of any width and height */ 
+.centered-v {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+textarea {
+    resize: none;
+    color: @grey
+}
+
+input[type=radio],
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=radio] + span:before,
+input[type=checkbox] + span:before {
+    font-family: "icomoon";
+    width: 1.2em;
+    display:inline-block;
+}
+
+input[type=checkbox] + span:before {
+  color: @grey
+}
+
+input[type=radio] + span:before {
+  font-size: 10px
+}
+
+input[type=checkbox] + span:before          { content: "\e661"; }
+input[type=checkbox]:checked + span:before  { content: "\e660"; color: @orange }
+
+
+input[type=radio] + span:before             { content: "\e614"; }
+input[type=radio]:checked + span:before     { content: "\e615"; }
+
+small.error{color: red;}
+
+#create-subtask{
+  .modal-content{
+    width:800px;
+    margin-left:-15%;
+  }
+  .modal-body{
+    &.row{
+      margin:0;
+      .pull-right{
+        position: relative;
+        margin-top: 50px;
+      }
+    }
+    textarea{
+      color:#222222;
+      min-height: 70px;
+    }
+    .task-icons-calendar .dropdown-menu{
+      min-width: 50px!important;
+      text-align: center!important;
+    }
+   .task-icons-calendar [class^="icon-"]{
+      color: #335561;
+      padding: 0px;
+      font-size: 15px;
+      vertical-align: middle;
+    }
+
+    }
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+[ng-drag]{
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+[ng-drag].drag-over{
+  border:dashed 1px  #335561;
+}
+[ng-drag].dragging{
+  opacity: 0.5;
+  border:dashed 1px @blue;
+  &.qualifier,
+  &.milestone{
+    max-width: 100px;
+  }
+}
+
+[ng-drop].drag-enter{
+  border:dashed 1px @blue;
+}
+
+[ng-drop] div{
+  z-index: 2;
+}

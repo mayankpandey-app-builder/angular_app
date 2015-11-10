@@ -1,0 +1,61 @@
+<h1>Override</h1>
+
+<div class="forecast-list-name">
+    <p><b>Current</b></p>
+    <div>
+        <div class="pull-left forecast-list-name-length ellipsisNoWrap">
+            <div class="pull-left" ng-show="overridedDeal.realValues.dealValue">{{getFormattedAmount(overridedDeal.realValues.dealValue)}} {{overridedDeal.currency}}</div>
+            <div class="pull-left" ng-show="!overridedDeal.realValues.dealValue">-</div>
+            <div class="deal-type pull-right">
+                <div class="override-current" ng-show="overridedDeal.realValues.status == 'Best case'" href="" rel="tooltip" data-placement="bottom" title="Best Case">
+                    <i class="icon-deal"></i>
+                    Best case
+                </div>
+                <div class="override-current" ng-show="overridedDeal.realValues.status == 'Commit'" href="" rel="tooltip" data-placement="bottom" title="Commit">
+                    <i class="icon-won-deal"></i>
+                    Commit
+                </div>
+                <div class="override-current" ng-show="overridedDeal.realValues.status == 'Pipeline'" href="" rel="tooltip" data-placement="bottom" title="Pipeline">
+                    <i class="icon-pipeline"></i>
+                    <br/>
+                    Pipeline
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <p><b>Override</b></p>
+    <div class="pull-left forecast-list-name-length ellipsisNoWrap">
+        <div class="pull-left detailsForm" style="width: 50%;">
+            <input type="text" ng-model="overridedDeal.forecastedValues.dealValue" ng-change="overridedDeal.forecastedValues.valueOverwritten = true;"/> {{overridedDeal.currency}}
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="deal-type pull-left">
+        <a class="override-status" ng-class="{'selected': overridedDeal.forecastedValues.status  == 'Commit'}" href="" rel="tooltip" data-placement="bottom" title="Commit" ng-click="overridedDeal.forecastedValues.status = 'Commit'; overridedDeal.forecastedValues.statusOverwritten = true;">
+            <i class="icon-won-deal"></i>
+            Commit
+        </a>
+        <a class="override-status" ng-class="{'selected': overridedDeal.forecastedValues.status == 'Best case'}" href="" rel="tooltip" data-placement="bottom" title="Best case" ng-click="overridedDeal.forecastedValues.status = 'Best case'; overridedDeal.forecastedValues.statusOverwritten = true;">
+            <i class="icon-deal"></i>
+            Best case
+        </a>
+        <a class="override-status" ng-class="{'selected': overridedDeal.forecastedValues.status  == 'Pipeline'}" href="" rel="tooltip" data-placement="bottom" title="Pipeline" ng-click="overridedDeal.forecastedValues.status = 'Pipeline'; overridedDeal.forecastedValues.statusOverwritten = true;">
+            <i class="icon-pipeline"></i>
+            <br/>
+            Pipeline
+        </a>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <textarea msd-elastic rows="5" class="form-control form-textarea black" ng-model="overridedDeal.forecastedValues.comment" placeholder="Comments"></textarea>
+</div>
+<button class="greyBtn" ng-click="changeActiveSection('forecast-filters')">Cancel</button>
+<button class="orangeBtn" ng-click="updateForecastedValues(overridedDeal.forecastedValues, overridedDeal.id);">Save</button>

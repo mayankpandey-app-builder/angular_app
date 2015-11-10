@@ -1,0 +1,209 @@
+<top-menu class=""></top-menu>
+<div class="main-content clearfix">
+    <!-- maine left -->
+    <div class="main-left">
+        <div class="container admin panel-group">
+            <div class="row" id="company-details">
+                <div class="col-lg-12">
+                    <div class="inner-box link" ng-class="{'collapsed': !sections.companyCollapsed}"
+                         ng-click="getCompanyDetails(); collapse('companyCollapsed',!sections.companyCollapsed);">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="25%" class="left-col"><p><i class="icon-company"></i>Company details</p></td>
+                                <td width="73%" class="mid-col"><p>Please enter your corporate info like name, number of employees and your logo here</p></td>
+                                <td width="2%" class="right-col">
+                                    <i ng-class="{'icon-arrow': !sections.companyCollapsed,'icon-arrow-down2':sections.companyCollapsed }"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="collapse fade" collapse="!sections.companyCollapsed">
+                        <admin-company-details></admin-company-details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-box link" ng-class="{'collapsed': !sections.teamCollapsed}"
+                         ng-click="getTeamStructure('webapp'); collapse('teamCollapsed',!sections.teamCollapsed ); getTabs();">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="25%" class="left-col"><p><i class="icon-meeting"></i>User Administration</p></td>
+                                <td width="73%" class="mid-col"><p>Configure users for your organization.</p></td>
+                                <td width="2%" class="right-col">
+                                    <i ng-class="{'icon-arrow': !sections.teamCollapsed,'icon-arrow-down2':sections.teamCollapsed }"></i></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="list-of-users" class="collapse fade" collapse="!sections.teamCollapsed">
+                        <team-structure></team-structure>
+
+                        <div class="col-lg-offset-3">
+                            <team-pending></team-pending>
+                        </div>
+
+                        <div class="col-lg-offset-3">
+                            <team-admins></team-admins>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-box link" ng-class="{'collapsed': !sections.dealsCollapsed}"
+                         ng-click="collapse('dealsCollapsed',!sections.dealsCollapsed); getDealsConfig()">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="25%" class="left-col"><p><i class="icon-dealsettings-01"></i>Deals Settings
+                                </p></td>
+                                <td width="73%" class="mid-col"><p>Configure your sales process here: Stage, Qualifiers, Milestones and Checklists.</p></td>
+                                <td width="2%" class="right-col">
+                                    <i ng-class="{'icon-arrow': !sections.dealsCollapsed,'icon-arrow-down2':sections.dealsCollapsed }"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="deals-settings" class="col-lg-12">
+                    <div class="collapse fade" collapse="!sections.dealsCollapsed">
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-0">
+                                <deals-stages></deals-stages>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-lg-offset-0">
+                                <deals-qualifiers></deals-qualifiers>
+                            </div>
+
+                            <div class="col-lg-5" ng-include="showSection()" ng-hide="milestoneSelected"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7 col-lg-offset-0">
+                                <deals-milestones></deals-milestones>
+                            </div>
+
+                            <div class="col-lg-5" ng-include="showSection()" ng-hide="qualifierSelected"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5 col-lg-offset-0">
+                                <deals-products></deals-products>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-box link" ng-class="{'collapsed': !sections.tasksCollapsed}"
+                         ng-click="collapse('tasksCollapsed',!sections.tasksCollapsed); getTasksConfig();">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="25%" class="left-col"><p><i class="icon-tasksettings-01"></i>Tasks Settings</p></td>
+                                <td width="73%" class="mid-col"><p>Configure your default tags and progress stages.</p></td>
+                                <td width="2%" class="right-col">
+                                <i ng-class="{'icon-arrow': !sections.tasksCollapsed,'icon-arrow-down2':sections.tasksCollapsed }"></i></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="tasks-settings" class="collapse fade" collapse="!sections.tasksCollapsed">
+                        <div class="row">
+                            <div class="col-lg-3 col-lg-offset-3">
+                                <default-tags></default-tags>
+                            </div>
+                            <div class="col-lg-3">
+                                <progress-stages></progress-stages>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-box link" ng-class="{'collapsed': !sections.financialCollapsed}"
+                            ng-click="collapse('financialCollapsed',!sections.financialCollapsed); getFinancialConfig()">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="25%" class="left-col"><p><i class="icon-budget"></i>Financial Data</p></td>
+                                <td width="73%" class="mid-col"><p>Enter your financial year start, you reporting currency, manage your exchange rates and define the time for the weekly forecast snapshot.</p></td>
+                                <td width="2%" class="right-col">
+                                    <i ng-class="{'icon-arrow': !sections.financialCollapsed,'icon-arrow-down2':sections.financialCollapsed }"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="financial-data" class="collapse fade" collapse="!sections.financialCollapsed">
+                        <div class="row">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <financial-data></financial-data>
+                                <financial-cards></financial-cards>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-box link" ng-class="{'collapsed': !sections.industriesCollapsed}"
+                            ng-click="collapse('industriesCollapsed',!sections.industriesCollapsed);">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="25%" class="left-col"><p><i class="icon-industry"></i>Industries and Solution Area</p></td>
+                                <td width="73%" class="mid-col"><p>Configure the vertical industries and the solution areas you want your sales people to tag their contacts.</p></td>
+                                <td width="2%" class="right-col"><i ng-class="{'icon-arrow': !sections.industriesCollapsed,'icon-arrow-down2':sections.industriesCollapsed }"></i></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="industries-and-solutions collapse fade" collapse="!sections.industriesCollapsed">
+                        <div class="row">
+                            <solution-areas></solution-areas>
+                            <industries-list></industries-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-box link" ng-class="{'collapsed': !sections.structureCollapsed}"
+                         ng-click="getRegionalStructure(); collapse('structureCollapsed',!sections.structureCollapsed);">
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="25%" class="left-col"><p><i class="icon-regionalstructure"></i>Territory Structure</p></td>
+                                <td width="73%" class="mid-col"><p>Here you can change the territory structure or use the default.</p></td>
+                                <td width="2%" class="right-col">
+                                    <i ng-class="{'icon-arrow': !sections.structureCollapsed,'icon-arrow-down2':sections.structureCollapsed }"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="industries-and-solutions collapse fade" collapse="!sections.structureCollapsed">
+                        <div class="row">
+                            <div class="col-lg-6 col-lg-offset-3">
+                                <organization-structure></organization-structure>
+                            </div>
+                            <business-unit></business-unit>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <aside class="right">
+
+        <section class="detailsSection " ng-include="showSection()" ng-hide="qualifierSelected || milestoneSelected">
+
+        </section>
+
+    </aside>
+</div>

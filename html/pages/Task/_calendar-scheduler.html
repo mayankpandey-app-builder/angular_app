@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div id="task-scheduler" class="inner-box dhx_cal_container" >
+            <div dhx-scheduler data='events' style="width:100%;height: 100%">
+                <div class="dhx_cal_tab" name="day_tab" ng-click="showStartingDay=false; setCalendarView('day')"></div>
+                <div class="dhx_cal_tab" name="week_tab" ng-click="showStartingDay=true; setCalendarView('week')"></div>
+                <div class="dhx_cal_tab" name="month_tab" ng-click="showStartingDay=true; setCalendarView('month')"></div>
+                <div class="dhx_cal_prev_button">&nbsp;</div>
+                <!--<div class="dhx_cal_today_button"></div>-->
+                <div class="dhx_cal_date"></div>
+                <div class="dhx_cal_next_button">&nbsp;</div>
+                <div class="relative-pos starting_day" ng-hide="showStartingDay">
+                    <a class="dropdown-toggle text-right" id="filterCalendarDate" role="button"
+                       data-toggle="dropdown" data-target="" href="">Choose date
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="goToDate"
+                                        data-datetimepicker-config="{ dropdownSelector: '#filterCalendarDate', minView:'day', view:'goToDate' }" data-on-set-time="goToDateFct"/>
+                    </ul>
+                </div>
+                <div class="starting_day" ng-show="showStartingDay"> Starting Day:
+                    <a href="" ng-class="{active: startWeek=='monday' }" class="dhx_cal_tab"
+                       ng-click="setWeekStartingDay('monday')"> Monday</a> |
+                    <a href="" ng-class="{active: startWeek=='sunday' }" class="dhx_cal_tab"
+                       ng-click="setWeekStartingDay('sunday')"> Sunday</a>
+                </div>
+                <div ng-repeat="event in events">
+
+                    <!--<div dhx-template="event_bar_date"> </div>-->
+                    <div dhx-template="event_bar_text">
+                        <div class="long-event">
+                            <i class="icon-{{event.task.taskType}}"></i>
+                            {{event.task.name}}
+                        </div>
+                    </div>
+                    <div dhx-template="event_text">
+                        <div class="row calendar-text">
+                            <div class="title-padding to-show-when-small"><b>{{event.task.name}}</b></div>
+                            <div class="col-lg-12 to-hide-when-small">
+                                <div class="col-lg-4">
+                                    <div class="title-padding"><b>{{event.task.name}}</b></div>
+                                </div>
+                                <div class="col-lg-4">
+                                    Assigned to
+                                    <img src="{{event.assigneeImageURL}}" title="{{event.task.assignee.firstName}} {{event.task.assignee.lastName}}" class="smallRoundImg"  />
+                                </div>
+                                <div class="col-lg-4">
+                                    {{event.task.description}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <br/>
+    </div>
+
+</div>

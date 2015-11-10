@@ -1,0 +1,343 @@
+.details {
+  .row {
+    .inner-box { height: 140px;
+      &.half { height: 60px; padding: 8px 5px; display: table;
+        p { margin: 0}
+      }
+      &.onehalf { height: 220px}
+      &.double { height: 300px}
+    }
+  }
+}
+
+.deals-container{
+  .row {
+    .inner-box { overflow:auto; }
+  }
+}
+
+.row {
+
+	[class^="icon-"], [class*=" icon-"], .fa { color: @grey; padding-right: 5px }
+
+    i.extra-space { padding-right: 12px}
+
+    .danger { color: @red}
+    .warning { color: @yellow}
+
+	.inner-box { width:100%; min-height: 60px; padding: 10px; .border-radius(3px); .box-shadow-color(1px, 1px, 2px, 1px, #ccc);
+		&.selected { .box-shadow-color(0px, 0px, 2px, 1px, @orange)}
+
+		li { line-height: @normal-line-height}
+		p { margin:0 0 5px 0; padding:0; color: #000; line-height: 16px;
+			&.bold { font-weight: @font-weight-bold}
+			&.notes-text { color:@grey}
+		}
+		p.doubleM { margin: 0 0 10px 0}
+
+		a { text-decoration: none}
+
+		span.date { display: block; color:@grey}
+
+		h1 { color:@blue; font-size: @h1-font-size; line-height: @h1-line-height; margin: 0 0 10px 0; padding: 0;
+			span { color: @black; font-size: 15px}
+		}
+		h2 { font-size: @h2-font-size; margin:0; padding: 0;
+			a { color:@link-color; text-decoration: none; position: relative; z-index: 300}
+		}
+
+		.head { margin: 0 0 5px 0;
+
+			img { float: left; margin:10px 10px 0 0}
+			.info { float: left; max-width: 72%}
+			h2 { margin: 0; line-height: 30px; font-size: @h2-font-size; color: @blue}
+			p { line-height: 14px}
+		}
+
+		&.company-basic-details {
+			.head { margin-bottom:10px;
+				img { margin-top:0}
+				h2 { margin-top: 20px; line-height: 20px}
+			}
+		}
+
+		ul.content-links {
+			li a {  color:@grey; text-decoration: none; display: block; border-bottom: 1px solid @grey; color: @grey; padding:0 0 5px 0; margin:0 0 15px 0;
+				&:hover { color:@orange; border-color:@orange;
+					i { color: @orange}
+				}
+			}
+		}
+
+		ul.contacts {
+			li { border-bottom: 1px solid #dcdcdc; line-height: @normal-line-height; padding: 0 0 7px 0; margin:0 0 7px 0}
+			img { float: left; margin-right: 10px}
+			a { color:#000; text-decoration:none}
+			span { padding-top: 3px}
+			span i { color: @grey}
+		}
+
+		/* user card */
+		&.user-card, &.contact-card { text-align: center;
+			h2 { margin-bottom:0; color: @blue}
+			p { line-height: 20px; margin:0; padding:0}
+			img { margin-bottom: 10px}
+		}
+
+		&.connected-profiles {
+			li { margin-bottom: 10px; text-align: center}
+			a { display: block; min-height: 2px}
+			span {}
+		}
+
+	}
+
+	&.first-row .inner-box { height: 125px}
+
+	.inner-box-head { margin-bottom:5px;
+
+		span {text-align: right; float:right; font-size: @small-font-size}
+
+	}
+
+	.t-cell { display: table-cell; vertical-align: middle; height: 40px; text-align: center}
+
+    .blue-bleft { border-left:5px solid @blue}
+	.green-bleft { border-left:5px solid @green}
+	.orange-bleft { border-left:5px solid @orange}
+	.yellow-bleft { border-left:5px solid @yellow}
+	.red-bleft { border-left:5px solid @red}
+	.grey-bleft { border-left:5px solid @grey}
+
+    .dotted { border:1px dotted @black}
+
+    .milestone { .border-radius(30px, 30px, 0, 0);
+        &.green-bbottom { border-bottom:5px solid @green}
+        &.orange-bbottom { border-bottom:5px solid @orange}
+        &.yellow-bbottom { border-bottom:5px solid @yellow}
+        &.red-bbottom { border-bottom:5px solid @red}
+        &.grey-bbottom { border-bottom:5px solid @grey}
+    }
+
+    .deal-manager img { margin-bottom:10px }
+}
+
+/*general card */
+.general-card { padding: 0 10px; margin:0 0 20px 0; width: 170px; height:140px; float: left; position: relative; cursor: pointer;
+
+	p { color: @black}
+
+	.check-uncheck { width: auto; position: absolute; top:-1px; left:13px; z-index: 300; display: none;
+		input[type=checkbox] { cursor:pointer}
+
+		.btn-link {color: @grey; padding: 0;
+			&:hover { color: @orange}
+		}
+		.bootstrap-checkbox > button.btn { line-height: 1; width: 20px}
+
+		&.selected { display: block;
+			.btn-link, label { color: @orange}
+		}
+		label { color: @grey; font-size: 13px}
+	}
+
+	&:hover {
+		.check-uncheck { display: block}
+	}
+
+	a { position:absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; z-index: 200}
+	.inner-box { height:140px; width: 150px; position: relative; padding:15px 10px 0 10px;
+		&.selected { .box-shadow-color(0px, 0px, 2px, 1px, @orange)}
+	}
+	.new { position: absolute; top:-1px; right: 0}
+
+	.inner-box .head { margin: 0 0 5px 0;
+
+		img { float: left; margin:0 10px 0 0}
+		h2 { float: left; margin: 0; line-height: 30px; font-size: @h2-font-size; color: @black}
+		p { margin: 0; line-height: 14px}
+	}
+
+	.lead-contact {
+		p { font-weight: @font-weight-bold; line-height: 13px}
+		span { display: block; font-weight:@font-weight-regular; color: @blue; height: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap}
+	}
+
+	.lead-pogress { margin-bottom: 5px}
+
+	.lead-info { line-height: 13px;
+		.nr { float: left; font-weight: @font-weight-bold}
+		.sf { float: right; color: @grey}
+	}
+
+	.actions { position: absolute; bottom:0; left: 0; width: 100%; background: #f7f7f7; padding: 0 10px; font-size: 11px;
+		span { float: right}
+	}
+
+	&.contacts { width:170px;
+		.inner-box { width:150px}
+		.head {
+          height: 30px;
+          img { margin:0px 5px 5px 0; display: inline-block;}
+          .name-header{ height: 35px; vertical-align: middle; white-space: normal;}
+        }
+        p{  margin: 0 0 2px 0}
+	}
+
+	&.companies {
+		.actions { padding-top: 3px}
+		.head { margin-bottom:10px}
+	}
+
+    &.deal {
+        .check-uncheck { left: 17px; top: 1px}
+        .head { padding-left: 35px; position: relative;
+            img { position: absolute; left: 0; top: 0}
+            h2 { color: @blue; line-height: 20px; float: none;}
+        }
+        .progress { margin-bottom: 5px}
+        .actions { padding: 2px 10px}
+        .actions span { float: none; padding:0 10px 0 0;
+          :last-child { padding: 0; float: right}
+    }
+  }
+}
+
+
+/*status bar */
+.status-bar { width: 100%;
+
+	div { width: 20%; height: 50px; float:left; border-right:1px solid #cdcdcd; text-align: center; background: #FFF; color: #000; .box-shadow-color(3px, 1px, 2px, 1px, #cdcdcd); cursor: pointer;
+		&.done { background: @blue; color: #FFF; border-right: 1px solid @light-grey}
+		&.first {.border-radius(25px, 0px, 0px, 25px)}
+		&.last { border:none; .border-radius(0px, 25px, 25px, 0px)}
+	}
+	span { display: block; line-height: 50px; font-size: 14px; font-weight:@font-weight-bold}
+
+}
+
+/*lead box */
+.lead-box,.deal-box {
+
+	h4 { font-size: 13px; line-height: 17px; color: @blue; margin: 0 0 5px 0; padding: 0}
+	.lead-logo, .deal-logo { width:62px; float:left; margin: 0 10px 0 0}
+	.lead-info, .deal-info { float: left;
+		h2 { line-height: 20px}
+	}
+	table { margin-top:10px}
+	td { color:@grey}
+}
+
+.inner-box {
+
+	.small-progress-bar { margin: 7px 0 10px 0}
+
+	.user {
+		img { width: 27px; height: 27px; float: left; margin: 0 5px 0 0}
+		p { margin: 0; line-height: 13px}
+		p span { display: block; color:@grey}
+	}
+
+	&.reports-to {
+		.user { margin-bottom:20px;
+			p { margin-bottom: 5px}
+			p.c-blue { font-weight: @font-weight-bold}
+		}
+	}
+
+	&.influences { height: 140px;
+		.user { margin-bottom:10px}
+	}
+}
+
+
+.social-accounts { height:140px;
+
+	a { font-size: 20px; text-decoration: none; color: @grey; display: block; width:40px; height: 40px; line-height: 40px; margin:0 auto;
+		&:hover .fa { color:@orange !important}
+	}
+	td { text-align: center; padding:10px}
+	td.br { border-right: 1px solid @grey}
+	td.bb { border-bottom:1px solid @grey}
+
+	.edit { position: absolute; top:3px; left:15px; display: none;
+		a { font-size: 16px; width: auto; height: 20px; line-height: 20px}
+	}
+	&:hover, &.selected {
+		.edit { display: block}
+	}
+
+    .fa.fb-linked {
+      color: #3f5b9b !important;
+    }
+    .fa.ln-linked {
+      color: #006599 !important;
+    }
+    .fa.gp-linked {
+      color: #d6492e !important;
+    }
+    .fa.tw-linked {
+      color: #43bffb !important;
+    }
+}
+
+.inner-box.solutions { padding-right: 0}
+
+.rating-box { margin-right: 3%; float: left; text-align: center}
+.rating-box.last { margin-right:0}
+
+/* tabs as filters */
+.tabs-filters { border-bottom: 1px solid @orange}
+.tabs-filters i { font-size: 20px}
+.tabs-filters i.icon-unsorted-leads { padding-right: 5px}
+.tabs-filters i.icon-converted { padding-right: 5px}
+
+.tabs-filters li {}
+.tabs-filters li a { background: none; border:1px solid @grey; .border-radius(15px, 15px, 0, 0); font-size: 12px; font-weight: @font-weight-regular; color: @grey; padding:10px}
+
+.tabs-filters > li > a:hover, .tabs-filters > li > a:focus, .tabs-filters > li.active > a, .tabs-filters > li.active > a:hover, .tabs-filters > li.active > a:focus {
+  z-index: 99;
+  border-bottom: none;
+  background: #FFF;
+  border-color: @orange;
+  color: @orange;}
+
+.content-filters { border-top: 1px solid @orange; border-radius:0; box-shadow: none; padding: 10px 0 0 0; margin-top:-2px}
+
+.select-reset-btns { position: absolute; top: 25px; right: 0; width: 120px; margin-right: -10px;
+	a { color: @orange; margin:0 10px 0 0}
+}
+
+.forecast-head { margin-bottom: 2px;
+  p { color: @white; font-weight: @font-weight-regular}
+  &.level-1 { background: @blue; width: 100%; margin-bottom: 5px;}
+  &.level-2 { background: @blue; width: 95%; margin-left: 5%; margin-bottom: 5px;}
+  &.level-3 { background: @blue; margin-bottom: 5px;}
+}
+.forecast-content {}
+
+
+.event-edge{
+  &.green-bright { border-right:5px solid @green}
+  &.yellow-bright { border-right:5px solid @yellow}
+  &.red-bright { border-right:5px solid @red}
+}
+
+.green-bright { border-right:5px solid @green}
+.yellow-bright { border-right:5px solid @yellow}
+.red-bright { border-right:5px solid @red}
+
+/*
+#pain { z-index: 500; display: block; background:#98bf21; position:absolute; left: 0; top:0; width:100px; height: 100px;
+	visibility:hidden;
+  opacity:0;
+  transition:visibility 0s linear 0.5s,opacity 0.5s linear, width 2s, hight 2s;
+  -webkit-transition: visibility 0s linear 0.5s,opacity 0.5s linear, width 2s, hight 2s;
+}
+
+.pain { cursor: pointer}
+#pain.selected { visibility:visible; opacity:1; transition-delay:0s; width: 100%; height: 100%}
+*/
+
+
+

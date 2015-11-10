@@ -1,0 +1,86 @@
+<h1>Add New Company</h1>
+<form class="detailsForm" name="createdCompany" action="" ng-submit="addCompany(newCompany)" novalidate ng-init="createdCompany.$setPristine();resetCreateCompanyForm();">
+
+    <small class="error" ng-hide="validate(newCompany.name,createdCompany.companyName.$pristine)"
+           ng-show="companynameError">
+        Please provide company name.
+    </small>
+    <input type="text" placeholder="Company Name *" name="companyName" ng-model="newCompany.name"
+           ng-change="setError('companynameError',false);"
+           ng-class="{'my-input': !validate(newCompany.name,createdCompany.companyName.$pristine)|| companynameError}"
+           required>
+
+    <input type="search" placeholder="Industry" class="searchCompanies search"
+           ng-model="newCompany.industry"
+           typeahead="industry for industry in companyFiltersIndustry | filter:$viewValue | limitTo:10 "
+           typeahead-editable="true">
+
+    <div class="inline">
+        <div  class="item">
+            <input type="text" placeholder="Country" class=""
+                   ng-model="newCompany.country"
+                   typeahead="country for country in countries | filter:$viewValue  | limitTo:10 "
+                   typeahead-editable="true">
+        </div>
+        <div  class="item">
+            <input class="" type="text" placeholder="City" ng-model="newCompany.contactInformation.city">
+        </div>
+    </div>
+    <input type="text" placeholder="State / Province" ng-model="newCompany.contactInformation.state">
+    <input type="text" placeholder="Street" ng-model="newCompany.contactInformation.street">
+    <input type="text" placeholder="Postal Code" ng-model="newCompany.contactInformation.postalCode">
+
+    <div class="inline">
+      <div  class="item" 
+            ng-class = "getValidationCls(newCompany.revenue.amount,'number',createdCompany.revenueAmount.$pristine,'','',true)">
+         <small class="error">
+          Please provide a valid revenue.
+         </small>
+          <input class="" type="text" placeholder="Revenue" ng-model="newCompany.revenue.amount" name = "revenueAmount" ng-pattern = "typeNumber">
+      </div>
+
+       <div  class="item">
+        <small class="error" ng-show = "getValidationCls(newCompany.revenue.amount,'number',createdCompany.revenueAmount.$pristine,'','',true) =='invalidItem' ">
+        <!--empty just to simulate the same space (fake it till you make it:))-->
+        </small>
+           <input class="" type="text" placeholder="Currency" ng-model="newCompany.revenue.currency"
+           typeahead="currency for currency in companyFiltersCurrency | filter:$viewValue | limitTo:10 "
+           typeahead-editable="true"> 
+      </div>
+
+    </div>
+
+    
+
+    <div  class="item" 
+            ng-class = "getValidationCls(newCompany.numberOfEmployees,'number',createdCompany.numberOfEmp.$pristine,'','',true)">
+         <small class="error">
+          Please provide a valid number.
+         </small>
+          <input type="text" placeholder="No. of employees" ng-model="newCompany.numberOfEmployees" name = "numberOfEmp" ng-pattern = "typeNumber">
+    </div>
+
+    <div  class="item"
+          ng-class = "getValidationCls(newCompany.contactInformation.phoneNumber,'phone',createdCompany.mobileNo.$pristine,'','',true)">
+
+        <small class="error">
+          Please provide a valid phone number.
+      </small>
+      <input type="text" placeholder="Telephone number" ng-model="newCompany.contactInformation.phoneNumber"
+             name="mobileNo">
+    </div>
+
+     <div  class="item "
+           ng-class = "getValidationCls(newCompany.contactInformation.emailAddress,'email',createdCompany.email.$pristine,'','',true)" >
+          <small class="error">
+              Please provide a valid email address.
+          </small>
+
+          <input type="text" placeholder="Email" ng-model="newCompany.contactInformation.emailAddress" name="email" >
+
+      </div>
+
+    <button type="reset" class="greyBtnReset" ng-click="createdCompany.$setPristine();resetCreateCompanyForm()">Reset</button>
+    <button analytics-on analytics-event="Create company"  analytics-category="Companies" analytics-label="Cancel" type="button" class="greyBtn " ng-click="newCompany='';changeActiveSection(''); ">Cancel</button>
+    <button analytics-on analytics-event="Create company"  analytics-category="Companies" analytics-label="Success" type="submit" class="orangeBtn">Create</button>
+</form>

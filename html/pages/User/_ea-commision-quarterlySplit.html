@@ -1,0 +1,55 @@
+<div class="col-lg-12 quarterly">
+
+    <input type="text" ng-model="yearlyQuota"  ng-blur="checkYQ()"/>
+    <strong>{{currency}}</strong>
+
+    <div class="panel-title">
+        <a data-toggle="collapse" data-target="#qSplit" href=""><i></i>Quarterly Split</a>
+    </div>
+    <div class="row percent-message">
+        <small class="error" ng-show="currentPercent && currentPercent!=100">
+            <i class="icon-error"></i>- Current percentage is {{currentPercent | number:2}}%. 
+        </small>
+    </div>
+
+    <div id="qSplit" class="panel-collapse collapse">
+        <div class="col-lg-8">
+            <table>
+                <tbody>
+                <tr>
+                    <th></th>
+                    <th>target split</th>
+                    <th></th>
+                    <th>%split</th>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <th width="20">Q1</th>
+                    <td width="100"><input type="text" ng-model="quarterlySplit.Q1.target" ng-keyup="changedValue('q1p',quarterlySplit.Q1.target);" ng-blur="formatNumber('quarterlySplit.Q1.target',quarterlySplit.Q1.target)" /> <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="60" class="quarterly"><input type="text" ng-model="quarterlySplit.q1p" ng-keyup="changedPercent('Q1.target',quarterlySplit.q1p)" ng-blur="formatNumber('quarterlySplit.q1p',quarterlySplit.q1p)"/></td>
+                </tr>
+                <tr>
+                    <th width="20">Q2</th>
+                    <td width="100"><input type="text" ng-model="quarterlySplit.Q2.target" ng-keyup="changedValue('q2p',quarterlySplit.Q2.target)" ng-blur="formatNumber('quarterlySplit.Q2.target',quarterlySplit.Q2.target)"/> <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="60"><input type="text" ng-model="quarterlySplit.q2p" ng-keyup="changedPercent('Q2.target',quarterlySplit.q2p)" ng-blur="formatNumber('quarterlySplit.q2p',quarterlySplit.q2p)"/></td>
+                </tr>
+                <tr>
+                    <th width="20">Q3</th>
+                    <td width="100"><input type="text" ng-model="quarterlySplit.Q3.target" ng-keyup="changedValue('q3p',quarterlySplit.Q3.target)" ng-blur="formatNumber('quarterlySplit.Q3.target',quarterlySplit.Q3.target)"/> <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="60"><input type="text" ng-model="quarterlySplit.q3p" ng-keyup="changedPercent('Q3.target',quarterlySplit.q3p)" ng-blur="formatNumber('quarterlySplit.q3p',quarterlySplit.q3p)"/></td>
+                </tr>
+                <tr>
+                    <th width="20">Q4</th>
+                    <td width="100"><input type="text" ng-model="quarterlySplit.Q4.target" ng-keyup="changedValue('q4p',quarterlySplit.Q4.target)" ng-blur="formatNumber('quarterlySplit.Q4.target',quarterlySplit.Q4.target)"/> <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td  width="60"><input type="text" ng-model="quarterlySplit.q4p" ng-keyup="changedPercent('Q4.target',quarterlySplit.q4p)" ng-blur="formatNumber('quarterlySplit.q4p',quarterlySplit.q4p)"/></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

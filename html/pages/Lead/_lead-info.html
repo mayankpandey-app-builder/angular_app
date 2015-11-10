@@ -1,0 +1,43 @@
+<div class="general-card leads">
+    <div class="check-uncheck">
+        <label>
+            <input type="checkbox" ng-click="selectCard(this, $event);"/>
+            <span></span>
+        </label>
+    </div>
+    <!--<a href="" ng-click="getLeadDetails(lead.id)"></a>-->
+    <div class="inner-box" ng-click = "redirectToLead(lead.id)" analytics-on analytics-event="View details"  analytics-category="Leads" analytics-label="View">
+        <img class="new" ng-hide={{lead.wasSeen}} src="images/img_newbadge.png" alt="" />
+        <div class="head">
+            <img class="smallRoundImg" alt="{{lead.company.name}}" ng-src="{{lead.imageURL}}">
+            <div class = "ellipsisNoWrap smallCardTitle c-blue">{{lead.company.name || '' }}</div>
+            <div class="clear"></div>
+            <p  class = "ellipsisNoWrap">{{lead.leadName || '' }}</p>
+        </div>
+        <div class="lead-contact">
+            <p  class = "ellipsisNoWrap"> {{lead.fullName || '' }}
+                <span >{{lead.contact.position || '-'}}</span>
+            </p>
+        </div>
+        <div class="text-center">
+            <div ng-repeat="leadStage in lead.stage.list" tooltip="{{leadStage}}"  tooltip-placement="bottom" rel="tooltip" data-placement="top" title="{{leadStage}}" ng-class="{'deal-stage-phase-empty': lead.stage.current < $index, 'deal-stage-phase-full': lead.stage.current >= $index}">
+            </div>
+            <!--<div class="progress thin">
+                <div class="progress-bar progress-bar-{{barColor}} stage-{{lead.stage.current}}" role="progressbar"  aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>-->
+        </div>
+        <div class="lead-info clearfix">
+            <div class="nr c-{{bantColor}}">{{lead.bantScore}}</div>
+            <div class="sf"><i class="fa fa-file-text"></i>{{lead.source}}</div>
+        </div>
+        <div class="actions">
+            <i class="fa fa-phone" ng-class="{dark: hasPhone}"></i>
+            <i class="fa fa-envelope" ng-class="{dark:hasEmail}"></i>
+            <i class="fa fa-info" ng-class="{dark:lead.company.namedAccount}"></i>
+            <i class="fa fa-user" ng-class="{dark:isOwner}"></i>
+            <span>{{createdAgo}}</span>
+        </div>
+    </div>
+</div>
+

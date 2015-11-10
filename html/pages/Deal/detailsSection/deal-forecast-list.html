@@ -1,0 +1,44 @@
+<h1>Saved forecasts</h1>
+
+<div class="tplPerson">
+    <div ng-repeat="fList in forecastList">
+        <div class="forecast-list-name c-grey" ng-show="fList.forecasts.length > 0">
+            {{fList.member.firstName}} {{fList.member.lastName}}
+        </div>
+        <ul class="list-unstyled">
+            <li ng-repeat="forecast in fList.forecasts" class="forecast-list-cursor">
+                <div class="forecast-list-name">
+                    <div class="pull-left c-blue forecast-list-name-length ellipsisNoWrap link" ng-click="selectForecast(forecast.id, $parent.$index); getForecastView(selectedForecastsIds); changeActiveSection('forecast-filters');">
+                        {{forecast.name}}
+                    </div>
+                    <div class="pull-right">
+                        {{forecast.createdOn | date: 'd MMM'}}
+                    </div>
+                </div>
+                <div>
+                    <div class="pull-left">
+                        <div class="forecast-list-values">
+                            <icon class="icon-won-deal c-grey"></icon> {{getFormattedAmount(forecast.commitValue) || '-'}}
+                        </div>
+                        <div class="forecast-list-values">
+                            <icon class="icon-dealtypes c-grey"></icon> {{getFormattedAmount(forecast.bestCaseValue) || '-'}}
+                        </div>
+                        <div class="forecast-list-values">
+                            <icon class="icon-pipeline c-grey"></icon> {{getFormattedAmount(forecast.pipelineValue) || '-'}}
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <label>
+                            <input type="checkbox" ng-click="selectForecast(forecast.id, $parent.$index)" ng-checked="isForecastSelected(forecast.id)">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<button class="greyBtn" ng-click="changeActiveSection('filters')">Cancel</button>
+<button class="orangeBtn" ng-click="getForecastView(selectedForecastsIds); changeActiveSection('forecast-filters');">Open</button>

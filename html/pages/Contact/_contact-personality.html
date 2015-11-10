@@ -1,0 +1,9 @@
+<div class="col-lg-6">
+    <div class="inner-box sink ellipsisHidden">
+        <a class="card-link personality"></a>
+        <h1 ng-hide = personality.selectedValue>Personality</h1>
+        <h1 ng-show = personality.selectedValue >{{personality.selectedValue}}</h1>
+        <p class="notes-text" ng-hide = "personality.comments">{{personality.explanatoryText}}</p>
+        <textarea class="notes-text black text-area-card" ng-show = "personality.comments">{{personality.comments}}</textarea>
+    </div>
+</div>

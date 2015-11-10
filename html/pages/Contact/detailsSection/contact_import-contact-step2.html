@@ -1,0 +1,99 @@
+<h1 class="noM">Partial Matches</h1>
+<p>These {{conflictsNumber}} contacts already exists in the application. Please make a choice on which version we should keep. If you skip, no new contacts will be imported.</p>
+
+
+<div class="tplPerson import">
+    <ul class="list-unstyled group1">
+        <a class="merge" href="#"><i class="icon-merge"></i></a>
+        <li ng-repeat="conflict in conflicts">
+            <div class="beforeImg">
+                <img src="images/pics_right_panel/placeholder_contact-photo.png" alt="" />
+            </div>
+
+            <div class="persDesc">
+                <div class="persName">{{conflict.new.firstName}} {{conflict.new.lastName}}</div>
+                <div class="persFunction">{{conflict.new.position || '-'}}</div>
+                <div class="persEmail">email@email.com</div>
+                <div class="persCountry"><i class="icon-address c-grey"></i> {{conflict.new.country || '-'}}</div>
+                <div class="persCompany"><i class="icon-company c-grey"></i> {{conflict.new.company || '-'}}</div>
+            </div>
+
+            <div class="center-right">
+                <label>
+                    <input type="checkbox" id="group1_1" onclick="$(this).parents('li').toggleClass('selected'); checkMerge();" />
+                    <span></span>
+                </label>
+            </div>
+
+        </li>
+    </ul>
+
+    <ul class="list-unstyled group2">
+        <a class="merge" href="#"><i class="icon-merge"></i></a>
+        <li ng-repeat="conflict in conflicts">
+            <div class="beforeImg">
+                <img src="images/pics_right_panel/placeholder_contact-photo.png" alt="" />
+            </div>
+
+            <div class="persDesc">
+                <div class="persName">{{conflict.old.firstName}} {{conflict.old.lastName}}</div>
+                <div class="persFunction">{{conflict.old.position || '-'}}</div>
+                <div class="persEmail">email@email.com</div>
+                <div class="persCountry"><i class="icon-address c-grey"></i> {{conflict.old.country || '-'}}</div>
+                <div class="persCompany"><i class="icon-company c-grey"></i> {{conflict.old.company || '-'}}</div>
+            </div>
+
+            <div class="center-right">
+                <label>
+                    <input type="checkbox" id="group2_1" onclick="$(this).parents('li').toggleClass('selected'); checkMerge();" />
+                    <span></span>
+                </label>
+            </div>
+
+        </li>
+    </ul>
+
+</div>
+
+
+<button class="orangeBtn" id="import-final" ng-click="goToSummary()">Import</button>
+
+
+<script>
+
+    function checkMerge(){
+
+        if ( $('#group1_1').is(':checked') && $('#group1_2').is(':checked') ) {
+
+            $('.group1').addClass('selected');
+            $('.group1 a.merge').css('display','block');
+        }
+        else {
+            $('.group1').removeClass('selected');
+            $('.group1 a.merge').css('display','none');
+        }
+
+        if ( $('#group2_1').is(':checked') && $('#group2_2').is(':checked') ) {
+
+            $('.group2').addClass('selected');
+            $('.group2 a.merge').css('display','block');
+        }
+        else {
+            $('.group2').removeClass('selected');
+            $('.group2 a.merge').css('display','none');
+        }
+    }
+
+    $(document).ready(function(){
+
+        $('#import-final').click(function(){
+
+            $('.detailsSection > section').css('display','none');
+            $('.detailsSection section#contacts_import-summary').fadeIn('slow');
+
+        })
+    })
+
+</script>
+
+

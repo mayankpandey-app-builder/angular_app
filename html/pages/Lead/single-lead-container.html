@@ -1,0 +1,76 @@
+<top-menu class=""></top-menu>
+
+<div class="main-content clearfix">
+    <!-- maine left -->
+    <div class="main-left">
+    <div class="container details" ng-show="leadDetailsLoaded">
+    <div class="row">
+        <div class="col-lg-4">
+            <basic-lead-info basic-details="leadProfile.basicDetails" ng-click="changeActiveSection('update-basic-details')" class="cursor-pointer"></basic-lead-info>
+        </div>
+        <div class="col-lg-2">
+            <solution-area areas="leadProfile.solutionArea" ng-click="changeActiveSection('solutions')"  class="cursor-pointer"></solution-area>
+        </div>
+        <div class="col-lg-2">
+            <lead-shared-with shared-with="leadProfile" ng-click="getSharedWithList()" class="cursor-pointer"></lead-shared-with>
+        </div>
+        <div class="col-lg-4">
+            <lead-rating lead-rating="leadProfile.leadRating"></lead-rating>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <lead-stages current-stage="leadProfile.stage"></lead-stages>
+        </div>
+    </div>
+
+    <div class="row">
+    <div class="col-lg-4">
+        <lead-contacts style="height: 305px;" associated-contacts="leadProfile.associatedContacts"></lead-contacts>
+    </div>
+    <div class="col-lg-4">
+        <div class="row">
+            <!--
+            <div id="pain">Testing 1 2 3</div>
+            -->
+            <div class="col-lg-3">
+                <lead-qualifier key="budget" qualifiers="leadProfile.qualifiers" ng-click="changeActiveSection('update-budget-qualifier')"></lead-qualifier>
+            </div>
+            <div class="col-lg-3">
+                <lead-qualifier key="authority" qualifiers="leadProfile.qualifiers" ng-click="changeActiveSection('update-authority-qualifier')"></lead-qualifier>
+            </div>
+            <div class="col-lg-3">
+                <lead-qualifier key="pain" qualifiers="leadProfile.qualifiers" ng-click="changeActiveSection('update-pain-qualifier')"></lead-qualifier>
+            </div>
+            <div class="col-lg-3">
+                <lead-qualifier key="timeframe" qualifiers="leadProfile.qualifiers" ng-click="changeActiveSection('update-timeframe-qualifier')"></lead-qualifier>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" ng-click="changeActiveSection('add-quicknote')">
+                <lead-quicknotes notes="leadProfile.notes" class="cursor-pointer" style="height: 215px;"></lead-quicknotes>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="row">
+            <list-items items="leadProfile.tasks" type="tasks"></list-items>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <aside class="right">
+
+        <section class="detailsSection " ng-include="showSection()">
+
+        </section>
+
+    </aside>
+</div>
+
+<meeting-invite-modal attendees="meetingAttendees" taskid="taskId"></meeting-invite-modal>
+<convert-lead territories="territories" on-territory-selected="convertLeadToDeal"></convert-lead>

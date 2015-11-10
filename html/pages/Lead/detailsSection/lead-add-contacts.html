@@ -1,0 +1,42 @@
+<h1>Add contacts to lead</h1>
+
+<form class="detailsForm" action="">
+
+    <!-- Search TPL-->
+
+    <input type="search" ng-model="searchAvailableContact" class="searchPers search" placeholder = "Search contact...">
+
+    <p class="text-right">You have selected {{selectedAvailableContacts.length}} of {{contactsAvailableForAssociation.length}} contacts<br />
+        <a id="select-all" ng-click="selectAllAvailableContacts(filteredAvailableContacts);">Select All</a>
+        <a id="reset-btn" ng-click="unselectAllAvailableContacts();">Unselect All</a>
+    </p>
+
+    <div class="tplPerson">
+        <ul class="list-unstyled">
+            <li ng-repeat="availableContact in (filteredAvailableContacts = (contactsAvailableForAssociation | filter: searchAvailableContact))" ng-click="selectAvailableContact(availableContact.id)">
+                <div class="beforeImg">
+                    <img class="smallRoundImg" ng-src={{setImage(availableContact.imageURL)}} alt="" />
+                </div>
+                <div class="persDesc">
+                    <div class="persName">{{availableContact.firstName}} {{availableContact.lastName}}</div>
+                    <div class="persFunction">{{availableContact.position}}</div>
+                    <div class="persEmail">{{availableContact.email}}</div>
+                </div>
+
+                <div class="center-right check-uncheck-imported">
+                    <label>
+                        <input type="checkbox" ng-click="selectAvailableContact(availableContact.id)" ng-checked="isAvailableContactChecked(availableContact.id)">
+                        <span></span>
+                    </label>
+                </div>
+                <!-- <div class="center-right check-uncheck-imported" ng-show="sharedWithMember.canBeDeleted">
+                     <a>Delete</a>
+                 </div>-->
+            </li>
+        </ul>
+
+    </div>
+</form>
+
+<button class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
+<button class="orangeBtn" ng-click="associateContacts()">Next</button>

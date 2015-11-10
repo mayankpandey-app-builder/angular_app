@@ -1,0 +1,32 @@
+<h1>Search Prospect:</h1>
+<!--<p>Lorem ipsum lorem lorem lipsum Lorem Ipsum</p>-->
+
+<form class = "detailsForm" action="">
+
+    <input type="search" class="searchPers search" placeholder = "Search prospect..." ng-model="lead.searchLead" ng-change="searchLead('{{lead.searchLead}}')">
+
+    <div class="tplPerson" ng-repeat="lead in leadsResultsList">
+        <ul class="list-unstyled">
+            <li>
+                <div class="beforeImg">
+                    <img ng-src="{{lead.company.imageURL || 'images/pics_right_panel/placeholder_contact-photo.png' }}" alt="" />
+                </div>
+
+                <div class="persDesc">
+                    <div class="persName">{{lead.contact.firstName}} {{lead.contact.lastName}}</div>
+                    <div class="persFunction">{{lead.contact.position}}</div>
+                    <div class="persEmail">{{lead.contact.email || 'sample@test.com'}}</div>
+                </div>
+
+                <div class="center-right">
+                    <label>
+                        <input type="checkbox" />
+                        <span></span>
+                    </label>
+                </div>
+
+            </li>
+        </ul>
+
+    </div>
+</form>

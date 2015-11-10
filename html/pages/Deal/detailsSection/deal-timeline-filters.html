@@ -1,0 +1,119 @@
+<h1>Filters</h1>
+
+<ul class="selected-filters">
+    <li ng-repeat="appliedFilter in allTimelineFilters">
+        {{appliedFilter.displayName}} - {{appliedFilter.name}}<a
+            class="pull-right" ng-click="applyTimelineFilter('type', appliedFilter.name, 'Type')"><i class="icon-x"></i></a>
+    </li>
+    <li ng-show="thisWeekFilter.active">
+        Deadline - This Week<a
+            class="pull-right" ng-click="setThisWeekFilter();"><i class="icon-x"></i></a>
+    </li>
+    <li ng-show="nextWeekFilter.active">
+        Deadline - Next Week<a
+            class="pull-right" ng-click="setNextWeekFilter();"><i class="icon-x"></i></a>
+    </li>
+    <li ng-show="overdueTimelineFilter">
+        Deadline - Overdue<a
+            class="pull-right" ng-click="toggleOverdueFilter();"><i class="icon-x"></i></a>
+    </li>
+    <li ng-show="statusDoneTimelineFilter == 'done'">
+        Status - Done<a
+            class="pull-right" ng-click="setDoneFilter();"><i class="icon-x"></i></a>
+    </li>
+    <li ng-show="statusOpenTimelineFilter == 'open'">
+        Status - Open<a
+            class="pull-right" ng-click="setOpenFilter();"><i class="icon-x"></i></a>
+    </li>
+</ul>
+<p class="text-right" style="margin-bottom: 0;"><a class="cursor-pointer" ng-click="clearAllTimelineFilters()">Clear All</a></p>
+
+<div class="panel-group" id="accordion">
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#forecast-type" href="#forecast-type"><i></i>Type</a>
+        </h4>
+    </div>
+    <div id="forecast-type" class="panel-collapse collapse in">
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" ng-click="applyTimelineFilter('type', 'Qualifiers', 'Type')" ng-checked="isTypeTimelineFilter('qualifier')"/>
+                    <span>Qualifiers</span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" ng-click="applyTimelineFilter('type', 'Milestones', 'Type')" ng-checked="isTypeTimelineFilter('milestone')"/>
+                    <span>Milestones</span>
+                </label>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#date" href="#date"><i></i>Deadline</a>
+        </h4>
+    </div>
+    <div id="date" class="panel-collapse collapse in">
+        <ul>
+            <li>
+
+                <label>
+                    <input type="radio" ng-click="setThisWeekFilter();" ng-checked="thisWeekFilter.active"/>
+                    <span>This Week</span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" ng-click="setNextWeekFilter();" ng-checked="nextWeekFilter.active"/>
+                    <span>Next Week</span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" ng-click="toggleOverdueFilter();" ng-checked="overdueTimelineFilter"/>
+                    <span>Overdue</span>
+                </label>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#status" href="#status"><i></i>Status</a>
+        </h4>
+    </div>
+    <div id="status" class="panel-collapse collapse in">
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" ng-click="setDoneFilter(); " ng-checked="statusDoneTimelineFilter == 'done'" ng-disabled="statusDoneTimelineFilter == 'done' && !statusOpenTimelineFilter"/>
+                    <span>Done</span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" ng-click="setOpenFilter();" ng-checked="statusOpenTimelineFilter == 'open'" ng-disabled="statusOpenTimelineFilter == 'open' && !statusDoneTimelineFilter"/>
+                    <span>Open</span>
+                </label>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</div>
+<script>
+
+    $('.panel-title > a').click(function(e) {
+        e.preventDefault();
+    });
+
+</script>

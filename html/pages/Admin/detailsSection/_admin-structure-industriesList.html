@@ -1,0 +1,22 @@
+<div class="col-lg-3">
+    <div class="inner-box">
+        <h2>Industries <a href="" class="pull-right" ng-click="addIn=true; focusNew=true">Add</a></h2>
+        <ul class="content-links see-more">
+            <li ng-show="addIn">
+                <input type="text" class="searchCompanies search" ng-model="newIndustry" focus-me="focusNew"
+                       placeholder="Industry Name"
+                       ng-blur="addIn=false; addIndustry(newIndustry)"/>
+            </li>
+            <li ng-repeat="industry in (filteredIndustry = (organization.industries | filter: newIndustry)) | limitTo:limit||14">
+                <input type="text" ng-hide="!updateEntry" ng-model="industry" focus-me="focusEdit"
+                       placeholder="Industry name"
+                       ng-blur="updateEntry=false; updateIndustry($index, industry);"/>
+                <a ng-click="updateEntry=true; focusEdit=true" ng-show="!updateEntry">{{industry}}
+                    <i class="icon-x" ng-click="updateIndustry($index);"></i>
+                </a>
+            </li>
+            <li ng-hide="isMore"><a class="pull-right" href="" ng-click="seeMore()">See more</a></li>
+            <li ng-show="isMore"><a class="pull-right" href="" ng-click="seeMore('less')">See less</a></li>
+        </ul>
+    </div>
+</div>

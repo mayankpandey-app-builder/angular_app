@@ -1,0 +1,71 @@
+<h1>Lead Info</h1>
+
+<form  class = "detailsForm" ng-submit = "updateLeadInformation(leadProfile.basicDetails)" novalidate>
+    <input type="text" placeholder = "Company Name *" required
+           ng-model="leadProfile.basicDetails.companyName"
+           ng-blur ="updateLeadInformation(leadProfile.basicDetails)" disabled="{{!leadProfile.basicDetails.companyName.length > 0}}" ng-class = "{'cursor-none': !leadProfile.basicDetails.companyName.length}"/>
+    <input type="text" placeholder = "Lead Name"
+           ng-model="leadProfile.basicDetails.leadName"
+           ng-blur ="updateLeadInformation(leadProfile.basicDetails)" />
+    <input type="text" placeholder = "Contact Name"
+           ng-model="leadProfile.basicDetails.contactName"
+           ng-blur ="updateLeadInformation(leadProfile.basicDetails)" />
+    
+    <div class="inlineInput">
+        <input class  = "" type="text" placeholder = "Lead Value"
+               ng-model="leadProfile.basicDetails.leadValue.amount"
+               ng-blur ="updateLeadInformation(leadProfile.basicDetails)" ng-keypress="validateNumber();"/>
+        <input type="text" placeholder="Currency"
+               ng-model="leadProfile.basicDetails.leadValue.currency"
+               typeahead="currency for currency in currencies | filter:$viewValue:startsWidth | limitTo:10"
+               typeahead-on-select="updateLeadInformation(leadProfile.basicDetails)">
+    </div>
+    <input type="text" placeholder="Country"
+           ng-model="leadProfile.basicDetails.country"
+           typeahead="country for country in countries | filter:$viewValue:startsWidth | limitTo:10"
+           typeahead-on-select="updateLeadInformation(leadProfile.basicDetails)">
+    <div class="radios">
+        <label><input type="radio" value="Hot" name="status"
+                      ng-change="updateLeadInformation(leadProfile.basicDetails)" ng-model="leadProfile.basicDetails.leadStatus"/><span>Hot</span></label>
+        <label><input type="radio" value="Warm" name="status"
+                      ng-change="updateLeadInformation(leadProfile.basicDetails)" ng-model="leadProfile.basicDetails.leadStatus"/><span>Warm</span></label>
+        <label><input type="radio" value="Cold" name="status"
+                      ng-change="updateLeadInformation(leadProfile.basicDetails)" ng-model="leadProfile.basicDetails.leadStatus"/><span>Cold</span></label>
+        <label><input type="radio" value="Trash" name="status"
+                      ng-change="updateLeadInformation(leadProfile.basicDetails)" ng-model="leadProfile.basicDetails.leadStatus"/><span>Trash</span></label>
+    </div>
+</form>
+
+<div class="modal fade" id="selectReason" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="myModalLabel">Send to Trash</h1>
+
+            </div>
+
+            <div class="modal-body">
+                <input type="text" placeholder = "Enter a tag" class="searchCompanies search" ng-model="reasonTag.displayValue " />
+                <h1 class="modal-title">Reasons</h1>
+                <br/>
+                <div class="tplReason">
+                    <table class="table table-striped">
+                        <tr ng-repeat="reason in reasons">
+                            <td class="col-lg-11">
+                                {{reason.displayValue}}
+                                <a ng-if="reasonTag.displayValue  !== reason.displayValue" class="pull-right c-blue" href="" ng-click="selectReason(reason)">Select</a>
+                                <i ng-if="reasonTag.displayValue  === reason.displayValue" class="icon-ok-modal c-blue pull-right" ng-click="reasonTag.displayValue=''"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="greyBtn" data-dismiss="modal" ng-click="reasonTag.displayValue=''; getLeadDetails(leadProfile.id)">Cancel</button>
+                <button class="orangeBtn" ng-click="updateStatuses('Trash', reasonTag.displayValue )">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

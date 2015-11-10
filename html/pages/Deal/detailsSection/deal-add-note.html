@@ -1,0 +1,11 @@
+<h1>Add New Note</h1>
+<form class="detailsForm" name = "createNote" action="" ng-submit="addNote(newDealNote)" novalidate>
+
+    <input type="text" placeholder="Note Title *" name="title" ng-model="newDealNote.title">
+
+    <textarea msd-elastic placeholder="Add description" rows="6" class="form-control form-textarea"
+              ng-model="newDealNote.text"></textarea>
+
+    <button type="button" class="greyBtn " ng-click="newDealNote = {}; changeActiveSection('')">Cancel</button>
+    <button type="submit" class="orangeBtn">Accept</button>
+</form>

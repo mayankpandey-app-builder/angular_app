@@ -1,0 +1,84 @@
+<div class="col-lg-12 tasks-list">
+    <h1>Overdue tasks</h1>
+    <span ng-hide="overdueEvents.length >0">No overdue tasks</span>
+    <div class="task-box" ng-click="selectTask($event,taskList.task.id); " analytics-on analytics-event="View details"  analytics-category="Tasks" analytics-label="View" ng-repeat="taskList in overdueEvents track by $index" ng-class="{'selected': currentTaskId === taskList.task.id}">
+        <div class="task-content " ng-class="getBorderLeftColor(taskList.end_date);">
+            <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-5 ellipsisNoWrap">
+                    <i class="icon-error" ng-class="{'important': taskList.task.important}"></i>
+                    <i class="icon-{{taskList.task.taskType}}"></i>
+                    <strong>{{taskList.task.name}}</strong>
+                </div>
+                <div class="col-lg-4 ellipsisNoWrap">
+                    {{taskList.task.description || 'No description provided'}}
+                </div>
+                <div class="col-lg-3 text-right">
+                    <img ng-src="{{taskList.task.assignee.imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg" tooltip="{{taskList.task.assignee.firstName}} {{taskList.task.assignee.lastName}}" tooltip-placement="bottom"/>
+                    &nbsp;
+                    {{taskList.task.start | date:'dd MMM, HH:mm'}}
+                </div>
+
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <h1>Scheduled tasks</h1>
+
+    <div class="task-box" ng-click="selectTask($event,taskList.task.id); " ng-repeat="taskList in events track by $index" ng-show="!taskList.overdue">
+        <div class="task-content " ng-class="getBorderLeftColor(taskList.end_date);">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-5 ellipsisNoWrap">
+                        <i class="icon-error" ng-class="{'important': taskList.task.important}"></i>
+                        <i class="icon-{{taskList.task.taskType}}"></i>
+                        <strong>{{taskList.task.name}}</strong>
+                    </div>
+                    <div class="col-lg-4 ellipsisNoWrap">
+                        {{taskList.task.description || 'No description provided'}}
+                    </div>
+                    <div class="col-lg-3 text-right">
+                        <img ng-src="{{taskList.task.assignee.imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg" title="{{taskList.task.assignee.firstName}} {{taskList.task.assignee.lastName}}"/>
+                        &nbsp;
+                        {{taskList.task.start | date:'dd MMM, HH:mm'}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <h1>Unscheduled tasks</h1>
+    <span ng-hide="unscheduledEvents.length>0">No unscheduled tasks</span>
+    <div class="task-box" ng-click="selectTask($event,taskList.task.id); " ng-repeat="taskList in unscheduledEvents track by $index">
+        <div class="task-content grey-bleft" >
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-5 ellipsisNoWrap">
+                        <i class="icon-error" ng-class="{'important': taskList.task.important}"></i>
+                        <i class="icon-{{taskList.task.taskType}}"></i>
+                        <strong>{{taskList.task.name}}</strong>
+                    </div>
+                    <div class="col-lg-4 ellipsisNoWrap">
+                        {{taskList.task.description || 'No description provided'}}
+                    </div>
+                    <div class="col-lg-3 text-right">
+                        <div class="col-lg-7 text-right">
+                        <img ng-src="{{taskList.task.assignee.imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg" title="{{taskList.task.assignee.firstName}} {{taskList.task.assignee.lastName}}"/>
+                        </div>
+                        <div class="col-lg-5">&nbsp;</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

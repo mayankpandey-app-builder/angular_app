@@ -1,0 +1,40 @@
+<h1>Manage attendees</h1>
+
+<form class="detailsForm" action="">
+
+    <div class="top-search">
+        <input type="search searchPers" class="searchPers search" placeholder="Add attendee"
+               ng-model="search.attendee"
+               ng-keyup = "searchAttendee(search.attendee)"
+               typeahead="s.displayValue for s in searchSuggestionsList || '' | limitTo:10"
+               typeahead-on-select="addAttendee($item)"
+               typeahead-min-length="3"
+               typeahead-wait-ms = "300">
+    </div>
+
+    <div class="tplPerson">
+        <ul class="list-unstyled">
+            <li ng-repeat="attendee in meetingMinuteInfo.attendees">
+                <div class="beforeImg">
+                    <img class="smallRoundImg" ng-src="{{attendee.imageURL || 'images/placeholder_contact-photo.png'}}" alt="" />
+                </div>
+                <div class="persDesc">
+                    <div class="persName ellipsisNoWrap">{{attendee.firstName}} {{attendee.lastName}}</div>
+                    <div class="persFunction ellipsisNoWrap">{{attendee.company || '-'}}</div>
+                    <div class="persEmail ellipsisNoWrap">{{attendeeEmailAddress(attendee) || '-'}}</div>
+                </div>
+
+                <div class="center-right check-uncheck-imported">
+                    <label>
+                        <input type="checkbox" ng-click="attendee.selected = !attendee.selected" ng-checked="attendee.selected">
+                        <span name="{{attendee.firstName}} {{attendee.lastName}}"></span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</form>
+
+
+<button class="greyBtn" ng-click="changeActiveSection('qualifiers');">Close</button>

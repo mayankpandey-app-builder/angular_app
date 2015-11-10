@@ -1,0 +1,23 @@
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+ <!-- <div class="modal-dialog" ng-style="{'width': myModal.width}">-->
+ <div class="modal-dialog" style="width: 20%;z-index:10000">
+      <div class="modal-content">
+
+          <div class="modal-header">
+              <h1 class="modal-title" id="myModalLabel">{{myModal.title}}</h1>
+          </div>
+
+          <div class="modal-body">
+              <h2>{{myModal.info}}</h2>
+          </div>
+
+          <div class="modal-footer">
+              <button analytics-on analytics-event="{{myModal.analyticsAction}}"  analytics-category="{{myModal.analyticsContext}}" analytics-label="Cancel" ng-show="myModal.decline.length > 0" class="greyBtn" data-dismiss="modal" ng-click = "myModal.declineAction()">{{myModal.decline}}</button>
+              <button analytics-on analytics-event="{{myModal.analyticsAction}}"  analytics-category="{{myModal.analyticsContext}}" analytics-label="Success" class="orangeBtn" ng-click = "myModal.acceptAction()">{{myModal.accept}}</button>
+          </div>
+
+
+      </div>
+  </div>
+</div>
+

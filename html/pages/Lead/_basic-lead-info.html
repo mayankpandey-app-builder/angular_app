@@ -1,0 +1,31 @@
+<div class="inner-box sink">
+    <div class="lead-box">
+        <div class="lead-logo">
+            <img class="bigRoundImg" ng-src="{{basicDetails.companyImageURL || 'images/placeholder_company.png'}}" alt=""/>
+        </div>
+        <div class="lead-info max-width-80 lead-basic-info">
+            <h2><i class="icon-company pull-left"></i> <div class = "ellipsisNoWrap c-blue">{{basicDetails.companyName}}</div></h2>
+
+            <h2><i class="icon-lead pull-left"></i> <div class = "ellipsisNoWrap c-blue">{{basicDetails.leadName}}</div></h2>
+
+            <h2><i class="fa fa-user pull-left"></i> <div class = "ellipsisNoWrap c-blue">{{basicDetails.contactName}}</div></h2>
+        </div>
+        <div class="clear"></div>
+
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td><i class="icon-outbound"></i> {{basicDetails.leadSourceType || '-'}}</td>
+                <td class = "ellipsisNoWrap max-width-100px" style="width: 100px;"><i class="icon-budget " ></i> {{getFormattedAmountFunc(basicDetails.leadValue.amount)}} {{basicDetails.leadValue.currency || '-'}} </td>
+                <td><i class="icon-namedaccount"></i> {{namedAccount}}</td>
+            </tr>
+            <tr>
+                <td><i class="icon-source"></i> {{basicDetails.leadSource || '-'}}</td>
+                <td><i class="icon-address"></i> {{basicDetails.country || '-' | truncate: 10}}</td>
+                <td><i class="icon-deadline"></i> {{createdAgo}}</td>
+            </tr>
+            <tr>
+                <td><i class="icon-converted"></i> {{basicDetails.leadStatus || '-'}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

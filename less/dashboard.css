@@ -1,0 +1,87 @@
+.dashboard h1 {
+  color: white;
+}
+.dashboard .col-lg-4 {
+  max-width: 150px;
+}
+.dashboard .inner-box {
+  margin-top: 20px;
+  background: #fff;
+  max-height: 280px;
+  opacity: 0.8;
+}
+.dashboard .inner-box .big-box {
+  min-height: 280px;
+  max-height: 280px;
+}
+.dashboard .inner-box.small-box {
+  min-height: 130px;
+  max-height: 280px;
+}
+.dashboard .inner-box.logo {
+  display: table;
+}
+.dashboard .inner-box .x-scrollable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 0;
+  max-height: 220px;
+}
+.dashboard .inner-box h1,
+.dashboard .inner-box h2,
+.dashboard .inner-box .center-paragraph {
+  text-align: center;
+}
+.dashboard .inner-box .left-h1 {
+  text-align: left;
+}
+.dashboard .inner-box .border {
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #d3d3d3;
+  padding: 0 0 15px 0;
+  margin: 0px 0 15px 0;
+}
+.dashboard .inner-box .border.top-border {
+  border-top: 1px solid #cecece;
+  padding: 15px 0 15px  0;
+}
+.dashboard .inner-box .box-sizing {
+  margin: 35px 0 35px 0;
+}
+.dashboard .inner-box .deals-row {
+  margin-bottom: 0;
+}
+.dashboard .inner-box .content-box {
+  margin-top: 40px;
+}
+.dashboard .inner-box .time {
+  font-size: 9px;
+}
+.dashboard .inner-box .logo-image {
+  display: table-cell;
+  vertical-align: bottom;
+}
+.dashboard .inner-box .logo-image img {
+  margin-left: 10px;
+}
+.dashboard-main-content {
+  background-image: url('/images/dashboard_background.jpg');
+  background-repeat: no-repeat;
+  background-position-y: 50px;
+  height: 100%;
+}
+.dashboard-leads-row {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.dashboard-leads-box {
+  max-height: 130px !important;
+}
+.dashboard-referral-placeholder {
+  background-image: url('/images/refer_dashboard.png');
+  background-repeat: no-repeat;
+  height: 42px;
+  width: 73px;
+  margin-left: 35%;
+}

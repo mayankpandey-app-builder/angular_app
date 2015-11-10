@@ -1,0 +1,12 @@
+<div class="inner-box bg-gray">
+    <h1>Notifications</h1>
+    <ul>
+        <li ng-hide="notifications.length>0">There are no notifications</li>
+        <li ng-repeat="notification in notifications">
+            <a href="">{{notification}}
+                <span class="pull-right" ng-show="notification"><i class="icon-error danger"></i></span>
+            </a>
+        </li>
+    </ul>
+
+</div>

@@ -1,0 +1,10 @@
+<div class="inner-box sink">
+    <h1>Followers</h1>
+    <ul class="contacts">
+        <li ng-repeat="follower in followers">
+            <span>{{follower.memberName}}</span>
+            <span ng-show="follower.memberId == ownerId">(owner)</span>
+            <div>{{follower.memberPosition}}</div>
+        </li>
+    </ul>
+</div>

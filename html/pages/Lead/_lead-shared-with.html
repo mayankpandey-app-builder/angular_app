@@ -1,0 +1,13 @@
+<div class="inner-box sink scrollableHidden">
+    <a class="card-link" id="shared-with"></a>
+
+    <h1>Shared With</h1>
+    <ul class="contacts">
+        <li ng-repeat="sharedWithContact in shareWithContacts">
+            <span>{{sharedWithContact.memberName}}</span>
+            <span ng-show="sharedWithContact.memberId == ownerId">(owner)</span>
+            <span ng-show="sharedWithContact.memberId == assigneeId">(assignee)</span>
+            <div>{{sharedWithContact.memberPosition}}</div>
+        </li>
+    </ul>
+</div>

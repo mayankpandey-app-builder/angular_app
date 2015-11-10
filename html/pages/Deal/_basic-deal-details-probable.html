@@ -1,0 +1,33 @@
+<div class="general-card deal">
+
+    <div ng-click="updateProbability(deal.id)" class="inner-box" ng-class="{'is-probable':deal.probable,'grey-bleft': deal.dealFlagStatus == 3, 'green-bleft': deal.dealFlagStatus == 0, 'yellow-bleft': deal.dealFlagStatus == 1, 'orange-bleft': deal.dealFlagStatus == 2}">
+            <div class="head">
+                <img class="smallRoundImg" ng-src="{{deal.companyImageURL || 'images/icn_company.png'}}" alt=""/>
+
+                <h2 class="ellipsisNoWrap smallCardTitle">{{deal.companyName}}</h2>
+
+                <p>{{deal.closeDate || '-' | date: 'd MMM'}}</p>
+            </div>
+
+            <p class="bold blue ellipsisNoWrap">{{deal.dealName}}</p>
+
+            <div class="pogress">
+                <div class="progress thin">
+                    <div class="progress-bar deal-stage-{{deal.stage.current}}" role="progressbar" aria-valuemin="0"
+                         aria-valuemax="100">
+                    </div>
+                </div>
+            </div>
+            <div class="info clearfix">
+                <span class="pull-left"><i class="icon-budget"></i>{{getFormattedAmount(deal.dealValue.amount)}}</span>
+                <span class="pull-right"><i
+                        ng-class="{'icon-won-deal': deal.dealStatus == 'Commit', 'icon-dealtypes': deal.dealStatus == 'Best case', 'icon-pipeline': deal.dealStatus == 'Pipeline'}"></i>{{deal.dealStatus}}</span>
+            </div>
+        <div class="actions">
+            <span ng-class="{'c-grey': deal.products.indexOf('Licenses') == -1}">LIC</span>
+            <span ng-class="{'c-grey': deal.products.indexOf('Services') == -1}">SER</span>
+            <span ng-class="{'c-grey': deal.products.indexOf('Maintenance') == -1}">MAI</span>
+            <span><i ng-class="{'c-blue': deal.probable}" class="icon-flag"></i></span>
+        </div>
+    </div>
+</div>

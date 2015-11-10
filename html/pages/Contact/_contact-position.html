@@ -1,0 +1,9 @@
+<div class="col-lg-6">
+    <div class="inner-box sink ellipsisHidden">
+        <a class="card-link position"></a>
+        <h1 ng-hide="hierarchicalPosition.selectedValue">Position</h1>
+        <h1 ng-show="hierarchicalPosition.selectedValue">{{hierarchicalPosition.selectedValue}}</h1>
+        <p class="notes-text" ng-hide = "hierarchicalPosition.comments">{{hierarchicalPosition.explanatoryText}}</p>
+        <textarea class="notes-text black text-area-card" ng-show = "hierarchicalPosition.comments">{{hierarchicalPosition.comments}}</textarea>
+    </div>
+</div>

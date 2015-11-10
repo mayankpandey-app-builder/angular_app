@@ -1,0 +1,28 @@
+<div class="general-card contacts">
+    <div class="check-uncheck">
+        <label>
+            <input type="checkbox" onclick="select_card(this);" />
+            <span></span>
+        </label>
+    </div>
+    
+    <div class="inner-box" ng-click = "redirectToContact(contact.id)">
+        <div class="head">
+            <img alt="" ng-src="{{contact.imageURL}}">
+            <p class="c-blue">{{contact.firstName}} {{contact.lastName}}</p>
+            <p><strong>{{contact.company}}</strong></p>
+            <p ng-show="!contact.company">&nbsp;</p>
+            <p>{{contact.position}}</p>
+        </div>
+
+        <p ng-show="contact.email.length > 0" class="normal-one-line"><i class="icon-email c-grey"></i>{{contact.email}}</p>
+        <p ng-show="contact.mobileNo.length > 0"><i class="icon-call c-grey"></i>{{contact.mobileNo}}</p>
+        <p class="normal-one-line"><i class="icon-email c-grey"></i>Next task lorem ipsum dolor sit...</p>
+
+        <div class="actions c-grey">
+            TL&nbsp;&nbsp;
+            D&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>4</span>
+        </div>
+    </div>
+</div>

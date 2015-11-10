@@ -1,0 +1,13 @@
+<h1>Add quick notes</h1>
+
+<div style="height: 420px; overflow-y: scroll;">
+<!--<span class="date quicknotes">{{currentDate | date : 'dd-MMM-yyyy'}} - {{currentUser}}</span>-->
+<textarea msd-elastic text="" description="" ng-model="newNote.text" ng-blur="addQuickNote(newNote, leadProfile.notes)" placeholder="Add quick note..." rows="3" class="form-control form-textarea quicknotes"></textarea>
+
+<div ng-repeat="note in leadProfile.notes">
+    <span class="date quicknotes">{{note.timestamp | date : 'dd-MMM-yyyy'}} - {{note.author}}</span>
+    <textarea msd-elastic text="" description="" ng-model="note.text" ng-blur="addQuickNote(newNote, leadProfile.notes)" placeholder="Add quick note..." rows="3" class="form-control form-textarea quicknotes"></textarea>
+</div>
+</div>
+<button class="greyBtn" ng-click="changeActiveSection('')">Cancel</button>
+<!--<button class="orangeBtn" ng-click="addQuickNote(newNote, leadProfile.notes)">Add</button>-->

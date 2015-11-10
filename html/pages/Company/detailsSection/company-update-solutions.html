@@ -1,0 +1,10 @@
+<h1>Solutions</h1>
+
+<ul class="solutions-list">
+    <li ng-repeat="solution in companyProfile.solutionArea">
+        <label>
+            <input type="checkbox" ng-click="selectSolution($index);" ng-checked="solution.selected"/>
+            <span>{{solution.solutionName}}</span>
+        </label>
+    </li>
+</ul>

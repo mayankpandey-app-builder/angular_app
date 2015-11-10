@@ -1,0 +1,74 @@
+<div class="row ramps-kickers">
+        <div class="col-lg-12">
+            <!--<div class="level">-->
+                <!--<small class="error" ng-show="validLevels">-->
+                    <!--<i class="icon-error"></i>- Invalid levels target.-->
+                <!--</small>-->
+            <!--</div>-->
+            <table>
+                <tbody>
+                <tr>
+                    <th></th>
+                    <th>from </th>
+                    <th>to</th>
+                    <th>target</th>
+                    <th></th>
+                    <th>target%</th>
+                    <th></th>
+                    <th>commission rate</th>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <th width="20">Level1</th>
+                    <td width="100">{{baseline || '0'}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10"></td>
+                    <td width="100"><input type="text" ng-model="rampsAndKickers.level1.target" ng-keyup="changedTarget('level1.percent',rampsAndKickers.level1.target);" ng-blur="formatNumber('rampsAndKickers.level1.target',rampsAndKickers.level1.target)"/> <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td width="70"><input type="text" ng-model="rampsAndKickers.level1.percent" ng-keyup="changedPercents('level1.target',rampsAndKickers.level1.percent);" ng-blur="formatNumber('rampsAndKickers.level1.percent',rampsAndKickers.level1.percent)"/></td>
+                    <td width="10">-</td>
+                    <td width="50"><input type="text" ng-model="rampsAndKickers.level1.commissionPercentage" ng-blur="formatNumber('rampsAndKickers.level1.commissionPercentage',rampsAndKickers.level1.commissionPercentage)"/></strong></td>
+                </tr>
+                <tr ng-class="{'grey-disabled':!rampsAndKickers.level1.target || rampsAndKickers.level1.target=='0.00' || rampsAndKickers.level2.target=='0.00'}">
+                    <th width="20">Level2</th>
+                    <td width="100">{{rampsAndKickers.level1.target}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10"></td>
+                    <td width="100"><input type="text" ng-model="rampsAndKickers.level2.target" ng-keyup="changedTarget('level2.percent',rampsAndKickers.level2.target);" ng-blur="formatNumber('rampsAndKickers.level2.target',rampsAndKickers.level2.target)" ng-disabled="!rampsAndKickers.level1.target"/> <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td width="70"><input type="text" ng-model="rampsAndKickers.level2.percent" ng-keyup="changedPercents('level2.target',rampsAndKickers.level2.percent);" ng-blur="formatNumber('rampsAndKickers.level2.percent',rampsAndKickers.level2.percent)" ng-disabled="!rampsAndKickers.level1.target"/></td>
+                    <td width="10">-</td>
+                    <td width="50"><input type="text" ng-model="rampsAndKickers.level2.commissionPercentage" ng-blur="formatNumber('rampsAndKickers.level2.commissionPercentage',rampsAndKickers.level2.commissionPercentage)" ng-disabled="!rampsAndKickers.level1.target"/></strong></td>
+                </tr>
+                <tr ng-class="{'grey-disabled':!rampsAndKickers.level2.target || rampsAndKickers.level2.target=='0.00' || rampsAndKickers.level3.target=='0.00'}">
+                    <th width="20">Level3</th>
+                    <td width="100">{{rampsAndKickers.level2.target}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10"></td>
+                    <td width="100"><input type="text" ng-model="rampsAndKickers.level3.target" ng-keyup="changedTarget('level3.percent',rampsAndKickers.level3.target);" ng-blur="formatNumber('rampsAndKickers.level3.target',rampsAndKickers.level3.target)" ng-disabled="!rampsAndKickers.level2.target"/><strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td width="70"><input type="text" ng-model="rampsAndKickers.level3.percent" ng-keyup="changedPercents('level3.target',rampsAndKickers.level3.percent);" ng-blur="formatNumber('rampsAndKickers.level3.percent',rampsAndKickers.level3.percent)" ng-disabled="!rampsAndKickers.level2.target"/></td>
+                    <td width="10">-</td>
+                    <td width="50"><input type="text" ng-model="rampsAndKickers.level3.commissionPercentage" ng-blur="formatNumber('rampsAndKickers.level3.commissionPercentage',rampsAndKickers.level3.commissionPercentage)" ng-disabled="!rampsAndKickers.level2.target"/></strong></td>
+                </tr>
+                <tr ng-class="{'grey-disabled':!rampsAndKickers.level3.target || rampsAndKickers.level3.target=='0.00' || rampsAndKickers.level4.target=='0.00' }">
+                    <th width="20">Level4</th>
+                    <td width="100">{{rampsAndKickers.level3.target}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10"></td>
+                    <td width="100"><input type="text" ng-model="rampsAndKickers.level4.target" ng-keyup="changedTarget('level4.percent',rampsAndKickers.level4.target);" ng-blur="formatNumber('rampsAndKickers.level4.target',rampsAndKickers.level4.target)" ng-disabled="!rampsAndKickers.level3.target"/> <strong>{{currency||'-'}}</strong></td>
+                    <td width="10">-</td>
+                    <td width="70"><input type="text" ng-model="rampsAndKickers.level4.percent" ng-keyup="changedPercents('level4.target',rampsAndKickers.level4.percent);" ng-blur="formatNumber('rampsAndKickers.level4.percent',rampsAndKickers.level4.percent)" ng-disabled="!rampsAndKickers.level3.target"/></td>
+                    <td width="10">-</td>
+                    <td width="50"><input type="text" ng-model="rampsAndKickers.level4.commissionPercentage" ng-blur="formatNumber('rampsAndKickers.level4.commissionPercentage',rampsAndKickers.level4.commissionPercentage)" ng-disabled="!rampsAndKickers.level3.target"/></strong></td>
+                </tr>
+                <tr>
+                    <th width="20">Above</th>
+                    <td width="100">{{getAbove() || 0}} <strong>{{currency||'-'}}</strong></td>
+                    <td width="10"></td>
+                    <td width="100"></td>
+                    <td width="10"></td>
+                    <td width="70"></td>
+                    <td width="10">-</td>
+                    <td width="50"><input type="text" ng-model="rampsAndKickers.aboveLastLevelCommissionPercentage" ng-blur="formatNumber('rampsAndKickers.aboveLastLevelCommissionPercentage',rampsAndKickers.aboveLastLevelCommissionPercentage)"/></strong></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+</div>

@@ -1,0 +1,26 @@
+<div>
+
+    <div class="col-lg-2" ng-class="{'border-right': stage.name!=stages[stages.length-1].name}" ng-drop="true" ng-drop-success="onDropQualifierComplete($data,$event,this)"
+         ng-repeat="stage in stages">
+        <div class="row">
+            <div class="col-lg-12 status-bar" ng-class="{'first': stage.name==stages[0].name, 'last':stage.name==stages[stages.length].name}">
+                <div ng-class="{'first': stage.name==stages[0].name, 'last':stage.name==stages[stages.length-1].name, 'done':stage.selected==true}">
+                    <span ng-click="updateStage(stage.name)">{{stage.name}}</span></div>
+            </div>
+        </div>
+
+        <div class="row stones">
+            <div class="col-lg-6" ng-repeat="stone in stage.qualifiersAndMilestones">
+                <div class="inner-box link sink half" ng-drag="true" ng-drag-data="stone"
+                        ng-class="getStoneColor(stone);"
+                        ng-click="changeStoneSection(stone,$parent.stage.name, $parent.$index, $index)">
+                    <div class="t-cell">
+                        <p>{{stone.shortName}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

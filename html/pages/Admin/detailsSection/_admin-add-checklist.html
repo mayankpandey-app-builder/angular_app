@@ -1,0 +1,30 @@
+<div class="col-lg-6">
+    <div class="inner-box">
+        <div class="detailsTitle">Checklist - {{checkList.longName}}</div>
+
+        <h2><a href="" class="pull-right" ng-click="addItem=true; focusNew=true">Add</a></h2>
+
+        <br/>
+
+        <div class="checklist" ng-show="addItem" class="newEntry">
+            <input type="text" ng-model="checkitem" placeholder="Checklist Name" focus-me="focusNew"
+                   ng-blur="addToChecklist('new',checkitem); checkitem=[]; addItem=false;"/>
+        </div>
+
+        <div class="checklist" ng-repeat="checkitem in checkList.checklistValues track by $index">
+            <input type="text" ng-model="checkitem" placeholder="Checklist Name"
+                   ng-blur="addToChecklist('update', checkitem, $index)"/>
+
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+    <div class="inner-box">
+        <div class="detailsTitle">Description</div>
+        <textarea msd-elastic placeholder="Enter text information" rows="3" class="form-control form-textarea"
+                  ng-model="checkList.explanatoryText" ng-blur="updateDescription(checkList.explanatoryText)" >
+
+        </textarea>
+    </div>
+</div>

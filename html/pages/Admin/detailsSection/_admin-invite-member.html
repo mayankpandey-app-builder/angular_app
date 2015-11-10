@@ -1,0 +1,10 @@
+<div class="detailsTitle">Invite contact</div>
+
+<form class="detailsForm" name="inviteContact" action="" ng-submit="inviteNewMember(newMember)" novalidate>
+
+    <input type="text" placeholder="E-mail address *" name="emailAddress" ng-model="newMember.email"
+           required >
+
+    <button type="button" class="greyBtn " ng-click="changeActiveSection(''); newMember = {};">Cancel</button>
+    <button type="submit" class="orangeBtn">Invite</button>
+</form>

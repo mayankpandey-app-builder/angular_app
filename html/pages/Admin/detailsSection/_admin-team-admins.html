@@ -1,0 +1,30 @@
+<div class="col-lg-4">
+    <div class="inner-box">
+        <div>
+            <h2>Admins <a href="" class="pull-right" ng-click="addAdmin=true; focusNew=true">Add</a></h2>
+        </div>
+        <div class="tplAdmin">
+            <ul class="content-links detailsForm list-unstyled" >
+                <li ng-show="addAdmin">
+                    <input type="search" id="searchCompany" placeholder="Member name" class="searchPers search" ng-model="newAdmin" typeahead="member.fullName for member in nonAdmins | filter:$viewValue:startsWidth | limitTo:10" typeahead-on-select="addAdmin=false; changeAdminStatus($item.id, true); newAdmin='';">
+                </li>
+                <li ng-repeat="admin in admins track by $index">
+                    <div class="beforeAdminImg">
+                        <img ng-src="{{admin.imageURL || 'images/placeholder_contact-big.png'}}" class = "smallRoundImg" alt="" />
+                    </div>
+
+                    <div class="persDesc">
+                        <div class="persName ellipsisHidden">{{admin.firstName }} {{admin.lastName}}  </div>
+                        <div class="persFunction ellipsisHidden">{{admin.position || "-"}}</div>
+                    </div>
+
+                    <div class="center-right-admin">
+                        <a href="" ng-click="changeAdminStatus(admin.id, false)" ng-show="admin.id == currentAdmin">
+                            <i class="icon-x"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

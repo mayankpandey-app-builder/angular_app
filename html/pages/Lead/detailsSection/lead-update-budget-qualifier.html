@@ -1,0 +1,12 @@
+<h1 ng-class="{'green-bbottom': leadProfile.qualifiers.budget.status == 5, 'yellow-bbottom': leadProfile.qualifiers.budget.status == 3, 'red-bbottom': leadProfile.qualifiers.budget.status == 1, 'grey-bbottom': leadProfile.qualifiers.budget.status == 0}">Budget</h1>
+
+<form  class = "detailsForm" action="" ng-submit="updateQualifier('budget', leadProfile.qualifiers.budget.status)">
+    <textarea msd-elastic text="" description="" ng-model="leadProfile.qualifiers.budget.text"  ng-blur="updateQualifier('budget', leadProfile.qualifiers.budget.status)" placeholder="{{leadProfile.qualifiers.budget.explanatoryText}}" rows="4" class="form-control form-textarea">
+    </textarea>
+    <div class="radios">
+        <label class="c-green"><input type="radio" name="mark" ng-click="updateQualifier('budget', 5)" ng-checked="isChecked(leadProfile.qualifiers.budget.status, 5)"/><span></span></label>
+        <label class="c-yellow"><input type="radio" name="mark" ng-click="updateQualifier('budget', 3)" ng-checked="isChecked(leadProfile.qualifiers.budget.status, 3)"/><span></span></label>
+        <label class="c-orange"><input type="radio" name="mark" ng-click="updateQualifier('budget', 1)" ng-checked="isChecked(leadProfile.qualifiers.budget.status, 1)"/><span></span></label>
+        <label class="c-grey"><input type="radio" name="mark" ng-click="updateQualifier('budget', 0)" ng-checked="isChecked(leadProfile.qualifiers.budget.status, 0)"/><span></span></label>
+    </div>
+</form>

@@ -1,0 +1,22 @@
+<h1>Social Account</h1>
+
+<form action="" class="detailsForm"  ng-submit = "updateUserSocialAccounts(userSocialAccounts)">
+	<div class="icon-placeholder">
+		<i class="fa fa-facebook"></i>
+		<input type="text" placeholder="Facebook" ng-model = "userSocialAccounts.facebook" ng-blur="updateUserSocialAccounts(userSocialAccounts)">
+	</div>
+	<div class="icon-placeholder">
+		<i class="fa fa-linkedin"></i>
+		<input type="text" placeholder="Linkedin"  ng-model = "userSocialAccounts.linkedIn" ng-blur="updateUserSocialAccounts(userSocialAccounts)">
+	</div>
+	<div class="icon-placeholder">
+		<i class="fa fa-google-plus"></i>	
+		<input type="text" placeholder="Google +" ng-model = "userSocialAccounts.googlePlus" ng-blur="updateUserSocialAccounts(userSocialAccounts)">
+	</div>
+	<div class="icon-placeholder">
+		<i class="fa fa-twitter"></i>
+		<input type="text" placeholder="Twitter" ng-model = "userSocialAccounts.twitter" ng-blur="updateUserSocialAccounts(userSocialAccounts)">
+	</div>
+
+    <input type="submit" style="visibility: hidden;"/>
+</form>

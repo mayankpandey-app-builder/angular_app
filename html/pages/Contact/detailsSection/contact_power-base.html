@@ -1,0 +1,18 @@
+<h1>Power Base</h1>
+
+<div class="radios-grey-orange">
+    <p class="noM">
+        <label >
+            <input type="radio" name="power" ng-click = "selectPowerBase('Yes')" ng-checked= "isChecked(contactProfile.powerBase.selectedValue, 'Yes')"/>
+            <span>Yes</span>
+        </label>
+    </p>
+    <p class="noM">
+        <label>
+            <input type="radio" name="power" ng-click = "selectPowerBase('No')" ng-checked= "isChecked(contactProfile.powerBase.selectedValue, 'No')" />
+            <span>No</span>
+        </label>
+    </p>
+</div>
+
+<textarea msd-elastic text="" description="" placeholder={{contactProfile.powerBase.explanatoryText}} rows="5" class="form-control form-textarea black" ng-model = "contactProfile.powerBase.comments" ng-blur = "updatePowerBase()"></textarea>

@@ -1,0 +1,12 @@
+<h1 ng-class="{'green-bbottom': leadProfile.qualifiers.authority.status == 5, 'yellow-bbottom': leadProfile.qualifiers.authority.status == 3, 'red-bbottom': leadProfile.qualifiers.authority.status == 1, 'grey-bbottom': leadProfile.qualifiers.authority.status == 0}">Authority</h1>
+
+<form  class = "detailsForm" action="" ng-submit="updateQualifier('authority', leadProfile.qualifiers.authority.status)">
+    <textarea msd-elastic text="" description="" ng-model="leadProfile.qualifiers.authority.text"  ng-blur="updateQualifier('authority', leadProfile.qualifiers.authority.status)" placeholder="{{leadProfile.qualifiers.authority.explanatoryText}}" rows="4" class="form-control form-textarea">
+    </textarea>
+    <div class="radios">
+        <label class="c-green"><input type="radio" name="mark" ng-click="updateQualifier('authority', 5)" ng-checked="isChecked(leadProfile.qualifiers.authority.status, 5)"/><span></span></label>
+        <label class="c-yellow"><input type="radio" name="mark" ng-click="updateQualifier('authority', 3)" ng-checked="isChecked(leadProfile.qualifiers.authority.status, 3)"/><span></span></label>
+        <label class="c-orange"><input type="radio" name="mark" ng-click="updateQualifier('authority', 1)" ng-checked="isChecked(leadProfile.qualifiers.authority.status, 1)"/><span></span></label>
+        <label class="c-grey"><input type="radio" name="mark" ng-click="updateQualifier('authority', 0)" ng-checked="isChecked(leadProfile.qualifiers.authority.status, 0)"/><span></span></label>
+    </div>
+</form>

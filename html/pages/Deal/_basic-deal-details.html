@@ -1,0 +1,36 @@
+<div class="general-card deal">
+    <div class="check-uncheck">
+        <label>
+            <input type="checkbox" ng-click="selectCard(this, $event);" />
+            <span></span>
+        </label>
+    </div>
+    <div analytics-on analytics-event="View details"  analytics-category="Deals" analytics-label="View" ng-click="redirectToDeal(deal.id);" class="inner-box" ng-class="{'grey-bleft': deal.dealFlagStatus == 3, 'green-bleft': deal.dealFlagStatus == 0, 'yellow-bleft': deal.dealFlagStatus == 1, 'orange-bleft': deal.dealFlagStatus == 2}">
+        <div class="head" analytics-on analytics-event="View details"  analytics-category="Deals" analytics-label="View" ng-click="showExpandedView(deal); $event.stopPropagation();">
+            <img class="smallRoundImg" ng-src="{{deal.companyImageURL || 'images/icn_company.png'}}" alt="" />
+            <h2 class="ellipsisNoWrap smallCardTitle">{{deal.companyName}}</h2>
+            <p>{{deal.closeDate || '-' | date: 'd MMM'}}</p>
+        </div>
+
+        <p class="bold blue ellipsisNoWrap">{{deal.dealName}}</p>
+
+        <div class="pogress text-center">
+            <div ng-repeat="dealStage in deal.stage.list" tooltip="{{dealStage}}"  tooltip-placement="bottom" rel="tooltip" data-placement="top" title="{{dealStage}}" ng-class="{'deal-stage-phase-empty': deal.stage.current < $index, 'deal-stage-phase-full': deal.stage.current >= $index}">
+            </div>
+            <!--<div class="progress thin">
+                <div class="progress-bar deal-stage-{{deal.stage.current}}" role="progressbar"  aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>-->
+        </div>
+        <div class="info clearfix">
+            <span class="pull-left"><i class="icon-budget"></i>{{getFormattedAmount(deal.dealValue.amount)}}</span>
+            <span class="pull-right"><i ng-class="{'icon-won-deal': deal.dealStatus == 'Commit', 'icon-dealtypes': deal.dealStatus == 'Best case', 'icon-pipeline': deal.dealStatus == 'Pipeline'}"></i>{{deal.dealStatus}}</span>
+        </div>
+        <div class="actions">
+            <span ng-class="{'c-grey': deal.products.indexOf('Licenses') == -1}">LIC</span>
+            <span ng-class="{'c-grey': deal.products.indexOf('Services') == -1}">SER</span>
+            <span ng-class="{'c-grey': deal.products.indexOf('Maintenance') == -1}">MAI</span>
+            <span><i ng-class="{'c-blue': deal.probable}" class="icon-flag"></i></span>
+        </div>
+    </div>
+</div>

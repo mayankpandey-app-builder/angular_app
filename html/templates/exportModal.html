@@ -1,0 +1,152 @@
+<div class="modal" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog" ng-style="{'width': exportModal.width}">
+      <div class="modal-content">
+
+          <div class="modal-header">
+              <h1 class="modal-title" id="myModalLabel">{{exportModal.title}}</h1>
+              <img src="images/cross20.png" id="clp" class="clpbt" data-dismiss="modal" ng-click="closeModal();">
+          </div>
+
+          <div class="modal-body border-bottom" style="overflow:hidden;">
+
+                <div class="clearfix"></div>
+                <div id="edit-container" class="hide">
+                  <div class="edit-form">
+                    <label style="float:left;margin-top:5px;margin-right:10px;">Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Name" style="font-size: 11px;height: 28px;float: left;width: 154px;margin-right: 5px;padding-left:5px;">
+                  </div>
+                  <div class="clearfix"></div>
+                  <div style="width:200px;float:left;margin-top:25px;">
+                    <p><strong>Add Field</strong></p>
+                    <div id="add-field-left" class="add-field">
+                      <ul>
+                        <li ng-click="toggle = !toggle" data-id="{{fields.id}}" data-name="{{fields.name}}" data-index="{{fields.position}}" ng-class="{'active' : toggle}" ng-repeat="fields in fieldsToAdd | orderObjectBy: 'position': false">{{fields.name}}</li>
+                      </ul>
+                      <p class="no-field" ng-if="fieldsToAdd.length<=0">No Field Available</p>
+                    </div>
+                  </div>
+                  <div id="arrows" style="float:left;margin:100px 20px;">
+                    <a href="javascript:;" ng-click="moveToAdd()" style="height:10px;" class="left-arrow"><img src="images/left-arrow.png" alt="" /></a><br />
+                    <a href="javascript:;" ng-click="moveToSelected()" style="height:10px;" class="right-arrow"><img src="images/right-arrow.png" alt="" /></a>
+                  </div>
+                  <div id="add-field-right" style="margin-top:25px;">
+                    <p><strong>Selected Field  </strong></p>
+
+                    <div  class="add-field">
+                    <ul>
+                      <li ng-click="toggle = !toggle" data-id="{{fields.id}}" data-name="{{fields.name}}" data-index="{{fields.position}}" ng-class="{'active' : toggle}" ng-repeat="fields in availableFields | orderObjectBy: 'position': false">{{fields.name}}</li>
+                    </ul>
+                    <p class="no-field" ng-if="availableFields.length<=0">No Field Available</p>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="data-container" ng-show="showFilter">
+
+                   <div class="form-group edit-form" style="float:left;margin-top:-15px;">
+                    <label style="float:left;margin-right:10px;margin-top:5px;">Select Filter</label>
+
+
+                    <select class="form-control" style="font-size: 11px;height: 28px;float: left;width: 154px;margin-right: 5px;padding-left:5px;" ng-model="filter" ng-change="updateFilter(filter);" id="export-selector">
+                      <option value="" id="export-all" ng-selected="selectedExport">Export all fields</option>
+                      <option  ng-repeat="ll in $root.contactExportFilters" value="{{ll.id}}">{{ll.export_setting_name}}</option>
+                    </select>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+
+               <div style="width:100%;float:left;overflow:auto;padding-top:22px;">
+                  <div class="data-scoller">
+                   <!-- FIRSTNAME CONTAINER BEGINS -->
+                    <div class="data-inner-container" ng-repeat="fields in availableFields | orderObjectBy: 'position': false">
+                      <img src="images/close_button.png" alt="" class="close-btn" ng-click="removeField($index)" />
+                         <input type="button" class=" buttn edit-btn" value="Edit" style="float:right;display:none" />
+                        <label style="margin-top: 5px;"><strong>{{fields.name}}-{{$index}}</strong></label>
+
+                        <div class="clearfix"></div>
+                         <div class="clearfix"></div>
+                        <ul class="list-option">
+                          <li ng-repeat="contact in exportModal.contacts.items | limitTo: 3">
+                            <a ng-if="fields.id!=='socialNetworks'" href="javascript:;" ng-bind="contact[fields.id]"></a>
+                            <a ng-if="fields.id==='socialNetworks'" href="javascript:;">
+                              <span ng-repeat="s in contact[fields.id]">
+                                {{s.name}}: {{s.URL}},
+                              </span>
+                            </a></li>
+                        </ul>
+                    </div>
+                    <!-- FIRSTNAME CONTAINER ENDS -->
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <p class="available-field" ng-show="!toggle"><a href="javascript:;" ng-click="toggle=!toggle" style="color:#ffad1d;padding: 0;height: 10px;padding: 20px 0 20px 0;font-weight: bold;float:right;">Show Available Field</a></p>
+                <div id="edit-container" ng-show="toggle">
+                  <div style="width:100%;float:left;margin-top:0;position:relative;margin-bottom:10px;">
+
+                      <div id="add-field-left" class="add-field" style="max-height:300px;overflow-y:auto;">
+                        <p style="margin-bottom:5px;"><strong>Available Field</strong> <span class="hideLnk" style="float:right">
+                          <a href="javascript:;" ng-click="toggle=!toggle" class="hide-field" style="margin-top: -10px; margin-right: -5px;font-weight: bold;color:#ffad1d;">Hide</a></span></p>
+                        <ul>
+                        <li ng-click="moveToAdded(fields)" data-id="{{fields.id}}" data-name="{{fields.name}}" data-index="{{fields.position}}" ng-repeat="fields in fieldsToAdd | orderObjectBy: 'position': false">{{fields.name}}</li>
+                        <p class="no-field" ng-if="fieldsToAdd.length<=0">All fields selected for export</p>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+
+
+                <div class="clearfix"></div>
+
+                <p class="pull-left fullwidth" style="margin-top: 13px;margin-bottom: 8px;"><strong>Select Delievery</strong></p>
+                  <div style="width:300px;float:left">
+                    <div class="checkbox pl0 edit-form" style="width: 100%;float: left;margin:0;padding:0;">
+                      <label class="flot" style="margin-top:7px;width:20%;">
+                        <input type="checkbox" class="chk" ng-model="emailChk">Email
+                      </label>
+                      <div class="form-group" style="width:60%;float:left;margin-bottom:5px;">
+                        <input type="email" class="form-control" id="email" ng-model="email" placeholder="robertwatson1970@admin.com" ng-keyup="removeError('#email')" ng-blur="removeError('#email')">
+                      </div>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <div class="checkbox pl0 edit-form" style="width: 100%;float: left;margin:0;padding:0;">
+                      <label class="flot" style="margin-top:7px;width:50%;">
+                        <input type="checkbox" class="chk" ng-model="download"> Download
+                      </label>
+                    </div>
+
+
+                    <div class="errorExport hide">Please Select at least one option</div>
+                    </div>
+                    <div class="form-group edit-form" style="float:left;margin-left: 106px;width: 310px;">
+                      <div class="checkbox pl0 edit-form" style="width: 100%;float: left;margin:0 0 10px 0;padding:0;">
+
+                        <label class="flot" style="width:100%;">
+                          <input type="checkbox" class="chk" id="check-filter" ng-click="show=!show" ng-model="savedFilter"> Do you want to save the fields selection?
+                        </label>
+                      </div>
+
+                      <div id="filter" ng-show="show">
+                        <label style="float:left;margin-right:10px;margin-top:5px;">Fields selection</label>
+                        <input type="text" class="form-control" placeholder="fields selection" style="font-size: 11px;height: 28px;float: left;width: 154px;margin-right: 5px;padding-left:5px;" id="filterName" ng-model="filterName" ng-keyup="removeError('#filterName')" ng-blur="removeError('#filterName')" />
+                        <input type="button" class="orangeBtn" value="Save" style="float:right;margin-top: 0px;height: 29px;line-height: 36px;" ng-click="saveFilter()"/>
+                      </div>
+                       <div class="checkbox pl0 edit-form" style="width: 100%;float: left;margin:0;padding:0;">
+                      <label class="flot" style="margin-top:7px;width:50%;">
+                        <input type="checkbox" class="chk" ng-model="available_for_all"> Available for all
+                      </label>
+                    </div>
+                    </div>
+             <button class="greyBtn" style="float:right;margin-left: 18px;" confirmed-click="sayHi()" ng-confirm-click="Would you like to say hi?" ng-show="showDelete" ng-click="deleteExport();">Delete</button>
+                    <button class="orangeBtn" style="float:right;" ng-click="exportContacts();">Export</button>
+
+                </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+

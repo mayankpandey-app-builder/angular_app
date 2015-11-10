@@ -1,0 +1,10 @@
+<div class="inner-box cursor-pointer sink">
+    <h1>Forecasts</h1>
+
+    <p class="bold ellipsisNoWrap">{{forecast.name}}</p>
+    <p>{{forecast.createdOn | date: 'd MMMM'}}</p>
+    <p><i class="icon-won-deal extra-space"></i>{{getFormattedAmount(forecast.commitValue) || '-'}}</p>
+    <p><i class="icon-dealtypes extra-space"></i>{{getFormattedAmount(forecast.bestCaseValue) || '-'}}</p>
+    <p><i class="icon-pipeline"></i>{{getFormattedAmount(forecast.pipelineValue) || '-'}}</p>
+
+</div>

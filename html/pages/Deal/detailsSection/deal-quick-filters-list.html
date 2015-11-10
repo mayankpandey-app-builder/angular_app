@@ -1,0 +1,29 @@
+<h1>Quick filters</h1>
+<p><b>Saved filters</b></p>
+
+<div class="tplPerson">
+
+    <ul class="list-unstyled">
+        <li ng-repeat="quickFilter in quickFilters" class="forecast-list-cursor">
+            <div class="forecast-list-name">
+                <div><i class="icon-x" style="color: orange" ng-show="quickFilter.canEdit" ng-click="deleteQuickFilter(quickFilter);"></i> <b ng-click="selectQuickFilter(quickFilter);">{{quickFilter.name}}</b></div>
+                <div class="pull-left c-blue forecast-list-name-length ellipsisNoWrap link" ng-click="selectQuickFilter(quickFilter); changeActiveSection('forecast-filters');">
+                    <div class="inline-display" style="white-space: normal;">
+                        <div class="inline-display" ng-repeat="dealStatus in quickFilter.dealStatuses"> {{dealStatus}}</div>
+                        <div class="inline-display" ng-repeat="dealType in quickFilter.dealTypes"> {{dealType}}</div>
+                        <div class="inline-display" ng-show="!quickFilter.dealStatuses && !quickFilter.dealTypes">-</div>
+                        <div class="inline-display" ng-show="quickFilter.dealSize.min && !quickFilter.dealSize.max"> Min. {{getFormattedAmount(quickFilter.dealSize.min)}}</div>
+                        <div class="inline-display" ng-show="!quickFilter.dealSize.min && quickFilter.dealSize.max"> Max. {{getFormattedAmount(quickFilter.dealSize.max)}}</div>
+                        <div class="inline-display" ng-show="quickFilter.dealSize.min && quickFilter.dealSize.max"> Min. {{getFormattedAmount(quickFilter.dealSize.min)}} - Max. {{getFormattedAmount(quickFilter.dealSize.max)}}</div>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    Public <input type="checkbox" ng-checked="quickFilter.isPublic">
+                    <span ng-click="toggleQuickFilterShare(quickFilter);" ></span>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<button class="greyBtn" ng-click="changeActiveSection('forecast-filters')">Cancel</button>

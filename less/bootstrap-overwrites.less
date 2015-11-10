@@ -1,0 +1,135 @@
+.clearfix, .detailsSection li {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+label { font-weight: @font-weight-regular; margin:0}
+
+a { color: @link-color}
+.container { width:auto !important}
+
+h1 { font-size: @h1-font-size; color: @blue}
+h2 { font-size: @h2-font-size}
+
+.form-control { color: @black}
+.container { position: relative;}
+.container .row { margin-bottom:20px; margin-left: -10px; margin-right: -10px; padding-top: 5px;}
+
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+    float: left;
+  }
+  .col-lg-12 { width: 100%}
+  .col-lg-11 { width: 91.66666667%}
+  .col-lg-10 { width: 83.33333333%}
+  .col-lg-9 { width: 75%}
+  .col-lg-8 { width: 66.66666667%}
+  .col-lg-7 { width: 58.33333333%}
+  .col-lg-6 { width: 50%}
+  .col-lg-5 { width: 41.66666667%}
+  .col-lg-4 { width: 33.33333333%}
+  .col-lg-3 { width: 25%}
+  .col-lg-2 { width: 16.66666667%}
+  .col-lg-1 { width: 8.33333333%}
+
+   .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1 { padding-left:10px; padding-right:10px}
+
+  .col-lg-pull-12 { right: 100%}
+  .col-lg-pull-11 { right: 91.66666667%}
+  .col-lg-pull-10 { right: 83.33333333%}
+  .col-lg-pull-9 { right: 75%}
+  .col-lg-pull-8 { right: 66.66666667%}
+  .col-lg-pull-7 { right: 58.33333333%}
+  .col-lg-pull-6 { right: 50%}
+  .col-lg-pull-5 { right: 41.66666667%}
+  .col-lg-pull-4 { right: 33.33333333%}
+  .col-lg-pull-3 { right: 25%}
+  .col-lg-pull-2 { right: 16.66666667%}
+  .col-lg-pull-1 { right: 8.33333333%}
+  .col-lg-pull-0 { right: 0%}
+  .col-lg-push-12 { left: 100%}
+  .col-lg-push-11 { left: 91.66666667%}
+  .col-lg-push-10 { left: 83.33333333%}
+  .col-lg-push-9 { left: 75%}
+  .col-lg-push-8 { left: 66.66666667%}
+  .col-lg-push-7 { left: 58.33333333%}
+  .col-lg-push-6 { left: 50%}
+  .col-lg-push-5 { left: 41.66666667%}
+  .col-lg-push-4 { left: 33.33333333%}
+  .col-lg-push-3 { left: 25%}
+  .col-lg-push-2 { left: 16.66666667%}
+  .col-lg-push-1 { left: 8.33333333%}
+  .col-lg-push-0 { left: 0%}
+  .col-lg-offset-12 { margin-left: 100%}
+  .col-lg-offset-11 { margin-left: 91.66666667%}
+  .col-lg-offset-10 { margin-left: 83.33333333%}
+  .col-lg-offset-9 { margin-left: 75%}
+  .col-lg-offset-8 { margin-left: 66.66666667%}
+  .col-lg-offset-7 { margin-left: 58.33333333%}
+  .col-lg-offset-6 { margin-left: 50%}
+  .col-lg-offset-5 { margin-left: 41.66666667%}
+  .col-lg-offset-4 { margin-left: 33.33333333%}
+  .col-lg-offset-3 { margin-left: 25%}
+  .col-lg-offset-2 { margin-left: 16.66666667%}
+  .col-lg-offset-1 { margin-left: 8.33333333%}
+  .col-lg-offset-0 { margin-left: 0%}
+
+.col-lg-12.status-bar.first { padding-left: 10px}
+.col-lg-12.status-bar { padding: 0}
+.col-lg-12.status-bar.last { padding-right: 10px}
+
+
+.col-lg-12.status-bar > div { width: 100%; border: none}
+.col-lg-12.status-bar div.done { border: none}
+
+.col-lg-2.border-right {min-height: 235px}
+
+.noGutter .col-lg-6, .noGutter .col-lg-7, .noGutter .col-lg-5 { padding: 0}
+
+.progress { background-color: #e0e0e0}
+.progress.thin { height:7px; margin-bottom: 0}
+.progress-bar-grey { background-color: @progress-bar-grey}
+.progress-bar-blue { background-color: @progress-bar-blue}
+.progress-bar-orange { background-color: @progress-bar-orange}
+.progress-bar { background-color: @blue !important}
+
+.progress-vertical {
+    width: 40px;
+    height: 58px !important;
+    position: relative;
+    margin:0 auto
+}
+
+.progress-vertical .bar {
+    width: 100% !important;
+    position: absolute;
+    bottom: 0;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+}
+
+
+.btn-link:hover, .btn-link:focus { text-decoration: none}
+
+input:disabled{
+  cursor: pointer!important;
+  color:#d3d3d3;
+  background-color:#fff;
+}
+
+
+
+
+
+
+
+

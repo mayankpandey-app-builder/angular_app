@@ -1,0 +1,31 @@
+<div class="modal fade" id="manageTagsModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title">Manage Tags</h1>
+
+            </div>
+
+            <div class="modal-body">
+                <input analytics-on analytics-event="Create task tags" analytics-category="Tasks" analytics-label="Success" type="text" placeholder = "Enter a new tag" class="searchCompanies search" ng-model="newTag" ng-blur="manageTagAdd(newTag); newTag=''"/>
+                <h1 class="modal-title">All tags</h1>
+                <br/>
+                <div class="all-tags">
+                    <table class="table table-striped">
+                        <tr ng-repeat="tag in tagsManageList">
+                            <td class="col-lg-11">
+                                {{tag.displayValue}}
+                                <a analytics-on analytics-event="Delete task tags" analytics-category="Tasks" analytics-label="Cancel"class="pull-right" href="" ng-show="tag.canDelete" ng-click="manageTagRemove(tag.id)">Remove</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button analytics-on analytics-event="Manage tags" analytics-category="Tasks" analytics-label="Cancel" class="greyBtn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

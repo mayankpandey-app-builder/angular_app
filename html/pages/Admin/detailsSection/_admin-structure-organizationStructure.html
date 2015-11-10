@@ -1,0 +1,54 @@
+    <div class="inner-box">
+        <h2>Regional structure</h2>
+
+        <div ui-tree="regionalTree" id="tree-root" data-max-depth="6" data-drag-enabled = "true">
+            <div class="row options">
+                <a href="" class="pull-right" ng-click="expandAll()">Expand All</a>
+                <a href="" class="pull-right" ng-click="collapseAll()">Collapse All</a>
+            </div>
+            <ol ui-tree-nodes="" ng-model="territories">
+                <li ng-repeat="territory in territories" ui-tree-node ng-include="'territories_renderer.html'" data-collapsed="true"></li>
+            </ol>
+        </div>
+
+
+        <script type="text/ng-template" id="territories_renderer.html">
+            <div ui-tree-handle class="tree-node tree-node-content">
+                <table cellpadding="0" cellspacing="0" class="structure">
+                    <tr>
+                        <td></td>
+                        <td style="width: 5%;">
+                            <div class="user">
+                            </div>
+                        </td>
+                        <td width="20" data-nodrag>
+                            <a href="" ng-click="toggle(this)">
+                                <i ng-class="{'icon-arrow': collapsed, 'icon-arrow-down2': !collapsed }" ng-show="territory.territories.length > 0"></i>
+                            </a>
+
+                        </td>
+                        <td width="10"></td>
+                        <td>
+                        <input type="text" ng-model="territory.displayValue" name="{{territory.displayValue}}"
+                           placeholder="Enter name"
+                           ng-blur="updateRegion('updateName',this);"/>
+                        </td>
+                        <td class="text-right" data-nodrag>
+                            <a href="" class="pull-right remove" ng-click="deleteTerritory($modelValue)">
+                                <i class="icon-x" ></i>
+                            </a>
+                            <a href="" class="pull-right" ng-click="territory.territories.unshift({})">Add</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <ol ui-tree-nodes="" ng-model="territory.territories" ng-class="{hidden: collapsed}">
+                <li ng-repeat="territory in territory.territories" ui-tree-node ng-include="'territories_renderer.html'">
+                </li>
+            </ol>
+        </script>
+
+
+    </div>
+

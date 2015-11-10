@@ -1,0 +1,108 @@
+<div class="inner-box">
+    <h2><i class="icon-milestone"></i>
+        Milestones
+        <a href="" class="pull-right" ng-click="addMilestone=true; focusNew=true; milestone = {};">Add</i></a>
+    </h2>
+    <table cellpadding="0" cellspacing="0" class="full-table">
+
+        <tr ng-show="addMilestone" class="newEntry">
+            <td></td>
+            <td>
+                <input type="text"  ng-model="milestone.longName"
+                       focus-me="focusNew" tabindex="1"
+                       placeholder="Milestone Long Name"/>
+            </td>
+            <td>
+                <input type="text" ng-model="milestone.shortName" tabindex="2"
+                       placeholder="Milestone Short Name"/>
+            </td>
+            <td width="150" class="text-center">
+                <div class="relative-pos">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">{{milestone.stage || 'Select stage'}}
+                        <b class="icon-arrow-down"></b>
+                    </a>
+                    <ul role="menu" class="dropdown-menu text-left">
+                        <li ng-repeat="stage in stages track by $index">
+                            <a href="" ng-click="selectStageMilestone(stage.name)">{{stage.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td class="text-center">
+                <label>
+                    <input type="checkbox" ng-model="milestone.isGate"/>
+                    <span></span>
+                </label>
+            </td>
+            <td class="text-center">
+                <label>
+                    <input type="checkbox" ng-model="milestone.isMainQualifier"/>
+                    <span></span>
+                </label>
+            </td>
+            <td><a href="" class="pull-right" ng-click="addMilestone=false;milestone={} "><i class="icon-x"></i></a></td>
+            <td><a href="" class="pull-right" ng-click="addMilestoneFct(milestone)"><i class="icon-ok-modal"></i></a></td>
+        </tr>
+
+        <tr>
+            <th></th>
+            <th width="150">Long name</th>
+            <th width="150">Short name</th>
+            <th class="text-center" width="150">Stage</th>
+            <th class="text-center" width="150">Gate</th>
+            <th class="text-center" width="150">Main qualifier</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr class="empty-line"></tr>
+
+        <tr ng-repeat="stage in stages track by $index">
+            <td colspan="8" ng-hide="stage.milestones.length==0">
+                <table cellpadding="0" cellspacing="0" class="full-table recursive-table">
+
+                    <tr ng-repeat="milestone in stage.milestones" class="edit-selected-qualifier" ng-click="checklistSection(milestone,'milestones',$index, $parent.$index)">
+                        <td></td>
+                        <td width="180">
+                            <input type="text" ng-model="milestone.longName"
+                                   placeholder="Milestone Long Name" ng-blur="updateDeal(products, stages)" name="{{milestone.longName}}"/>
+                        </td>
+                        <td width="150">
+                            <input type="text" ng-model="milestone.shortName"
+                                   placeholder="Milestone Short Name" ng-blur="updateDeal(products, stages)"/>
+                        </td>
+                        <td width="180" class="text-center">
+                            <div class="relative-pos">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="">{{stage.name || 'Select stage'}}
+                                    <b class="icon-arrow-down"></b>
+                                </a>
+                                <ul role="menu" class="dropdown-menu text-left">
+                                    <li ng-repeat="stage in stages track by $index">
+                                        <a href="" ng-click="setStageMilestone(milestone,stage.name,$parent)">{{stage.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="text-center" width="150">
+                            <label>
+                                <input type="checkbox" ng-model="milestone.isGate" ng-change="updateDeal(products, stages)"/>
+                                <span></span>
+                            </label>
+                        </td>
+                        <td class="text-center" width="150">
+                            <label>
+                                <input type="checkbox" ng-model="milestone.isMainQualifier" ng-change="updateDeal(products, stages)"/>
+                                <span></span>
+                            </label>
+                        </td>
+                        <td name="{{milestone.longName}}">
+                            <a href=""  ng-click="removeQualifierMilestone('milestone',$index, $parent.stage.name)" class="pull-right"><i
+                                class="icon-x"></i></a></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+    </table>
+</div>

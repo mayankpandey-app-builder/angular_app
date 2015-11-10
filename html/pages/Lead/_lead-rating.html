@@ -1,0 +1,35 @@
+<div class="inner-box bg-gray clearfix">
+    <h1>Lead Rating ({{leadRating.bantScore}})</h1>
+
+    <div class="rating-box">
+        <div class="progress-vertical">
+            <div ng-class="{'rating-10': leadRating.target == 10, 'rating-0': leadRating.target == 0}" class="bar progress-bar-blue"></div>
+        </div>
+        <p>Target</p>
+    </div>
+    <div class="rating-box">
+        <div class="progress-vertical">
+            <div ng-class="{'rating-10': leadRating.budget == 10, 'rating-5': leadRating.budget == 5, 'rating-3': leadRating.budget == 3, 'rating-1': leadRating.budget == 1, 'rating-0': leadRating.budget == 0}" class="bar progress-bar-blue"></div>
+        </div>
+        <p>Budget</p>
+    </div>
+    <div class="rating-box">
+        <div class="progress-vertical">
+            <div ng-class="{'rating-10': leadRating.authority == 10, 'rating-5': leadRating.authority == 5, 'rating-3': leadRating.authority == 3, 'rating-1': leadRating.authority == 1, 'rating-0': leadRating.authority == 0}"class="bar progress-bar-blue"></div>
+        </div>
+        <p>Authority</p>
+    </div>
+    <div class="rating-box">
+        <div class="progress-vertical">
+            <div ng-class="{'rating-10': leadRating.pain == 10, 'rating-5': leadRating.pain == 5, 'rating-3': leadRating.pain == 3, 'rating-1': leadRating.pain == 1, 'rating-0': leadRating.pain == 0}" class="bar progress-bar-blue"></div>
+        </div>
+        <p>Pain</p>
+    </div>
+    <div class="rating-box last">
+        <div class="progress-vertical">
+            <div ng-class="{'rating-10': leadRating.timeframe == 10, 'rating-5': leadRating.timeframe == 5, 'rating-3': leadRating.timeframe == 3, 'rating-1': leadRating.timeframe == 1, 'rating-0': leadRating.timeframe == 0}" class="bar progress-bar-blue"></div>
+        </div>
+        <p>Timeline</p>
+    </div>
+
+</div>

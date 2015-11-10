@@ -1,0 +1,15 @@
+<h1>Position</h1>
+
+<div class="radios-grey-orange" ng-repeat = "positionVal in contactProfile.hierarchicalPosition.possibleValues">
+	<p class="noM">
+		<label>
+			<input type="radio" name="position" ng-click = "selectPosition(positionVal)" ng-checked= "isChecked(contactProfile.hierarchicalPosition.selectedValue, positionVal)" />
+			<span>{{positionVal}}</span>
+		</label>
+	</p>	
+
+</div>
+
+<textarea msd-elastic text="" description="" placeholder={{contactProfile.hierarchicalPosition.explanatoryText}} rows="5" class="form-control form-textarea black" ng-blur = "updatePositionComments(contactProfile.hierarchicalPosition.comments)" ng-model = contactProfile.hierarchicalPosition.comments>
+</textarea>
+

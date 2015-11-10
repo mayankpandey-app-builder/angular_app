@@ -1,0 +1,178 @@
+
+body {
+    background: url("../images/body-bg.jpg") no-repeat scroll center top #4EA7DF;
+    margin: 0;
+    padding: 0;
+}
+.clear {
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+}
+a img {
+    border: 0 none;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.main-wrapper {
+    font-family: Helvetica,Arial,sans-serif;
+    margin: 0 auto;
+    padding: 100px 0;
+    width: 1336px;
+}
+.logo {
+    display: block;
+    height: 123px;
+    margin: 0 auto 115px;
+    width: 226px;
+}
+.login-register-box {
+    margin: 0 auto;
+    width: 412px;
+}
+ul.tabs {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+ul.tabs li {
+    float: left;
+}
+ul.tabs li a {
+    background: none repeat scroll 0 0 #CDCDCD;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+    color: #FFFFFF;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 0 0 20px;
+    text-decoration: none;
+    width: 185px;
+}
+ul.tabs li a.selected {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #376092;
+}
+ul.tabs li a.defaulttab {
+    margin: 0 2px 0 0;
+}
+.tabs-content {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);
+    margin-top: -3px;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+form {
+}
+.item {
+    margin: 0 0 15px;
+}
+.item.fcol {
+    float: left;
+    width: 238px;
+}
+.item.lcol {
+    float: right;
+    width: 238px;
+}
+div.item input {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: -moz-use-text-color -moz-use-text-color #CDCDCD;
+    border-image: none;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+    color: #CDCDCD;
+    font-size: 16px;
+    line-height: 30px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+#login a {
+    color: #376092;
+    display: block;
+    float: left;
+    font-size: 20px;
+    margin: 95px 0 0;
+    width: auto;
+}
+.btn {
+    border: medium none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    float: right;
+    font-size: 12px;
+    height: 50px;
+    padding: 30px 0 0;
+    text-align: center;
+    width: 100px;
+}
+.login {
+    background: url("../images/check-icon.jpg") no-repeat scroll center 13px #FFA300;
+}
+.next {
+    background: url("../images/next-icon.png") no-repeat scroll center 25px #376091;
+}
+.cancel {
+    background: url("../images/cancel-icon.jpg") no-repeat scroll center 25px #D1D1D1;
+    margin: 0 40px 0 0;
+}
+.mt20 {
+    margin-top: 20px;
+}
+.register-box {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+    display: none;
+    padding: 45px 30px;
+    width: auto;
+}
+.register-box h2 {
+    color: #376092;
+    font-size: 34px;
+    margin: 0 0 30px;
+    padding: 0;
+}
+.register-box .main-left-col {
+    float: left;
+    width: 515px;
+}
+.register-box .main-left-col p {
+    color: #374350;
+    font-size: 18px;
+    line-height: 30px;
+    margin: 0;
+    padding: 35px 0 0;
+}
+.register-box .main-left-col p a {
+    color: #376092;
+}
+.register-box .main-right-col {
+    float: right;
+    width: 515px;
+}
+.register-box .main-right-col a {
+    color: #376092;
+    float: right;
+    font-size: 20px;
+    margin: 70px 0 0;
+    text-align: right;
+}

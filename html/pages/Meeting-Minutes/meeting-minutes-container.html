@@ -1,0 +1,22 @@
+<top-menu class=""></top-menu>
+
+<div class="main-content clearfix">
+    <div class="main-left">
+        <div class="container">
+            <div class="col-lg-12">
+                <div class="row">
+                    <attendees attendees-list="meetingMinuteInfo.attendees" set-attendee="setAttendeeTag" change-active-section="changeActiveSection"></attendees>
+                </div>
+                <div class="row">
+                    <tags set-mood="setMoodTag" set-private="setPrivateTag" set-image="setImageTag" set-general-info="setGeneralInfoTag" display-general-info="displayGeneralInfo"></tags>
+                    <agenda class="agenda-tags" details="meetingMinuteInfo" listen-enter="listenKeyPressed" paragraph-index="setParagraphIndex" current-paragraph-index="paragraphIndex" show-paragraph-image="showParagraphImage" selected-image="selectedImage" delete-paragraph-image="deleteParagraphImage"></agenda>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside class="right">
+        <section class="detailsSection " ng-include="showSection()">
+        </section>
+    </aside>
+</div>

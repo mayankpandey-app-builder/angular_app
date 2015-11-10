@@ -1,0 +1,240 @@
+<top-menu class=""></top-menu>
+
+<div class="main-content clearfix dashboard-main-content">
+
+<!-- maine left -->
+<div class="col-lg-12">
+    <div class="container dashboard">
+        <h1>Welcome back {{fullName}}</h1>
+
+        <div class="row">
+            <div class="subset-left">
+                <!-- logo -->
+                <div class="inner-box sink small-box logo">
+                    <div class="logo-image">
+                        <img src="/images/logo_orange.png">
+                    </div>
+                </div>
+
+
+                <!-- leads -->
+                <div class="inner-box sink small-box dashboard-leads-box" ng-click="goTo('/leads');"
+                     analytics-on analytics-event="View list" analytics-category="Leads" analytics-label="View">
+                    <h1>Leads</h1>
+
+                    <div class="row dashboard-leads-row">
+                        <div class="pull-left">
+                            New
+                        </div>
+                        <div class="pull-right">
+                            <h1>{{dashboardView.leadsReport.leadsNew}}</h1>
+                        </div>
+                    </div>
+                    <div class="row dashboard-leads-row">
+                        <div class="pull-left">
+                            Open
+                        </div>
+                        <div class="pull-right">
+                            <h1>{{dashboardView.leadsReport.leadsOpen}}</h1>
+                        </div>
+                    </div>
+                    <div class="row dashboard-leads-row">
+                        <div class="pull-left">
+                            Hot
+                        </div>
+                        <div class="pull-right">
+                            <h1>{{dashboardView.leadsReport.leadsHot}}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- meetings -->
+                <div class="inner-box sink small-box" ng-click="goTo('/tasks');" analytics-on
+                     analytics-event="View list" analytics-category="Meeting Minutes" analytics-label="View">
+                    <div class="content-box">
+                        <h1>{{dashboardView.tasksReport.numberOfMeetingsToday}} Meetings</h1>
+
+                        <p class="center-paragraph">Today</p>
+                    </div>
+                </div>
+
+            </div>
+                    <!-- tasks -->
+            <div class="subset-tasks">
+                <div class="inner-box sink tasks-box" ng-click="goTo('/tasks');" analytics-on analytics-event="View list"
+                     analytics-category="Tasks" analytics-label="View">
+                    <div class="big-box">
+                        <h1 class="left-h1">{{dashboardView.tasksReport.numberOfTasks}} Tasks</h1>
+
+                        <h2 class="c-blue pull-left"> {{dashboardView.tasksReport.numberOfOverdueTasks}} Overdue</h2>
+
+                        <div class="x-scrollable">
+                            <div class="border" ng-repeat="task in dashboardView.tasksReport.tasks">
+                                <div class="row deals-row" ng-click="goTo('/tasks/', task.id);" analytics-on
+                                     analytics-event="View details" analytics-category="Tasks" analytics-label="View">
+                                    <div class="col-lg-2 no-padding-right">
+                                        <i class="icon-error c-red" ng-if="task.important"></i>
+                                        <i class="icon-{{task.taskType}}"></i>
+                                    </div>
+                                    <div class="col-lg-3 col-md-8 col-sm-8 ellipsisNoWrap no-padding-left">
+                                        <p>{{task.name}}</p>
+                                    </div>
+                                    <div  class="col-lg-4 hidden-md hidden-sm ellipsisNoWrap">
+                                        <p ng-if="task.assignee" >
+                                            Assigned to:
+                                            <img ng-src="{{task.assignee.imageURL || '/images/placeholder_contact-photo.png'}}" class="smallRoundImg" title="{{task.assignee.firstName}} {{task.assignee.lastName}}" tooltip="{{task.assignee.firstName}} {{task.assignee.lastName}}" tooltip-placement="left"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-3 time">
+                                        <p class="pull-right">{{task.start | date: 'd MMM, HH:mm'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                    <!-- deals -->
+            <div class="subset-deals">
+                <div class="inner-box sink deals-box" ng-click="goTo('/deals');" analytics-on
+                     analytics-event="View list" analytics-category="Deals" analytics-label="View">
+                    <div class="big-box deals-box-inner">
+                        <h1 class="left-h1">Deals</h1>
+
+                        <p class="c-blue pull-right">EUR</p>
+
+                        <div class="x-scrollable">
+                            <div class="border" ng-repeat="deal in dashboardView.dealsReport.deals"
+                                 ng-click="goTo('/deals/', deal.id);">
+                                <div class="row deals-row">
+                                    <div class="col-lg-9">
+                                        <p>{{deal.companyName}} - {{deal.dealName}}</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p class="pull-right">{{getFormattedAmountFunc(deal.dealValue.amount)}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    <!-- forecast -->
+            <div class="subset-right">
+                <div class="inner-box  sink wide-box" ng-click="goTo('/deals', '', 'view=forecast');" analytics-on
+                     analytics-event="View list" analytics-category="Deals" analytics-label="View">
+                    <div class="">
+                        <h1>Forecast(EUR)</h1>
+
+                        <div class="">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h1>{{getFormattedAmountFunc(dashboardView.forecastsReport.commitValue) ||
+                                        '-'}}</h1>
+
+                                    <p class="center-paragraph">Commit</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h1>{{getFormattedAmountFunc(dashboardView.forecastsReport.bestCaseValue) ||
+                                        '-'}}</h1>
+
+                                    <p class="center-paragraph">Best case</p>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h1>{{getFormattedAmountFunc(dashboardView.forecastsReport.pipelineValue) ||
+                                        '-'}}</h1>
+
+                                    <p class="center-paragraph">Pipeline</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- referral -->
+                <div class="inner-box sink wide-box" ng-click="openModal('#dashboardReferralModal');">
+                    <h1 class="left-h1">Referral</h1>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Refer iSEEit to a friend or colleague.</p>
+                        </div>
+                        <div class="col-lg-12 dashboard-referral-placeholder">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div class="modal" id="dashboardReferralModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="dashboardReferralModalLabel">Refer a friend</h1>
+            </div>
+
+            <div class="modal-body">
+                <h2>Enter a valid email address and share iSEEit with a friend.</h2>
+                <input type="text" ng-model="referralEmail" placeholder="Email address" class="dashboard-referral-input"/>
+            </div>
+
+            <div class="modal-footer">
+                <button class="greyBtn" data-dismiss="modal" ng-click = "dismissModal('#dashboardReferralModal');">Cancel</button>
+                <button class="orangeBtn" ng-click = "referFriend();">Send</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="dashboardReferralError" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title" id="dashboardReferralErrorModalLabel">Oops!</h1>
+            </div>
+
+            <div class="modal-body">
+                <h2>The entered email address is not valid.</h2>
+            </div>
+
+            <div class="modal-footer">
+                <button class="orangeBtn" data-dismiss="modal" ng-click = "dismissModal('#dashboardReferralError');">Ok</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="dashboardSuccess" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+            </div>
+
+            <div class="modal-body">
+                <h2>Your referral was sent.</h2>
+            </div>
+
+            <div class="modal-footer">
+                <button class="orangeBtn" data-dismiss="modal" ng-click = "dismissModal('#dashboardSuccess');">Ok</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>

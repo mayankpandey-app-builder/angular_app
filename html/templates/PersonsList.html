@@ -1,0 +1,17 @@
+<div class='tplPerson' persons = 'persons'>
+	<input type="search" class="searchPers search" placeholder = "Search contact..." ng-model = "persFilter">
+	<ul class='list-unstyled'>
+	 	 <li ng-repeat='person in persons | filter:persFilter'>	
+
+	 	 	<div class='beforeImg'>
+				<img ng-src={{person.profilePic}} alt=' '/>
+			</div>
+
+			<div class='persDesc'>
+				<div class='persName'>{{person.persName}}</div>
+				<div class='persFunction'>{{person.persFunction}}</div>
+				<div class='persEmail'>{{person.persEmail}}</div>
+			</div>
+		</li>
+	</ul>			
+</div>

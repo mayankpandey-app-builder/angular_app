@@ -1,0 +1,51 @@
+<div class="inner-box double user-contact-details sink">
+	<a class="card-link contact-details"></a>
+	<h1>Contact Details</h1>
+	<div ng-repeat="contactInfo in contactInformation" class = "ellipsedContent ">
+		
+		<p ng-if = "contactInfo.contactType == 'mobilePhoneNumber'" >
+			<i class="icon-call"> </i>  {{contactInfo.contactValue}}
+		</p>
+		
+
+		<p ng-if = "contactInfo.contactType == 'personalPhoneNumber'">
+			<i class="icon-personalphone c-grey"> </i>  {{contactInfo.contactValue}}
+		</p>
+
+
+		<p ng-if = "contactInfo.contactType == 'officePhoneNumber'">
+			<i class="icon-officephone c-grey"> </i>  {{contactInfo.contactValue}}
+		</p>
+
+		<p ng-if = "contactInfo.contactType == 'skypeName'">
+			<i class="icon-skype" ng-if = "displayIcon(contactInformation,'skypeName')"> </i>  {{contactInfo.contactValue}}
+		</p>
+
+		<p ng-if = "contactInfo.contactType == 'emailAddress'">
+			<i class="icon-email c-grey" ng-if = "displayIcon(contactInformation,'emailAddress')"> </i>  {{contactInfo.contactValue}}
+		</p>
+
+	</div>
+	
+	<div class = "inline full-width">
+		<i class="icon-address c-grey pull-left" ng-if = "displayAdressIcon(contactInformation)"> </i>
+		<div ng-repeat="contactInfo in contactInformation" class = "max-full-width pull-left">
+			<div ng-if="contactInfo.contactType == 'street'" class = "ellipsisNoWrap max-full-width">
+				{{contactInfo.contactValue}} &nbsp;
+			</div> 
+
+			<div ng-if="contactInfo.contactType == 'city'"  class = "ellipsisNoWrap max-full-width">
+				{{contactInfo.contactValue}} &nbsp;
+			</div>
+
+			<div ng-if="contactInfo.contactType == 'postalCode'"  class = "ellipsisNoWrap max-full-width">
+				{{contactInfo.contactValue}} &nbsp;
+			</div>
+
+			<div ng-if="contactInfo.contactType == 'state'" class = "ellipsisNoWrap max-full-width">
+				{{contactInfo.contactValue}} &nbsp;
+			</div>
+		</div>
+	</div>
+</div>
+

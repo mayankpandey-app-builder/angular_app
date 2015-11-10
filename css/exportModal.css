@@ -1,0 +1,148 @@
+		  .buttn{padding:6px 15px;background:#ddd;border:#ccc;color:#4E4E4E;border-radius:3px;}
+		  input[type=checkbox].chk{margin:2px 6px 0px 0px !important;float:left;display:block;}
+		  .flot{float:left;width:15%;}
+		  .pl0{padding-left:0px;}
+		  .width24point5{width:23%;float:left;margin-right:2%;position:relative;}
+		  .width24point5 input[type=text]{padding-right:25px;}
+		  .width24point5:last-child{margin-right:0px;}
+		  .mydialog{width:58%;}
+		  .mydialog2{width:25%;}
+      .mydialog h1{font-size: 16px;}
+		  .rem{position:absolute;right:8px;top:11px; cursor:pointer;}
+		  .rem img{float:left;width:13px;}
+		  .self{float:left;padding-top:0px;margin-top:7px;margin-right:10px;}
+		  .mtopminus{margin-top:-8px;margin-left:15px;}
+		  .fullwidth{width:100%;margin-bottom:20px;}
+		  .selfield{width:100%;float:left;}
+		  .margin{margin:8px 20px 0px 10px;}
+		  .modal-footer{float:left;width:100%;}
+		  .modal-body{float:left;width:100%;max-height: 700px;}
+      .modal-dialog{width: 900px;}
+		  .modal-content{float:left;width:100%;}
+		  .model-header{position:relative;}
+		  .oranngebtn2{background-image:none;line-height:normal;width:100%;font-size:11px;height:auto;padding:10px;margin:0px; border-radius:4px;font-weight: normal;}
+      .add-field-content .form-group{margin-bottom:5px;}
+		  .scroll{float:left;width:100%;height:190px;overflow-y:scroll;padding-right:6px;}
+		  .mainmod{float:left;width:99.9%;height:400px;overflow-y:scroll;}
+		  .border-top{border-top:1px solid #ddd;margin-top:20px;padding-top:35px;}
+		  .mp{margin-top:20px;padding:10px 15px;border-radius:4px;}
+		  .marginlb{margin-right:90px;font-size:12px;position: relative;}
+        .marginlb.last{margin-right: 0;}
+      .marginlb .rem {
+            right: -22px;
+            top: 2px;
+            }
+		  .border-bottom{border-bottom:1px solid #ddd;margin-bottom:20px;}
+		  .modaldisplaynone{display:none;background:url(../images/blackbg.png) repeat;}
+		  .clpbt{position:absolute;right:15px;top:19px;cursor:pointer;width: 10px;}
+		  .edit-form .form-control{font-size: 11px;height: 28px;}
+      .form-group .rem img {
+        width: 8px;
+      }
+		  ul.list-option{
+        height:115px;overflow:auto;
+      }
+      ul.list-option li{
+        float: none;
+        border-right: none;
+        height: auto;
+        padding: 0;
+      }
+      ul.list-option li a{
+        color: #858585;
+        border-bottom: 1px solid #fff;
+        background: #f2f2f2;
+        height: 36px;
+        font-size: 12px;
+        text-decoration: none;
+        display: block;
+        padding: 10px 10px 0 10px;
+      }
+      ul.list-option li a:hover{
+        background: #ffad1d;
+        color: #fff;
+      }
+      .data-container{
+       width: 100%;
+       float: left;
+       padding-top: 15px;
+      }
+      .data-inner-container{
+        border:1px solid #ddd;width:190px;margin-right:20px;float:left;padding:10px;position:relative;margin-bottom: 5px;
+      }
+      .close-btn{
+        position: absolute;
+        right: -10px;
+        top: -12px;
+        height: 22px;
+        z-index: 99999;
+        cursor: pointer;
+      }
+      .form-input{position: absolute;background: white;padding: 10px 10px 10px 0;top: 37px;width: 96%;}
+      .form-input .form-control{width: 71%;float: left;margin-top: 14px;}
+      .form-input .orangeBtn{float: left;margin-top: 0;margin-left: 10px;}
+      .add-field{
+         width: 99%;
+        float: left;
+        padding: 10px;
+        max-height: 300px;
+        overflow: auto;
+        margin-right: 20px;
+        box-shadow: 1px 1px 2px 1px #ccc;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+      .add-field li, #add-field-right ul li{
+        width: 99%;
+        height: 37px !important;
+
+      }
+      .add-field li{
+        background: #ffad1d;
+        width: auto;
+        padding: 10px 5px 5px 10px;
+        float: left;
+        color: #fff;
+        font-style: 12px;
+        border-radius: 5px;
+        height: 37px;
+        border: 1px solid #ffad1d;
+        margin-bottom: 1px;
+        cursor: pointer;
+        border-right: 1px solid #ffad1d !important;
+        margin-right: 10px;
+      }
+      .add-field li.active, .add-field li:hover{
+        background: #f2f2f2;
+        color: #b0b0b0;
+        border: 1px solid #f2f2f2 !important;
+      }
+      .add-field li a:hover{
+        border:1px solid #ffad1d;
+      }
+
+      #add-field-right{
+        float: left;
+        width: 200px;
+      }
+      .data-scoller{
+        min-width: 110000px;
+      }
+      .available-field a, .hideLnk a{
+        text-decoration: none;
+        display: block;
+        padding: 5px 10px 0 10px;
+        height: 50px;
+      }
+      .error {
+        border-color: red;
+        background-color: #F8ECE0;
+      }
+      .errorExport {
+        color: red;
+        padding: 5px 5px 5px 10px;
+        clear: both;
+        background-color: #F8ECE0;
+      }
+

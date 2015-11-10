@@ -1,0 +1,55 @@
+.login-register { 
+	
+	width: 402px; margin: 0 auto;
+
+	.nav-tabs > li > a { width:200px; border:none; margin-right: 0; outline: 0; .box-shadow(0px, 0px, 4px, 0.10)}
+	.nav-tabs > li.first > a { margin-right: 2px}
+
+	.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus { color: @blue; border:none}
+
+	.orangeBtn, .blueBtn { font-weight: @font-weight-regular; float: right; margin:0}
+}
+
+
+.nav-tabs > li > a { color: @white; text-decoration: none; font-size: @large-font-size; font-weight: @font-weight-regular; background: @grey}
+.nav > li > a:hover, .nav > li > a:focus { background-color: @grey}
+
+
+.tab-content { background: #FFF; margin-top: -3px; padding: 40px 15px 25px 15px; position: relative; z-index: 10; .border-radius(0, 0, 4px, 4px); .box-shadow(0, 4px, 4px, 0.10)}
+
+.login-register-scren {
+
+	.item { margin-bottom: 25px;
+		
+		input { box-shadow: none; background: none; border: none; border-bottom: 1px solid #CECECE; width:100%; line-height: 30px; padding-bottom: 10px; font-size: @medium-font-size}
+
+		&.half  { width: 47%; padding:0 10px;}
+	}
+
+}
+
+#login a { margin-top: 32px; display: block; float: left}
+
+.register-step2 { width: 800px; margin-top: -200px; padding: 30px 15px 15px 15px; margin:0 auto; background: #FFF; border-radius:4px; box-shadow:0 0 2px 1px rgba(0, 0, 0, 0.10);
+		
+		.row { margin-bottom: 0}
+		h1 { color: @blue; margin:0 0 20px 0; font-size: @h1-font-size}
+
+		a, p, label { font-size: @normal-font-size; line-height: 23px}
+
+		.orangeBtn { margin-right: 0}
+		.orangeBtn, .greyBtn { font-weight: @font-weight-regular}
+		
+		.radio, .checkbox { margin-top: 0; margin-bottom: 0}
+        .half  { padding:0 0!important;}
+	}
+
+
+.my-input.ng-invalid, .my-input.ng-required {
+	background: url('/images/icn_important.png') no-repeat !important;
+	background-position: center right !important;
+}
+
+input {
+	outline-width: 0px !important;
+}

@@ -1,0 +1,67 @@
+<top-menu class=""></top-menu>
+<div class="main-content clearfix">
+	<div class="main-left">
+		<div class="container details" ng-show = "loadedContactDetails">
+			<div class="row">
+				
+				<div class="col-lg-4">
+					<div class="row">
+						<basic-info basic-information = "contactProfile.company" type = "company" ng-click = "changeActiveSection(''); goToCompany(contactProfile.company.id)" class = "cursor-default"></basic-info>
+						<social-accounts social-networks = "contactProfile.socialNetworks" change-active-section = "changeActiveSection"></social-accounts>
+					</div>
+                    <div class="row">
+                        <list-items items = "contactProfile.plannedActivities" type = "plannedActivities" ></list-items>
+                    </div>
+                    <div class="row">
+                        <power-base power-base = "contactProfile.powerBase" ng-click = "changeActiveSection('power-base')" class = "pull-right"></power-base>
+                    </div>
+				</div>
+
+
+				<div class="col-lg-4">
+					<div class="row">
+						<card-details basic-details = "contactProfile.basicDetails" ng-click = "changeActiveSection('contact-details')"></card-details>
+					</div>
+                    <div class="row">
+                        <contact-position hierarchical-position = "contactProfile.hierarchicalPosition" ng-click = "changeActiveSection('position')"></contact-position>
+                        <contact-personality personality = "contactProfile.personality" ng-click = "changeActiveSection('personality')"></contact-personality>
+                    </div>
+                    <div class="row">
+                        <contact-type contact-type = "contactProfile.contactType" ng-click = "changeActiveSection('type')"></contact-type>
+                        <contact-role role = "contactProfile.role" ng-click = "changeActiveSection('role')"></contact-role>
+                    </div>
+				</div>
+                
+                <div class="col-lg-4">
+                    <div class="row">
+                        <contact-about contact-history = "contactProfile.contactHistory" about = "contactProfile.about" ng-click = "changeActiveSection('about');"></contact-about>
+                        <contact-options  options = "contactProfile.options" ng-click = "changeActiveSection('options')"></contact-options>
+                    </div>
+                    <div class="row" style="margin-top: -5px;">
+                        <list-items items = "contactProfile.leads" items2 = "contactProfile.deals" type = "leadsDeals" ></list-items>
+                    </div>
+                    <div class="row">
+                        <list-items items = "contactProfile.doneTasks" type = "doneTasks" ></list-items>
+                    </div>
+                    <div class="row">
+                        <influences  influences = "contactProfile.influences" ng-click = "changeActiveSection('influences')"></influences>
+                    </div>
+                </div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+	<!-- edit section -->
+	<aside class="right">
+
+		<section class="detailsSection " ng-include = "showSection()">
+
+		</section>
+
+	</aside>
+</div>
+
+<meeting-invite-modal attendees="meetingAttendees" taskid="taskId"></meeting-invite-modal>
